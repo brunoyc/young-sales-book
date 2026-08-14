@@ -442,6 +442,69 @@
     .stat-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .masthead { padding: 32px 22px 40px; }
   }
+
+  /* ---------- Copilot spotlight ---------- */
+  .spotlight-wrap {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 32px clamp(22px, 4vw, 32px) 0;
+  }
+  .spotlight {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    border: 1.5px solid var(--klein);
+    background: var(--klein-tint);
+    padding: 24px 28px;
+  }
+  .spotlight-text { max-width: 62ch; }
+  .spotlight .eyebrow {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--klein);
+  }
+  .spotlight h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.2rem;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin: 8px 0 0;
+  }
+  .spotlight p {
+    font-family: var(--font-body);
+    font-size: 0.98rem;
+    color: var(--steel);
+    margin: 8px 0 0;
+  }
+  .spotlight-cta {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--klein);
+    color: var(--white) !important;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-decoration: none !important;
+    padding: 13px 22px;
+    border: 1px solid var(--klein);
+    white-space: nowrap;
+  }
+  .spotlight-cta:hover { background: var(--ink); border-color: var(--ink); }
+  .spotlight-cta svg { flex: none; }
+  @media (max-width: 640px) {
+    .spotlight { flex-direction: column; align-items: flex-start; }
+    .spotlight-cta { width: 100%; justify-content: center; }
+  }
 </style>
 
 <div class="masthead">
@@ -462,6 +525,20 @@
       <div class="stat"><b>3</b><span data-i18n="stat3"></span></div>
       <div class="stat"><b>&euro;25K</b><span data-i18n="stat4"></span></div>
     </div>
+  </div>
+</div>
+
+<div class="spotlight-wrap">
+  <div class="spotlight">
+    <div class="spotlight-text">
+      <div class="eyebrow" data-i18n="spotlightEyebrow"></div>
+      <h3 data-i18n="spotlightH3"></h3>
+      <p data-i18n="spotlightBody"></p>
+    </div>
+    <a class="spotlight-cta" href="https://claude.ai/cowork/project/019ffcb7-7381-769f-92bf-4b742af00ef3" target="_blank" rel="noopener">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+      <span data-i18n="spotlightCta"></span>
+    </a>
   </div>
 </div>
 
@@ -779,6 +856,10 @@ en: {
   h1Suffix: 'Sales SOP',
   statement: '“If there is a commercial opportunity anywhere within YOUNG, Sales should know about it and know how to move it forward.”',
   stat1: 'Pipeline steps (A–X)', stat2: 'Business verticals', stat3: 'Countries', stat4: 'Phone-close threshold',
+  spotlightEyebrow: 'AI Copilot',
+  spotlightH3: 'Have a question this page can’t answer fast enough?',
+  spotlightBody: 'The Young Sales Copilot knows this SOP, the full commercial catalog, and the commission rules — ask it anything, before or during a call.',
+  spotlightCta: 'Open the Copilot',
   processEyebrow: 'Sales Process',
   processH2: 'One engine. Ten verticals underneath it.',
   processStatement: 'The stages are the same everywhere — what changes per vertical is how a lead enters, and the deal size at which a rep hands off to a specialist instead of closing it themselves.',
@@ -900,6 +981,10 @@ nl: {
   h1Suffix: 'Verkoop-SOP',
   statement: '“Als er ergens binnen YOUNG een commerciële kans is, moet Sales dat weten — en weten hoe die kans verzilverd wordt.”',
   stat1: 'Stappen in het proces (A–X)', stat2: 'Bedrijfsonderdelen', stat3: 'Landen', stat4: 'Telefonische-sluitdrempel',
+  spotlightEyebrow: 'AI Copilot',
+  spotlightH3: 'Een vraag die deze pagina niet snel genoeg beantwoordt?',
+  spotlightBody: 'De Young Sales Copilot kent deze SOP, de volledige commerciële catalogus en de commissieregels — vraag het gerust, voor of tijdens een gesprek.',
+  spotlightCta: 'Open de Copilot',
   processEyebrow: 'Verkoopproces',
   processH2: 'Eén systeem. Tien bedrijfsonderdelen eronder.',
   processStatement: 'De fasen zijn overal hetzelfde — wat per onderdeel verschilt, is hoe een lead binnenkomt en vanaf welk dealbedrag een rep de deal overdraagt aan een specialist in plaats van zelf te sluiten.',
@@ -1021,6 +1106,10 @@ es: {
   h1Suffix: 'SOP de Ventas',
   statement: '“Si existe una oportunidad comercial en cualquier parte de YOUNG, Ventas debe saberlo y saber cómo hacerla avanzar.”',
   stat1: 'Pasos del proceso (A–X)', stat2: 'Verticales de negocio', stat3: 'Países', stat4: 'Umbral de cierre telefónico',
+  spotlightEyebrow: 'Copiloto IA',
+  spotlightH3: '¿Tienes una pregunta que esta página no responde con la rapidez que necesitas?',
+  spotlightBody: 'El Copiloto de Young Sales conoce este SOP, el catálogo comercial completo y las reglas de comisión — pregúntale lo que sea, antes o durante una llamada.',
+  spotlightCta: 'Abrir el Copiloto',
   processEyebrow: 'Proceso de Ventas',
   processH2: 'Un solo motor. Diez verticales debajo.',
   processStatement: 'Las etapas son las mismas en todas partes — lo que cambia según la vertical es cómo entra un lead y el tamaño de operación a partir del cual un representante la transfiere a un especialista en vez de cerrarla él mismo.',
