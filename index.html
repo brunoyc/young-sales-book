@@ -77,9 +77,17 @@
   .masthead {
     background: var(--klein);
     color: var(--white);
-    padding: 72px clamp(22px, 4vw, 32px) 56px;
+    padding: 40px clamp(22px, 4vw, 32px) 56px;
   }
   .masthead-inner { max-width: var(--container); margin: 0 auto; }
+  .masthead-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+  }
   .masthead-eyebrow {
     font-family: var(--font-mono);
     font-weight: 600;
@@ -88,13 +96,27 @@
     text-transform: uppercase;
     color: rgba(255, 255, 255, 0.7);
   }
+  .lang-switch { display: flex; gap: 6px; }
+  .lang-btn {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: rgba(255, 255, 255, 0.6);
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  .lang-btn:hover { color: var(--white); border-color: rgba(255, 255, 255, 0.7); }
+  .lang-btn.is-active { color: var(--klein); background: var(--white); border-color: var(--white); }
   .masthead h1 {
     font-family: var(--font-display);
     font-weight: 800;
     font-size: clamp(2.2rem, 1.5rem + 3vw, 4.2rem);
     line-height: 1.04;
     letter-spacing: -0.03em;
-    margin: 14px 0 0;
+    margin: 0;
     text-wrap: balance;
     color: var(--white);
   }
@@ -163,7 +185,7 @@
     letter-spacing: -0.02em;
     color: var(--ink);
     margin: 10px 0 0;
-    max-width: 22ch;
+    max-width: 26ch;
   }
   .process .statement-light {
     font-family: var(--font-display);
@@ -172,8 +194,31 @@
     letter-spacing: -0.01em;
     line-height: 1.4;
     color: var(--klein);
-    max-width: 58ch;
+    max-width: 62ch;
     margin: 18px 0 0;
+  }
+  .sub-eyebrow {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--klein);
+    margin-top: 48px;
+  }
+  .sub-h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.15rem;
+    color: var(--ink);
+    margin: 8px 0 0;
+  }
+  .sub-intro {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--steel);
+    max-width: 70ch;
+    margin: 8px 0 0;
   }
 
   .diagram-wrap { margin: 40px 0 8px; overflow-x: auto; }
@@ -271,7 +316,7 @@
     letter-spacing: -0.02em;
     color: var(--white);
     margin: 10px 0 0;
-    max-width: 26ch;
+    max-width: 30ch;
   }
   .handoff .lead {
     font-family: var(--font-display);
@@ -353,34 +398,41 @@
 
   @media (max-width: 860px) {
     .stat-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .masthead { padding: 48px 22px 40px; }
+    .masthead { padding: 32px 22px 40px; }
   }
 </style>
 
 <div class="masthead">
   <div class="masthead-inner">
-    <div class="masthead-eyebrow">YOUNG GROUP — SALES OPERATING PROCEDURE</div>
-    <h1>YOUNG<span class="dim">.</span>Sales — Sales SOP</h1>
-    <p class="statement">“If there is a commercial opportunity anywhere within YOUNG, Sales should know about it and know how to move it forward.”</p>
+    <div class="masthead-topbar">
+      <div class="masthead-eyebrow" data-i18n="mastheadEyebrow"></div>
+      <div class="lang-switch" role="group" aria-label="Language / Taal / Idioma">
+        <button type="button" class="lang-btn" data-lang="en">EN</button>
+        <button type="button" class="lang-btn" data-lang="nl">NL</button>
+        <button type="button" class="lang-btn" data-lang="es">ES</button>
+      </div>
+    </div>
+    <h1>YOUNG<span class="dim">.</span>Sales — <span data-i18n="h1Suffix"></span></h1>
+    <p class="statement" data-i18n="statement"></p>
     <div class="stat-strip">
-      <div class="stat"><b>24</b><span>Pipeline steps (A&ndash;X)</span></div>
-      <div class="stat"><b>10</b><span>Business verticals</span></div>
-      <div class="stat"><b>3</b><span>Countries</span></div>
-      <div class="stat"><b>&euro;25K</b><span>Phone-close threshold</span></div>
+      <div class="stat"><b>24</b><span data-i18n="stat1"></span></div>
+      <div class="stat"><b>10</b><span data-i18n="stat2"></span></div>
+      <div class="stat"><b>3</b><span data-i18n="stat3"></span></div>
+      <div class="stat"><b>&euro;25K</b><span data-i18n="stat4"></span></div>
     </div>
   </div>
 </div>
 
 <div class="process">
-  <div class="eyebrow">Sales Process</div>
-  <h2>One engine. Ten verticals underneath it.</h2>
-  <p class="statement-light">The stages are the same everywhere — what changes per vertical is how a lead enters, and the deal size at which a rep hands off to a specialist instead of closing it themselves.</p>
+  <div class="eyebrow" data-i18n="processEyebrow"></div>
+  <h2 data-i18n="processH2"></h2>
+  <p class="statement-light" data-i18n="processStatement"></p>
 
-  <div class="eyebrow" style="margin-top:48px;">At a glance</div>
-  <h3 style="font-family:var(--font-display);font-weight:600;font-size:1.15rem;color:var(--ink);margin:8px 0 0;">The engine, simplified</h3>
+  <div class="sub-eyebrow" data-i18n="glanceEyebrow"></div>
+  <h3 class="sub-h3" data-i18n="glanceH3"></h3>
 
   <figure class="diagram-wrap">
-    <svg viewBox="0 0 1520 250" role="img" aria-label="A lead moves from Prospect through Entry Channel, Demand Generation, SDR Qualification, Meeting Handoff, and Close, then Onboarding and Active Customer. At Close, the path forks by deal size: a rep phone-closes below the vertical's threshold, a specialist closes above it — both rejoin at Onboarding. Active Customer runs a recurring Health Check that loops to Expansion or a Save Play. Renewal and churn signal feeds back to shape the next Entry Channel mix.">
+    <svg id="svg1" viewBox="0 0 1520 250" role="img">
       <defs>
         <marker id="sb-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
           <path d="M0,0 L10,5 L0,10 z" fill="currentColor"></path>
@@ -388,36 +440,36 @@
       </defs>
 
       <!-- feedback loop -->
-      <text x="774" y="13" text-anchor="middle" font-family="var(--font-mono)" font-size="10" fill="var(--steel)">renewal &amp; churn signal shapes next quarter's channel mix</text>
+      <text id="t1_feedback" x="774" y="13" text-anchor="middle" font-family="var(--font-mono)" font-size="10" fill="var(--steel)"></text>
       <path d="M1332,78 L1332,20 L215,20 L215,78" fill="none" stroke="var(--steel)" stroke-width="1.25" stroke-dasharray="4 3" marker-end="url(#sb-arrow)"></path>
 
       <!-- main spine boxes -->
       <g font-family="var(--font-mono)" font-size="11" text-anchor="middle">
         <rect x="10" y="78" width="110" height="50" fill="var(--white)" stroke="currentColor" stroke-width="1.5"></rect>
-        <text x="65" y="107" fill="var(--ink)">PROSPECT</text>
+        <text id="t1_prospect" x="65" y="107" fill="var(--ink)"></text>
 
         <rect x="140" y="78" width="135" height="50" fill="var(--white)" stroke="currentColor" stroke-width="1.5"></rect>
-        <text x="207" y="107" fill="var(--ink)">ENTRY CHANNEL</text>
+        <text id="t1_entry" x="207" y="107" fill="var(--ink)"></text>
 
         <rect x="295" y="78" width="170" height="50" fill="var(--white)" stroke="currentColor" stroke-width="1.5"></rect>
-        <text x="380" y="99" fill="var(--ink)">DEMAND GEN</text>
-        <text x="380" y="113" fill="var(--ink)">+ LEAD CAPTURE</text>
+        <text id="t1_demandgen1" x="380" y="99" fill="var(--ink)"></text>
+        <text id="t1_demandgen2" x="380" y="113" fill="var(--ink)"></text>
 
         <rect x="485" y="78" width="120" height="50" fill="var(--white)" stroke="currentColor" stroke-width="1.5"></rect>
-        <text x="545" y="107" fill="var(--ink)">SDR QUALIFY</text>
+        <text id="t1_sdrqualify" x="545" y="107" fill="var(--ink)"></text>
 
         <rect x="625" y="78" width="155" height="50" fill="var(--white)" stroke="currentColor" stroke-width="1.5"></rect>
-        <text x="702" y="99" fill="var(--ink)">MEETING BOOKED</text>
-        <text x="702" y="113" fill="var(--ink)">HANDOFF TO AE</text>
+        <text id="t1_meeting1" x="702" y="99" fill="var(--ink)"></text>
+        <text id="t1_meeting2" x="702" y="113" fill="var(--ink)"></text>
 
         <rect x="800" y="78" width="100" height="50" fill="var(--klein)" stroke="currentColor" stroke-width="1.5"></rect>
-        <text x="850" y="107" fill="var(--white)">CLOSE</text>
+        <text id="t1_close" x="850" y="107" fill="var(--white)"></text>
 
         <rect x="920" y="78" width="115" height="50" fill="var(--white)" stroke="currentColor" stroke-width="1.5"></rect>
-        <text x="977" y="107" fill="var(--ink)">ONBOARDING</text>
+        <text id="t1_onboarding" x="977" y="107" fill="var(--ink)"></text>
 
         <rect x="1250" y="78" width="165" height="50" fill="var(--white)" stroke="currentColor" stroke-width="1.5"></rect>
-        <text x="1332" y="107" fill="var(--ink)">ACTIVE CUSTOMER</text>
+        <text id="t1_activecustomer" x="1332" y="107" fill="var(--ink)"></text>
       </g>
 
       <!-- spine arrows -->
@@ -433,19 +485,19 @@
 
       <!-- close fork: strictly orthogonal, no diagonals, no crossings -->
       <path d="M850,128 L850,148" fill="none" stroke="currentColor" stroke-width="1.5"></path>
-      <text x="850" y="143" text-anchor="middle" font-family="var(--font-mono)" font-size="9.5" fill="var(--steel)">deal size vs. phone-close threshold</text>
+      <text id="t1_forklabel" x="850" y="143" text-anchor="middle" font-family="var(--font-mono)" font-size="9.5" fill="var(--steel)"></text>
       <path d="M700,148 L1000,148" fill="none" stroke="currentColor" stroke-width="1.5"></path>
       <path d="M700,148 L700,167" fill="none" stroke="currentColor" stroke-width="1.5" marker-end="url(#sb-arrow)"></path>
       <path d="M1000,148 L1000,167" fill="none" stroke="currentColor" stroke-width="1.5" marker-end="url(#sb-arrow)"></path>
 
       <g font-family="var(--font-mono)" font-size="10.5" text-anchor="middle">
         <rect x="590" y="168" width="220" height="44" fill="var(--white)" stroke="var(--klein)" stroke-width="1.25"></rect>
-        <text x="700" y="186" fill="var(--ink)">REP PHONE-CLOSES</text>
-        <text x="700" y="200" fill="var(--steel)">below threshold</text>
+        <text id="t1_rep1" x="700" y="186" fill="var(--ink)"></text>
+        <text id="t1_rep2" x="700" y="200" fill="var(--steel)"></text>
 
         <rect x="890" y="168" width="220" height="44" fill="var(--white)" stroke="var(--klein)" stroke-width="1.25"></rect>
-        <text x="1000" y="186" fill="var(--ink)">SPECIALIST CLOSES</text>
-        <text x="1000" y="200" fill="var(--steel)">at or above threshold</text>
+        <text id="t1_spec1" x="1000" y="186" fill="var(--ink)"></text>
+        <text id="t1_spec2" x="1000" y="200" fill="var(--steel)"></text>
       </g>
 
       <!-- merge back into Onboarding: routed through the gap BETWEEN the two fork boxes (x=850),
@@ -458,23 +510,23 @@
       <path d="M1332,128 L1332,167" fill="none" stroke="currentColor" stroke-width="1.5" marker-end="url(#sb-arrow)"></path>
       <g font-family="var(--font-mono)" font-size="10.5" text-anchor="middle">
         <rect x="1227" y="168" width="210" height="62" fill="var(--white)" stroke="var(--klein)" stroke-width="1.25"></rect>
-        <text x="1332" y="186" fill="var(--ink)">HEALTH CHECK</text>
-        <text x="1332" y="200" fill="var(--steel)">healthy: expand</text>
-        <text x="1332" y="213" fill="var(--steel)">at risk: save play</text>
+        <text id="t1_health1" x="1332" y="186" fill="var(--ink)"></text>
+        <text id="t1_health2" x="1332" y="200" fill="var(--steel)"></text>
+        <text id="t1_health3" x="1332" y="213" fill="var(--steel)"></text>
       </g>
       <path d="M1437,199 L1485,199 L1485,103 L1416,103" fill="none" stroke="currentColor" stroke-width="1.5" marker-end="url(#sb-arrow)"></path>
-      <text x="1476" y="144" text-anchor="end" font-family="var(--font-mono)" font-size="9.5" fill="var(--steel)">loops</text>
-      <text x="1476" y="156" text-anchor="end" font-family="var(--font-mono)" font-size="9.5" fill="var(--steel)">quarterly</text>
+      <text id="t1_loops1" x="1476" y="144" text-anchor="end" font-family="var(--font-mono)" font-size="9.5" fill="var(--steel)"></text>
+      <text id="t1_loops2" x="1476" y="156" text-anchor="end" font-family="var(--font-mono)" font-size="9.5" fill="var(--steel)"></text>
     </svg>
-    <figcaption>The full pipeline: entry channel and demand generation feed SDR qualification; Close forks by deal size (rep vs. specialist) and rejoins at Onboarding; Active Customer runs a recurring Health Check back into expansion or a save play; renewal and churn signal loops back to shape the next round of outreach.</figcaption>
+    <figcaption id="t1_caption"></figcaption>
   </figure>
 
-  <div class="eyebrow" style="margin-top:56px;">Step by step</div>
-  <h3 style="font-family:var(--font-display);font-weight:600;font-size:1.15rem;color:var(--ink);margin:8px 0 0;">The full pipeline, lettered A through X</h3>
-  <p style="font-family:var(--font-body);font-size:0.95rem;color:var(--steel);max-width:70ch;margin:8px 0 0;">Solid borders are an action or a state; dashed borders are a decision point. Every letter below is explained in the table under the diagram.</p>
+  <div class="sub-eyebrow" data-i18n="stepEyebrow"></div>
+  <h3 class="sub-h3" data-i18n="stepH3"></h3>
+  <p class="sub-intro" data-i18n="stepIntro"></p>
 
   <figure class="diagram-wrap">
-    <svg viewBox="0 0 1320 1660" role="img" aria-label="Detailed pipeline from Prospect/Target Account (A) through Entry Channel (B), three Demand Generation paths — Inbound (C), Outbound (D), Referral/Partner (E) — into Lead Captured in CRM (F), Lead Scoring and Routing (G), SDR Outreach (H), a Qualified decision (I) that either loops to Nurture/Recycle (J) or continues to Meeting Booked (K), Handoff to AE (L), Discovery Call (M), Demo/Value Case (N), Proposal and Negotiation (O), a Deal Outcome decision (P) that either loops to Closed Lost (Q) or continues to Closed Won (R), Onboarding (S), Active Customer (T), a Health Check decision (U) that loops to Expansion and Renewal (V) or CS Save Play (W), ending at Company Retained Revenue (X), which feeds win and churn insight back to Lead Scoring and Routing.">
+    <svg id="svg2" viewBox="0 0 1320 1660" role="img">
       <defs>
         <marker id="sb-arrow2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
           <path d="M0,0 L10,5 L0,10 z" fill="currentColor"></path>
@@ -484,46 +536,46 @@
 
       <!-- region backgrounds -->
       <rect x="40" y="205" width="1140" height="110" fill="var(--klein)" fill-opacity="0.05" stroke-width="1"></rect>
-      <text x="55" y="197" font-size="10" letter-spacing="1" fill="var(--klein)" stroke="none">DEMAND GENERATION</text>
+      <text id="t2_regionDG" x="55" y="197" font-size="10" letter-spacing="1" fill="var(--klein)" stroke="none"></text>
 
       <rect x="350" y="495" width="300" height="95" fill="var(--klein)" fill-opacity="0.05" stroke-width="1"></rect>
-      <text x="365" y="487" font-size="10" letter-spacing="1" fill="var(--klein)" stroke="none">SALES DEVELOPMENT</text>
+      <text id="t2_regionSD" x="365" y="487" font-size="10" letter-spacing="1" fill="var(--klein)" stroke="none"></text>
 
       <rect x="340" y="850" width="420" height="373" fill="var(--klein)" fill-opacity="0.05" stroke-width="1"></rect>
-      <text x="355" y="842" font-size="10" letter-spacing="1" fill="var(--klein)" stroke="none">ACCOUNT EXECUTIVE / CLOSE</text>
+      <text id="t2_regionAE" x="355" y="842" font-size="10" letter-spacing="1" fill="var(--klein)" stroke="none"></text>
 
       <rect x="340" y="1320" width="420" height="170" fill="var(--klein)" fill-opacity="0.05" stroke-width="1"></rect>
-      <text x="355" y="1312" font-size="10" letter-spacing="1" fill="var(--klein)" stroke="none">CUSTOMER SUCCESS</text>
+      <text id="t2_regionCS" x="355" y="1312" font-size="10" letter-spacing="1" fill="var(--klein)" stroke="none"></text>
 
       <!-- A -->
       <rect x="390" y="15" width="220" height="48" fill="var(--white)" stroke-width="1.5"></rect>
-      <text x="500" y="44" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none">PROSPECT / TARGET ACCOUNT (A)</text>
+      <text id="t2_A" x="500" y="44" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none"></text>
       <path d="M500,63 L500,88" marker-end="url(#sb-arrow2)"></path>
 
       <!-- B -->
       <rect x="390" y="88" width="220" height="48" fill="var(--white)" stroke-width="1.5" stroke-dasharray="4 3"></rect>
-      <text x="500" y="117" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none">ENTRY CHANNEL (B)</text>
+      <text id="t2_B" x="500" y="117" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none"></text>
       <path d="M500,136 L500,180" stroke-width="1.5"></path>
       <path d="M230,180 L970,180" stroke-width="1.5"></path>
       <path d="M230,180 L230,224" stroke-width="1.5" marker-end="url(#sb-arrow2)"></path>
       <path d="M600,180 L600,224" stroke-width="1.5" marker-end="url(#sb-arrow2)"></path>
       <path d="M970,180 L970,224" stroke-width="1.5" marker-end="url(#sb-arrow2)"></path>
-      <text x="230" y="197" text-anchor="middle" font-size="9" fill="var(--steel)" stroke="none">Inbound</text>
-      <text x="600" y="197" text-anchor="middle" font-size="9" fill="var(--steel)" stroke="none">Outbound</text>
-      <text x="970" y="197" text-anchor="middle" font-size="9" fill="var(--steel)" stroke="none">Referral &#183; Partner</text>
+      <text id="t2_inbound_lbl" x="230" y="197" text-anchor="middle" font-size="9" fill="var(--steel)" stroke="none"></text>
+      <text id="t2_outbound_lbl" x="600" y="197" text-anchor="middle" font-size="9" fill="var(--steel)" stroke="none"></text>
+      <text id="t2_referral_lbl" x="970" y="197" text-anchor="middle" font-size="9" fill="var(--steel)" stroke="none"></text>
 
       <!-- C, D, E -->
       <rect x="60" y="225" width="340" height="64" fill="var(--white)" stroke-width="1.5"></rect>
-      <text x="230" y="251" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none">INBOUND (C)</text>
-      <text x="230" y="267" text-anchor="middle" font-size="9.5" fill="var(--steel)" stroke="none">Marketing: content, website, ads</text>
+      <text id="t2_C1" x="230" y="251" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none"></text>
+      <text id="t2_C2" x="230" y="267" text-anchor="middle" font-size="9.5" fill="var(--steel)" stroke="none"></text>
 
       <rect x="430" y="225" width="340" height="64" fill="var(--white)" stroke-width="1.5"></rect>
-      <text x="600" y="251" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none">OUTBOUND (D)</text>
-      <text x="600" y="267" text-anchor="middle" font-size="9.5" fill="var(--steel)" stroke="none">SDR prospecting, AI signal + intent</text>
+      <text id="t2_D1" x="600" y="251" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none"></text>
+      <text id="t2_D2" x="600" y="267" text-anchor="middle" font-size="9.5" fill="var(--steel)" stroke="none"></text>
 
       <rect x="800" y="225" width="340" height="64" fill="var(--white)" stroke-width="1.5"></rect>
-      <text x="970" y="251" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none">REFERRAL / PARTNER (E)</text>
-      <text x="970" y="267" text-anchor="middle" font-size="9.5" fill="var(--steel)" stroke="none">Customer or partner referral</text>
+      <text id="t2_E1" x="970" y="251" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none"></text>
+      <text id="t2_E2" x="970" y="267" text-anchor="middle" font-size="9.5" fill="var(--steel)" stroke="none"></text>
 
       <!-- converge to F -->
       <path d="M230,289 L230,320" stroke-width="1.5"></path>
@@ -534,265 +586,570 @@
 
       <!-- F -->
       <rect x="390" y="345" width="220" height="48" fill="var(--white)" stroke-width="1.5"></rect>
-      <text x="500" y="374" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none">LEAD CAPTURED IN CRM (F)</text>
+      <text id="t2_F" x="500" y="374" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none"></text>
       <path d="M500,393 L500,415" marker-end="url(#sb-arrow2)"></path>
 
       <!-- G -->
       <rect x="390" y="415" width="220" height="48" fill="var(--white)" stroke-width="1.5"></rect>
-      <text x="500" y="444" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none">LEAD SCORING &amp; ROUTING (G)</text>
+      <text id="t2_G" x="500" y="444" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none"></text>
       <path d="M500,463 L500,505" marker-end="url(#sb-arrow2)"></path>
 
       <!-- H -->
       <rect x="370" y="505" width="260" height="64" fill="var(--white)" stroke-width="1.5"></rect>
-      <text x="500" y="531" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none">SDR OUTREACH (H)</text>
-      <text x="500" y="547" text-anchor="middle" font-size="9.5" fill="var(--steel)" stroke="none">AI-drafted, human-reviewed</text>
+      <text id="t2_H1" x="500" y="531" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none"></text>
+      <text id="t2_H2" x="500" y="547" text-anchor="middle" font-size="9.5" fill="var(--steel)" stroke="none"></text>
       <path d="M500,569 L500,610" marker-end="url(#sb-arrow2)"></path>
 
       <!-- I -->
       <rect x="390" y="610" width="220" height="48" fill="var(--white)" stroke-width="1.5" stroke-dasharray="4 3"></rect>
-      <text x="500" y="639" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none">QUALIFIED? (I)</text>
+      <text id="t2_I" x="500" y="639" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none"></text>
       <path d="M500,658 L500,683" marker-end="url(#sb-arrow2)"></path>
 
       <!-- J (no branch) -->
       <path d="M610,634 L760,634" stroke-width="1.5" marker-end="url(#sb-arrow2)"></path>
-      <text x="685" y="628" text-anchor="middle" font-size="9" fill="var(--steel)" stroke="none">no</text>
+      <text id="t2_J_no" x="685" y="628" text-anchor="middle" font-size="9" fill="var(--steel)" stroke="none"></text>
       <rect x="760" y="610" width="200" height="48" fill="var(--white)" stroke-width="1.5"></rect>
-      <text x="860" y="639" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none">NURTURE / RECYCLE (J)</text>
+      <text id="t2_J" x="860" y="639" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none"></text>
       <path d="M860,610 L860,428 L611,428" stroke-width="1.25" stroke-dasharray="4 3" marker-end="url(#sb-arrow2)"></path>
-      <text x="870" y="500" font-size="9" fill="var(--steel)" stroke="none">recycled into scoring</text>
+      <text id="t2_J_sub" x="870" y="500" font-size="9" fill="var(--steel)" stroke="none"></text>
 
       <!-- K -->
-      <text x="470" y="675" text-anchor="end" font-size="9" fill="var(--steel)" stroke="none">yes</text>
+      <text id="t2_K_yes" x="470" y="675" text-anchor="end" font-size="9" fill="var(--steel)" stroke="none"></text>
       <rect x="390" y="683" width="220" height="48" fill="var(--white)" stroke-width="1.5"></rect>
-      <text x="500" y="712" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none">MEETING BOOKED (K)</text>
+      <text id="t2_K" x="500" y="712" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none"></text>
       <path d="M500,731 L500,755" marker-end="url(#sb-arrow2)"></path>
 
       <!-- L -->
       <rect x="380" y="755" width="240" height="64" fill="var(--white)" stroke-width="1.5"></rect>
-      <text x="500" y="781" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none">HANDOFF TO AE (L)</text>
-      <text x="500" y="797" text-anchor="middle" font-size="9.5" fill="var(--steel)" stroke="none">context + call notes</text>
+      <text id="t2_L1" x="500" y="781" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none"></text>
+      <text id="t2_L2" x="500" y="797" text-anchor="middle" font-size="9.5" fill="var(--steel)" stroke="none"></text>
       <path d="M500,819 L500,880" marker-end="url(#sb-arrow2)"></path>
 
       <!-- M, N, O -->
       <rect x="390" y="880" width="220" height="48" fill="var(--white)" stroke-width="1.5"></rect>
-      <text x="500" y="909" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none">DISCOVERY CALL (M)</text>
+      <text id="t2_M" x="500" y="909" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none"></text>
       <path d="M500,928 L500,950" marker-end="url(#sb-arrow2)"></path>
 
       <rect x="390" y="950" width="220" height="48" fill="var(--white)" stroke-width="1.5"></rect>
-      <text x="500" y="979" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none">DEMO / VALUE CASE (N)</text>
+      <text id="t2_N" x="500" y="979" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none"></text>
       <path d="M500,998 L500,1020" marker-end="url(#sb-arrow2)"></path>
 
       <rect x="390" y="1020" width="220" height="48" fill="var(--white)" stroke-width="1.5"></rect>
-      <text x="500" y="1049" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none">PROPOSAL &amp; NEGOTIATION (O)</text>
+      <text id="t2_O" x="500" y="1049" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none"></text>
       <path d="M500,1068 L500,1090" marker-end="url(#sb-arrow2)"></path>
 
       <!-- P -->
       <rect x="390" y="1090" width="220" height="48" fill="var(--white)" stroke-width="1.5" stroke-dasharray="4 3"></rect>
-      <text x="500" y="1119" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none">DEAL OUTCOME (P)</text>
+      <text id="t2_P" x="500" y="1119" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none"></text>
       <path d="M500,1138 L500,1160" marker-end="url(#sb-arrow2)"></path>
 
       <!-- Q (lost branch) -->
       <path d="M390,1114 L341,1114" stroke-width="1.5" marker-end="url(#sb-arrow2)"></path>
-      <text x="365" y="1108" text-anchor="middle" font-size="9" fill="var(--steel)" stroke="none">lost</text>
+      <text id="t2_Q_lost" x="365" y="1108" text-anchor="middle" font-size="9" fill="var(--steel)" stroke="none"></text>
       <rect x="120" y="1090" width="220" height="48" fill="var(--white)" stroke-width="1.5"></rect>
-      <text x="230" y="1112" text-anchor="middle" font-size="10.5" fill="var(--ink)" stroke="none">CLOSED LOST (Q)</text>
-      <text x="230" y="1127" text-anchor="middle" font-size="9" fill="var(--steel)" stroke="none">reason captured</text>
+      <text id="t2_Q1" x="230" y="1112" text-anchor="middle" font-size="10.5" fill="var(--ink)" stroke="none"></text>
+      <text id="t2_Q2" x="230" y="1127" text-anchor="middle" font-size="9" fill="var(--steel)" stroke="none"></text>
       <path d="M230,1090 L230,428 L389,428" stroke-width="1.25" stroke-dasharray="4 3" marker-end="url(#sb-arrow2)"></path>
 
       <!-- R, S (won branch) -->
-      <text x="470" y="1155" text-anchor="end" font-size="9" fill="var(--steel)" stroke="none">won</text>
+      <text id="t2_R_won" x="470" y="1155" text-anchor="end" font-size="9" fill="var(--steel)" stroke="none"></text>
       <rect x="390" y="1160" width="220" height="48" fill="var(--white)" stroke-width="1.5"></rect>
-      <text x="500" y="1182" text-anchor="middle" font-size="10.5" fill="var(--ink)" stroke="none">CLOSED WON (R)</text>
-      <text x="500" y="1197" text-anchor="middle" font-size="9" fill="var(--steel)" stroke="none">contract signed</text>
+      <text id="t2_R1" x="500" y="1182" text-anchor="middle" font-size="10.5" fill="var(--ink)" stroke="none"></text>
+      <text id="t2_R2" x="500" y="1197" text-anchor="middle" font-size="9" fill="var(--steel)" stroke="none"></text>
       <path d="M500,1208 L500,1250" marker-end="url(#sb-arrow2)"></path>
 
       <rect x="390" y="1250" width="220" height="48" fill="var(--white)" stroke-width="1.5"></rect>
-      <text x="500" y="1279" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none">ONBOARDING (S)</text>
+      <text id="t2_S" x="500" y="1279" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none"></text>
       <path d="M500,1298 L500,1345" marker-end="url(#sb-arrow2)"></path>
 
       <!-- T -->
       <rect x="390" y="1345" width="220" height="48" fill="var(--white)" stroke-width="1.5"></rect>
-      <text x="500" y="1374" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none">ACTIVE CUSTOMER (T)</text>
+      <text id="t2_T" x="500" y="1374" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none"></text>
       <path d="M500,1393 L500,1415" marker-end="url(#sb-arrow2)"></path>
 
       <!-- U -->
       <rect x="390" y="1415" width="220" height="48" fill="var(--white)" stroke-width="1.5" stroke-dasharray="4 3"></rect>
-      <text x="500" y="1444" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none">HEALTH CHECK (U)</text>
+      <text id="t2_U" x="500" y="1444" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none"></text>
 
       <!-- V (healthy) -->
       <path d="M610,1439 L760,1439" stroke-width="1.5" marker-end="url(#sb-arrow2)"></path>
-      <text x="685" y="1433" text-anchor="middle" font-size="9" fill="var(--steel)" stroke="none">healthy</text>
+      <text id="t2_V_healthy" x="685" y="1433" text-anchor="middle" font-size="9" fill="var(--steel)" stroke="none"></text>
       <rect x="760" y="1415" width="200" height="48" fill="var(--white)" stroke-width="1.5"></rect>
-      <text x="860" y="1444" text-anchor="middle" font-size="10.5" fill="var(--ink)" stroke="none">EXPANSION &amp; RENEWAL (V)</text>
+      <text id="t2_V" x="860" y="1444" text-anchor="middle" font-size="10.5" fill="var(--ink)" stroke="none"></text>
       <path d="M860,1415 L860,1369 L611,1369" stroke-width="1.25" marker-end="url(#sb-arrow2)"></path>
 
       <!-- W (at risk) -->
       <path d="M390,1439 L341,1439" stroke-width="1.5" marker-end="url(#sb-arrow2)"></path>
-      <text x="365" y="1433" text-anchor="middle" font-size="9" fill="var(--steel)" stroke="none">at risk</text>
+      <text id="t2_W_atrisk" x="365" y="1433" text-anchor="middle" font-size="9" fill="var(--steel)" stroke="none"></text>
       <rect x="140" y="1415" width="200" height="48" fill="var(--white)" stroke-width="1.5"></rect>
-      <text x="240" y="1444" text-anchor="middle" font-size="10.5" fill="var(--ink)" stroke="none">CS SAVE PLAY (W)</text>
+      <text id="t2_W" x="240" y="1444" text-anchor="middle" font-size="10.5" fill="var(--ink)" stroke="none"></text>
       <path d="M240,1415 L240,1369 L389,1369" stroke-width="1.25" marker-end="url(#sb-arrow2)"></path>
 
       <!-- X -->
       <path d="M500,1463 L500,1502" marker-end="url(#sb-arrow2)"></path>
       <circle cx="500" cy="1560" r="58" fill="var(--klein)" stroke-width="1.5"></circle>
-      <text x="500" y="1553" text-anchor="middle" font-size="11" fill="var(--white)" stroke="none">COMPANY,</text>
-      <text x="500" y="1568" text-anchor="middle" font-size="11" fill="var(--white)" stroke="none">RETAINED</text>
-      <text x="500" y="1583" text-anchor="middle" font-size="11" fill="var(--white)" stroke="none">REVENUE (X)</text>
+      <text id="t2_X1" x="500" y="1553" text-anchor="middle" font-size="11" fill="var(--white)" stroke="none"></text>
+      <text id="t2_X2" x="500" y="1568" text-anchor="middle" font-size="11" fill="var(--white)" stroke="none"></text>
+      <text id="t2_X3" x="500" y="1583" text-anchor="middle" font-size="11" fill="var(--white)" stroke="none"></text>
 
       <!-- feedback: win + churn insight back to G -->
       <path d="M558,1540 L1200,1540 L1200,452 L611,452" stroke-width="1.25" stroke-dasharray="4 3" marker-end="url(#sb-arrow2)"></path>
-      <text x="1210" y="1000" font-size="9.5" fill="var(--steel)" stroke="none" transform="rotate(90 1210 1000)">win + churn insight feeds the next scoring pass</text>
+      <text id="t2_feedback" x="1210" y="1000" font-size="9.5" fill="var(--steel)" stroke="none" transform="rotate(90 1210 1000)"></text>
 
       </g>
     </svg>
-    <figcaption>Every commercial motion at YOUNG runs this same lettered pipeline — A through X. Disqualified leads (J) and lost deals (Q) both recycle into Lead Scoring rather than disappearing; retained revenue (X) reports back what won and what churned.</figcaption>
+    <figcaption id="t2_caption"></figcaption>
   </figure>
 
   <div class="dtable-wrap" style="margin:24px 0 8px;">
     <table class="dtable">
-      <thead><tr><th>Step</th><th>What happens</th></tr></thead>
-      <tbody>
-        <tr><td>A &#183; Prospect / Target Account</td><td>A named company or contact enters the pipeline as a fit for one of the ten verticals.</td></tr>
-        <tr><td>B &#183; Entry Channel</td><td>How they arrived — inbound, outbound, or referral/partner — decides which Demand Generation path picks them up.</td></tr>
-        <tr><td>C &#183; Inbound</td><td>Marketing content, the website, or ads bring the lead in on their own.</td></tr>
-        <tr><td>D &#183; Outbound</td><td>SDR prospecting using AI-surfaced signal and intent data.</td></tr>
-        <tr><td>E &#183; Referral / Partner</td><td>A customer or partner introduction.</td></tr>
-        <tr><td>F &#183; Lead Captured in CRM</td><td>Every path lands in the same CRM record, regardless of source.</td></tr>
-        <tr><td>G &#183; Lead Scoring &amp; Routing</td><td>The CRM scores the lead and routes it to the right SDR queue.</td></tr>
-        <tr><td>H &#183; SDR Outreach</td><td>AI drafts the first outreach; a human reviews before it sends.</td></tr>
-        <tr><td>I &#183; Qualified?</td><td>The SDR checks budget, timing and fit.</td></tr>
-        <tr><td>J &#183; Nurture / Recycle</td><td>Not-yet-qualified leads loop back into scoring rather than getting dropped.</td></tr>
-        <tr><td>K &#183; Meeting Booked</td><td>A qualified lead books time with an Account Executive.</td></tr>
-        <tr><td>L &#183; Handoff to AE</td><td>Context and call notes travel with the lead — no cold handoff.</td></tr>
-        <tr><td>M &#183; Discovery Call</td><td>The AE learns the actual problem and process.</td></tr>
-        <tr><td>N &#183; Demo / Value Case</td><td>A demo built around the case for buying.</td></tr>
-        <tr><td>O &#183; Proposal &amp; Negotiation</td><td>Terms, pricing and scope get finalized.</td></tr>
-        <tr><td>P &#183; Deal Outcome</td><td>Won or lost — every outcome is captured, not just wins.</td></tr>
-        <tr><td>Q &#183; Closed Lost</td><td>The reason gets logged and feeds back into scoring, not discarded.</td></tr>
-        <tr><td>R &#183; Closed Won, Contract Signed</td><td>The deal is signed and locked in the CRM.</td></tr>
-        <tr><td>S &#183; Onboarding</td><td>Handoff from Sales to the operating team — "we sell it, you operate it."</td></tr>
-        <tr><td>T &#183; Active Customer</td><td>The account moves into steady-state delivery.</td></tr>
-        <tr><td>U &#183; Health Check</td><td>A recurring check on usage and satisfaction decides what happens next.</td></tr>
-        <tr><td>V &#183; Expansion &amp; Renewal</td><td>A healthy account gets offered more, or renews.</td></tr>
-        <tr><td>W &#183; CS Save Play</td><td>An at-risk account gets a deliberate save motion before it churns.</td></tr>
-        <tr><td>X &#183; Company, Retained Revenue</td><td>What actually stuck — the number that matters — feeding win and churn insight back into scoring.</td></tr>
-      </tbody>
+      <thead><tr><th id="legendHeadStep"></th><th id="legendHeadWhat"></th></tr></thead>
+      <tbody id="legend-body"></tbody>
     </table>
   </div>
 
-  <div class="eyebrow" style="margin-top:56px;">Per vertical</div>
-  <h3 style="font-family:var(--font-display);font-weight:600;font-size:1.15rem;color:var(--ink);margin:8px 0 0;">How each business runs the same engine</h3>
+  <div class="sub-eyebrow" data-i18n="perVerticalEyebrow"></div>
+  <h3 class="sub-h3" data-i18n="perVerticalH3"></h3>
   <div class="vgrid" id="vertical-grid"></div>
 </div>
 
 <div class="handoff">
   <div class="handoff-inner">
-    <div class="eyebrow">Decision Matrix</div>
-    <h2>From lead to payout — who owns each step</h2>
-    <p class="lead">Ten steps, two owners. The SDR runs the deal to a signed contract; the Commercial Lead runs the relationship and the money after that.</p>
-    <ul class="handoff-list">
-      <li><span class="n">01</span><span class="t">SDR receives the lead</span><span class="actor">SDR</span></li>
-      <li><span class="n">02</span><span class="t">SDR meets the lead and uses the catalog to shape the offer</span><span class="actor">SDR</span></li>
-      <li><span class="n">03</span><span class="t">SDR closes the proposal with the lead</span><span class="actor">SDR</span></li>
-      <li><span class="n">04</span><span class="t">SDR connects with the business unit owner</span><span class="actor">SDR</span></li>
-      <li><span class="n">05</span><span class="t">SDR sends the contract to the lead</span><span class="actor">SDR</span></li>
-      <li><span class="n">06</span><span class="t">SDR formalizes the closure of the business with the business unit</span><span class="actor">SDR</span></li>
-      <li><span class="n">07</span><span class="t">SDR updates the CRM</span><span class="actor">SDR</span></li>
-      <li class="handoff-divider">Handoff — SDR to Commercial Lead</li>
-      <li><span class="n">08</span><span class="t">Commercial Lead takes care of Account Management with the business unit and the customer</span><span class="actor">Commercial Lead</span></li>
-      <li><span class="n">09</span><span class="t">Commercial Lead sends the invoice to the customer</span><span class="actor">Commercial Lead</span></li>
-      <li><span class="n">10</span><span class="t">Commercial Lead pays the business unit</span><span class="actor">Commercial Lead</span></li>
-    </ul>
+    <div class="eyebrow" data-i18n="dmEyebrow"></div>
+    <h2 data-i18n="dmH2"></h2>
+    <p class="lead" data-i18n="dmLead"></p>
+    <ul class="handoff-list" id="handoff-list"></ul>
   </div>
 </div>
 
 <div class="colophon">
-  <span>YOUNG.Sales SOP — a living reference for how YOUNG sells, hands off, and retains.</span>
-  <span>The product catalog lives in a separate reference document.</span>
+  <span data-i18n="colophon1"></span>
+  <span data-i18n="colophon2"></span>
 </div>
 
 <script>
 (function () {
-  const BUSINESS_NAMES = {
-    workspaces: 'YOUNG Workspaces',
-    hotels: 'YOUNG Hotels',
-    restaurants: 'Restaurants & Hospitality',
-    beach: 'YOUNG.Beach',
-    realestate: 'YOUNG Real Estate',
-    media: 'YOUNG Media',
-    studio: 'YOUNG Studio',
-    products: 'YOUNG Products',
-    deals: 'YOUNG Deals',
-    ownyoung: 'Own YOUNG'
-  };
   const BUSINESS_ORDER = ['workspaces', 'hotels', 'restaurants', 'beach', 'realestate', 'media', 'studio', 'products', 'deals', 'ownyoung'];
 
-  const VERTICAL_PLAYBOOK = {
-    workspaces: {
-      entry: 'Inbound — walk-ins, website inquiries, local search — plus light outbound to nearby businesses.',
-      close: 'The location team closes directly, by phone or in person, against published desk and office pricing. No specialist handoff.',
-      support: 'Move-in coordinated by the location team; renewal comes up at each term’s end, with Meetings & Events as the natural upsell.'
-    },
-    hotels: {
-      entry: 'Inbound direct bookings and OTA overflow; outbound to corporate accounts and wedding/event planners.',
-      close: 'Standard stays close immediately. Weddings and corporate events run a full Discovery → Proposal cycle as Custom Quote.',
-      support: 'Reservations handles pre-arrival; post-stay follow-up drives repeat bookings and corporate-account renewal.'
-    },
-    restaurants: {
-      entry: 'Walk-in and reservation for regular dining; outbound to local businesses for standing lunch and catering accounts.',
-      close: 'Dining closes on the spot. Group bookings and catering contracts get a quick proposal.',
-      support: 'Standing orders reconfirmed each season; managers check in directly with corporate accounts.'
-    },
-    beach: {
-      entry: 'Referral from Hotels guests; seasonal outbound for corporate beach days; local inbound.',
-      close: 'Rep closes directly, usually bundled into a Hotels stay or a Deals package.',
-      support: 'Confirmed against the season’s calendar; repeat booking is pushed ahead of the following year.'
-    },
-    realestate: {
-      entry: 'Outbound to investor lists; referral and partner introductions.',
-      close: 'Phone reps qualify budget and intent only — every deal escalates to the RE Specialist to close. Deal sizes here (€50k–850k+) sit well above the €25,000 phone-close threshold.',
-      support: 'The specialist handles legal and payment terms; investor relations nurtures the pipeline toward later phases.'
-    },
-    media: {
-      entry: 'Outbound calling day (VG Visie priority) plus inbound media-kit downloads — a Slack alert fires on open/download and reps call within 15 minutes.',
-      close: 'Rep phone-closes anything under €25,000 immediately. Annual packages and cross-brand deals above that go through a Custom Quote proposal.',
-      support: 'Contract and creative brief hand off to Media Ops; renewal lands at the package’s anniversary, with VG Visie → TPO → MGA cross-sell as the next step.'
-    },
-    studio: {
-      entry: 'Internal referral from another YOUNG vertical closing a deal that needs content; inbound portfolio inquiries.',
-      close: 'Scope and budget shape a Proposal & Negotiation cycle — always project-based, never a phone close.',
-      support: 'Kickoff brief hands to the production team; retainer or repeat-project conversations follow delivery.'
-    },
-    products: {
-      entry: 'Outbound B2B wholesale outreach; inbound via youngcoffee.com.',
-      close: 'Standard SKUs close directly against list/volume pricing; corporate gifting and customization get a Custom Quote.',
-      support: 'Lead time and first shipment confirmed up front; reorder cadence is the renewal.'
-    },
-    deals: {
-      entry: 'Outbound partner outreach; inbound partner applications — this side sells partnership, not product.',
-      close: 'Audience fit and commission model are negotiated directly; the “close” is a signed partnership agreement, not a customer contract.',
-      support: 'Deal goes live in the directory; a performance review at renewal decides whether terms hold or change.'
-    },
-    ownyoung: {
-      entry: 'Inbound community/investor interest; outbound to targeted investors; referral from existing co-owners.',
-      close: 'Compliance-sensitive — every certificate sale escalates to the CEO/COO, never a rep phone-close.',
-      support: 'Certificate issuance plus welcome pack and stay; annual check-in against the 5-year buyback commitment.'
-    }
+  const STR = {
+en: {
+  mastheadEyebrow: 'YOUNG GROUP — SALES OPERATING PROCEDURE',
+  h1Suffix: 'Sales SOP',
+  statement: '“If there is a commercial opportunity anywhere within YOUNG, Sales should know about it and know how to move it forward.”',
+  stat1: 'Pipeline steps (A–X)', stat2: 'Business verticals', stat3: 'Countries', stat4: 'Phone-close threshold',
+  processEyebrow: 'Sales Process',
+  processH2: 'One engine. Ten verticals underneath it.',
+  processStatement: 'The stages are the same everywhere — what changes per vertical is how a lead enters, and the deal size at which a rep hands off to a specialist instead of closing it themselves.',
+  glanceEyebrow: 'At a glance',
+  glanceH3: 'The engine, simplified',
+  stepEyebrow: 'Step by step',
+  stepH3: 'The full pipeline, lettered A through X',
+  stepIntro: 'Solid borders are an action or a state; dashed borders are a decision point. Every letter below is explained in the table under the diagram.',
+  legendHeadStep: 'Step', legendHeadWhat: 'What happens',
+  perVerticalEyebrow: 'Per vertical',
+  perVerticalH3: 'How each business runs the same engine',
+  vLabelEntry: 'Entry', vLabelClose: 'Qualify &amp; close', vLabelSupport: 'Onboard &amp; support',
+  dmEyebrow: 'Decision Matrix',
+  dmH2: 'From lead to payout — who owns each step',
+  dmLead: 'Ten steps, two owners. The SDR runs the deal to a signed contract; the Commercial Lead runs the relationship and the money after that.',
+  dmDivider: 'Handoff — SDR to Commercial Lead',
+  colophon1: 'YOUNG.Sales SOP — a living reference for how YOUNG sells, hands off, and retains.',
+  colophon2: 'The product catalog lives in a separate reference document.',
+  svg1: {
+    feedback: "renewal & churn signal shapes next quarter's channel mix",
+    prospect: 'PROSPECT', entry: 'ENTRY CHANNEL', demandgen1: 'DEMAND GEN', demandgen2: '+ LEAD CAPTURE',
+    sdrqualify: 'SDR QUALIFY', meeting1: 'MEETING BOOKED', meeting2: 'HANDOFF TO AE', close: 'CLOSE',
+    onboarding: 'ONBOARDING', activecustomer: 'ACTIVE CUSTOMER',
+    forklabel: 'deal size vs. phone-close threshold',
+    rep1: 'REP PHONE-CLOSES', rep2: 'below threshold', spec1: 'SPECIALIST CLOSES', spec2: 'at or above threshold',
+    health1: 'HEALTH CHECK', health2: 'healthy: expand', health3: 'at risk: save play',
+    loops1: 'loops', loops2: 'quarterly',
+    aria: "A lead moves from Prospect through Entry Channel, Demand Generation, SDR Qualification, Meeting Handoff, and Close, then Onboarding and Active Customer. At Close, the path forks by deal size: a rep phone-closes below the vertical's threshold, a specialist closes above it — both rejoin at Onboarding. Active Customer runs a recurring Health Check that loops to Expansion or a Save Play. Renewal and churn signal feeds back to shape the next Entry Channel mix.",
+    caption: "The full pipeline: entry channel and demand generation feed SDR qualification; Close forks by deal size (rep vs. specialist) and rejoins at Onboarding; Active Customer runs a recurring Health Check back into expansion or a save play; renewal and churn signal loops back to shape the next round of outreach."
+  },
+  svg2: {
+    regionDG: 'DEMAND GENERATION', regionSD: 'SALES DEVELOPMENT', regionAE: 'ACCOUNT EXECUTIVE / CLOSE', regionCS: 'CUSTOMER SUCCESS',
+    A: 'PROSPECT / TARGET ACCOUNT (A)', B: 'ENTRY CHANNEL (B)',
+    inbound_lbl: 'Inbound', outbound_lbl: 'Outbound', referral_lbl: 'Referral · Partner',
+    C1: 'INBOUND (C)', C2: 'Marketing: content, website, ads',
+    D1: 'OUTBOUND (D)', D2: 'SDR prospecting, AI signal + intent',
+    E1: 'REFERRAL / PARTNER (E)', E2: 'Customer or partner referral',
+    F: 'LEAD CAPTURED IN CRM (F)', G: 'LEAD SCORING & ROUTING (G)',
+    H1: 'SDR OUTREACH (H)', H2: 'AI-drafted, human-reviewed',
+    I: 'QUALIFIED? (I)',
+    J_no: 'no', J: 'NURTURE / RECYCLE (J)', J_sub: 'recycled into scoring',
+    K_yes: 'yes', K: 'MEETING BOOKED (K)',
+    L1: 'HANDOFF TO AE (L)', L2: 'context + call notes',
+    M: 'DISCOVERY CALL (M)', N: 'DEMO / VALUE CASE (N)', O: 'PROPOSAL & NEGOTIATION (O)',
+    P: 'DEAL OUTCOME (P)',
+    Q_lost: 'lost', Q1: 'CLOSED LOST (Q)', Q2: 'reason captured',
+    R_won: 'won', R1: 'CLOSED WON (R)', R2: 'contract signed',
+    S: 'ONBOARDING (S)', T: 'ACTIVE CUSTOMER (T)', U: 'HEALTH CHECK (U)',
+    V_healthy: 'healthy', V: 'EXPANSION & RENEWAL (V)',
+    W_atrisk: 'at risk', W: 'CS SAVE PLAY (W)',
+    X1: 'COMPANY,', X2: 'RETAINED', X3: 'REVENUE (X)',
+    feedback: 'win + churn insight feeds the next scoring pass',
+    aria: 'Detailed pipeline from Prospect/Target Account (A) through Entry Channel (B), three Demand Generation paths — Inbound (C), Outbound (D), Referral/Partner (E) — into Lead Captured in CRM (F), Lead Scoring and Routing (G), SDR Outreach (H), a Qualified decision (I) that either loops to Nurture/Recycle (J) or continues to Meeting Booked (K), Handoff to AE (L), Discovery Call (M), Demo/Value Case (N), Proposal and Negotiation (O), a Deal Outcome decision (P) that either loops to Closed Lost (Q) or continues to Closed Won (R), Onboarding (S), Active Customer (T), a Health Check decision (U) that loops to Expansion and Renewal (V) or CS Save Play (W), ending at Company Retained Revenue (X), which feeds win and churn insight back to Lead Scoring and Routing.',
+    caption: 'Every commercial motion at YOUNG runs this same lettered pipeline — A through X. Disqualified leads (J) and lost deals (Q) both recycle into Lead Scoring rather than disappearing; retained revenue (X) reports back what won and what churned.'
+  },
+  legend: [
+    ['A · Prospect / Target Account', 'A named company or contact enters the pipeline as a fit for one of the ten verticals.'],
+    ['B · Entry Channel', 'How they arrived — inbound, outbound, or referral/partner — decides which Demand Generation path picks them up.'],
+    ['C · Inbound', 'Marketing content, the website, or ads bring the lead in on their own.'],
+    ['D · Outbound', 'SDR prospecting using AI-surfaced signal and intent data.'],
+    ['E · Referral / Partner', 'A customer or partner introduction.'],
+    ['F · Lead Captured in CRM', 'Every path lands in the same CRM record, regardless of source.'],
+    ['G · Lead Scoring &amp; Routing', 'The CRM scores the lead and routes it to the right SDR queue.'],
+    ['H · SDR Outreach', 'AI drafts the first outreach; a human reviews before it sends.'],
+    ['I · Qualified?', 'The SDR checks budget, timing and fit.'],
+    ['J · Nurture / Recycle', 'Not-yet-qualified leads loop back into scoring rather than getting dropped.'],
+    ['K · Meeting Booked', 'A qualified lead books time with an Account Executive.'],
+    ['L · Handoff to AE', 'Context and call notes travel with the lead — no cold handoff.'],
+    ['M · Discovery Call', 'The AE learns the actual problem and process.'],
+    ['N · Demo / Value Case', 'A demo built around the case for buying.'],
+    ['O · Proposal &amp; Negotiation', 'Terms, pricing and scope get finalized.'],
+    ['P · Deal Outcome', 'Won or lost — every outcome is captured, not just wins.'],
+    ['Q · Closed Lost', 'The reason gets logged and feeds back into scoring, not discarded.'],
+    ['R · Closed Won, Contract Signed', 'The deal is signed and locked in the CRM.'],
+    ['S · Onboarding', 'Handoff from Sales to the operating team — "we sell it, you operate it."'],
+    ['T · Active Customer', 'The account moves into steady-state delivery.'],
+    ['U · Health Check', 'A recurring check on usage and satisfaction decides what happens next.'],
+    ['V · Expansion &amp; Renewal', 'A healthy account gets offered more, or renews.'],
+    ['W · CS Save Play', 'An at-risk account gets a deliberate save motion before it churns.'],
+    ['X · Company, Retained Revenue', 'What actually stuck — the number that matters — feeding win and churn insight back into scoring.']
+  ],
+  businessNames: {
+    workspaces: 'YOUNG Workspaces', hotels: 'YOUNG Hotels', restaurants: 'Restaurants &amp; Hospitality',
+    beach: 'YOUNG.Beach', realestate: 'YOUNG Real Estate', media: 'YOUNG Media', studio: 'YOUNG Studio',
+    products: 'YOUNG Products', deals: 'YOUNG Deals', ownyoung: 'Own YOUNG'
+  },
+  playbook: {
+    workspaces: { entry: 'Inbound — walk-ins, website inquiries, local search — plus light outbound to nearby businesses.', close: 'The location team closes directly, by phone or in person, against published desk and office pricing. No specialist handoff.', support: 'Move-in coordinated by the location team; renewal comes up at each term’s end, with Meetings & Events as the natural upsell.' },
+    hotels: { entry: 'Inbound direct bookings and OTA overflow; outbound to corporate accounts and wedding/event planners.', close: 'Standard stays close immediately. Weddings and corporate events run a full Discovery → Proposal cycle as Custom Quote.', support: 'Reservations handles pre-arrival; post-stay follow-up drives repeat bookings and corporate-account renewal.' },
+    restaurants: { entry: 'Walk-in and reservation for regular dining; outbound to local businesses for standing lunch and catering accounts.', close: 'Dining closes on the spot. Group bookings and catering contracts get a quick proposal.', support: 'Standing orders reconfirmed each season; managers check in directly with corporate accounts.' },
+    beach: { entry: 'Referral from Hotels guests; seasonal outbound for corporate beach days; local inbound.', close: 'Rep closes directly, usually bundled into a Hotels stay or a Deals package.', support: 'Confirmed against the season’s calendar; repeat booking is pushed ahead of the following year.' },
+    realestate: { entry: 'Outbound to investor lists; referral and partner introductions.', close: 'Phone reps qualify budget and intent only — every deal escalates to the RE Specialist to close. Deal sizes here (€50k–850k+) sit well above the €25,000 phone-close threshold.', support: 'The specialist handles legal and payment terms; investor relations nurtures the pipeline toward later phases.' },
+    media: { entry: 'Outbound calling day (VG Visie priority) plus inbound media-kit downloads — a Slack alert fires on open/download and reps call within 15 minutes.', close: 'Rep phone-closes anything under €25,000 immediately. Annual packages and cross-brand deals above that go through a Custom Quote proposal.', support: 'Contract and creative brief hand off to Media Ops; renewal lands at the package’s anniversary, with VG Visie → TPO → MGA cross-sell as the next step.' },
+    studio: { entry: 'Internal referral from another YOUNG vertical closing a deal that needs content; inbound portfolio inquiries.', close: 'Scope and budget shape a Proposal & Negotiation cycle — always project-based, never a phone close.', support: 'Kickoff brief hands to the production team; retainer or repeat-project conversations follow delivery.' },
+    products: { entry: 'Outbound B2B wholesale outreach; inbound via youngcoffee.com.', close: 'Standard SKUs close directly against list/volume pricing; corporate gifting and customization get a Custom Quote.', support: 'Lead time and first shipment confirmed up front; reorder cadence is the renewal.' },
+    deals: { entry: 'Outbound partner outreach; inbound partner applications — this side sells partnership, not product.', close: 'Audience fit and commission model are negotiated directly; the “close” is a signed partnership agreement, not a customer contract.', support: 'Deal goes live in the directory; a performance review at renewal decides whether terms hold or change.' },
+    ownyoung: { entry: 'Inbound community/investor interest; outbound to targeted investors; referral from existing co-owners.', close: 'Compliance-sensitive — every certificate sale escalates to the CEO/COO, never a rep phone-close.', support: 'Certificate issuance plus welcome pack and stay; annual check-in against the 5-year buyback commitment.' }
+  },
+  dmSteps: [
+    { t: 'SDR receives the lead', actor: 'SDR' },
+    { t: 'SDR meets the lead and uses the catalog to shape the offer', actor: 'SDR' },
+    { t: 'SDR closes the proposal with the lead', actor: 'SDR' },
+    { t: 'SDR connects with the business unit owner', actor: 'SDR' },
+    { t: 'SDR sends the contract to the lead', actor: 'SDR' },
+    { t: 'SDR formalizes the closure of the business with the business unit', actor: 'SDR' },
+    { t: 'SDR updates the CRM', actor: 'SDR' },
+    { t: 'Commercial Lead takes care of Account Management with the business unit and the customer', actor: 'Commercial Lead' },
+    { t: 'Commercial Lead sends the invoice to the customer', actor: 'Commercial Lead' },
+    { t: 'Commercial Lead pays the business unit', actor: 'Commercial Lead' }
+  ]
+},
+nl: {
+  mastheadEyebrow: 'YOUNG GROEP — VERKOOPPROCEDURE',
+  h1Suffix: 'Verkoop-SOP',
+  statement: '“Als er ergens binnen YOUNG een commerciële kans is, moet Sales dat weten — en weten hoe die kans verzilverd wordt.”',
+  stat1: 'Stappen in het proces (A–X)', stat2: 'Bedrijfsonderdelen', stat3: 'Landen', stat4: 'Telefonische-sluitdrempel',
+  processEyebrow: 'Verkoopproces',
+  processH2: 'Eén systeem. Tien bedrijfsonderdelen eronder.',
+  processStatement: 'De fasen zijn overal hetzelfde — wat per onderdeel verschilt, is hoe een lead binnenkomt en vanaf welk dealbedrag een rep de deal overdraagt aan een specialist in plaats van zelf te sluiten.',
+  glanceEyebrow: 'In één oogopslag',
+  glanceH3: 'Het proces, vereenvoudigd',
+  stepEyebrow: 'Stap voor stap',
+  stepH3: 'De volledige pijplijn, van A tot en met X',
+  stepIntro: 'Doorlopende kaders zijn een actie of status; gestippelde kaders zijn een beslismoment. Elke letter hieronder wordt toegelicht in de tabel onder het diagram.',
+  legendHeadStep: 'Stap', legendHeadWhat: 'Wat er gebeurt',
+  perVerticalEyebrow: 'Per bedrijfsonderdeel',
+  perVerticalH3: 'Hoe elk bedrijfsonderdeel hetzelfde proces doorloopt',
+  vLabelEntry: 'Instroom', vLabelClose: 'Kwalificeren &amp; sluiten', vLabelSupport: 'Onboarding &amp; ondersteuning',
+  dmEyebrow: 'Beslismatrix',
+  dmH2: 'Van lead tot uitbetaling — wie doet wat',
+  dmLead: 'Tien stappen, twee eigenaren. De SDR brengt de deal tot een getekend contract; de Commercial Lead beheert daarna de relatie en het geld.',
+  dmDivider: 'Overdracht — SDR naar Commercial Lead',
+  colophon1: 'YOUNG.Sales SOP — een levend naslagwerk over hoe YOUNG verkoopt, overdraagt en behoudt.',
+  colophon2: 'De productcatalogus staat in een apart document.',
+  svg1: {
+    feedback: 'vernieuwings- en verloopsignaal stuurt de kanaalmix van komend kwartaal',
+    prospect: 'PROSPECT', entry: 'INSTROOMKANAAL', demandgen1: 'LEADGENERATIE', demandgen2: '+ LEAD VASTLEGGEN',
+    sdrqualify: 'KWALIFICATIE', meeting1: 'AFSPRAAK GEPLAND', meeting2: 'OVERDRACHT NAAR AE', close: 'SLUITEN',
+    onboarding: 'ONBOARDING', activecustomer: 'ACTIEVE KLANT',
+    forklabel: 'dealgrootte t.o.v. telefonische-sluitdrempel',
+    rep1: 'REP SLUIT TELEFONISCH', rep2: 'onder de drempel', spec1: 'SPECIALIST SLUIT AF', spec2: 'op of boven de drempel',
+    health1: 'GEZONDHEIDSCHECK', health2: 'gezond: uitbreiden', health3: 'risico: reddingsactie',
+    loops1: 'herhaalt', loops2: 'elk kwartaal',
+    aria: 'Een lead doorloopt Prospect, Instroomkanaal, Leadgeneratie, SDR-kwalificatie, Overdracht naar AE en Sluiten, daarna Onboarding en Actieve Klant. Bij Sluiten splitst het pad op dealgrootte: een rep sluit telefonisch onder de drempel van het onderdeel, een specialist sluit erboven — beide komen samen bij Onboarding. Actieve Klant doorloopt een terugkerende Gezondheidscheck die naar Uitbreiding of een Reddingsactie leidt. Vernieuwings- en verloopsignaal stroomt terug om de volgende kanaalmix te bepalen.',
+    caption: 'De volledige pijplijn: instroomkanaal en leadgeneratie voeden de SDR-kwalificatie; Sluiten splitst op dealgrootte (rep vs. specialist) en komt samen bij Onboarding; Actieve Klant doorloopt een terugkerende Gezondheidscheck naar uitbreiding of een reddingsactie; vernieuwings- en verloopsignaal stuurt de volgende ronde outreach.'
+  },
+  svg2: {
+    regionDG: 'LEADGENERATIE', regionSD: 'VERKOOPONTWIKKELING', regionAE: 'ACCOUNT EXECUTIVE / SLUITING', regionCS: 'KLANTSUCCES',
+    A: 'PROSPECT / DOELACCOUNT (A)', B: 'INSTROOMKANAAL (B)',
+    inbound_lbl: 'Inbound', outbound_lbl: 'Outbound', referral_lbl: 'Verwijzing · Partner',
+    C1: 'INBOUND (C)', C2: 'Marketing: content, website, advertenties',
+    D1: 'OUTBOUND (D)', D2: 'SDR-prospectie, AI-signalen + intentie',
+    E1: 'DOORVERWIJZING / PARTNER (E)', E2: 'Verwijzing door klant of partner',
+    F: 'LEAD VASTGELEGD IN CRM (F)', G: 'LEADSCORE & ROUTERING (G)',
+    H1: 'SDR OUTREACH (H)', H2: 'AI-opgesteld, mens-gecontroleerd',
+    I: 'GEKWALIFICEERD? (I)',
+    J_no: 'nee', J: 'NURTUREN / RECYCLEN (J)', J_sub: 'teruggevoerd naar scoring',
+    K_yes: 'ja', K: 'AFSPRAAK GEPLAND (K)',
+    L1: 'OVERDRACHT NAAR AE (L)', L2: 'context + gespreksnotities',
+    M: 'DISCOVERY-GESPREK (M)', N: 'DEMO / WAARDECASE (N)', O: 'VOORSTEL & ONDERHANDELING (O)',
+    P: 'DEALUITKOMST (P)',
+    Q_lost: 'verloren', Q1: 'VERLOREN (Q)', Q2: 'reden vastgelegd',
+    R_won: 'gewonnen', R1: 'GEWONNEN (R)', R2: 'contract getekend',
+    S: 'ONBOARDING (S)', T: 'ACTIEVE KLANT (T)', U: 'GEZONDHEIDSCHECK (U)',
+    V_healthy: 'gezond', V: 'GROEI & VERLENGING (V)',
+    W_atrisk: 'risico', W: 'CS REDDINGSPLAN (W)',
+    X1: 'BEDRIJF,', X2: 'BEHOUDEN', X3: 'OMZET (X)',
+    feedback: 'win- en verloopinzicht voedt de volgende scoringsronde',
+    aria: 'Gedetailleerde pijplijn van Prospect/Doelaccount (A) via Instroomkanaal (B), drie leadgeneratiepaden — Inbound (C), Outbound (D), Doorverwijzing/Partner (E) — naar Lead vastgelegd in CRM (F), Leadscore & Routering (G), SDR Outreach (H), een Gekwalificeerd-beslissing (I) die teruggaat naar Nurturen/Recyclen (J) of doorgaat naar Afspraak gepland (K), Overdracht naar AE (L), Discovery-gesprek (M), Demo/Waardecase (N), Voorstel & Onderhandeling (O), een Dealuitkomst-beslissing (P) die teruggaat naar Verloren (Q) of doorgaat naar Gewonnen (R), Onboarding (S), Actieve Klant (T), een Gezondheidscheck-beslissing (U) die leidt naar Groei & Verlenging (V) of CS Reddingsplan (W), eindigend bij Bedrijf, Behouden Omzet (X), dat win- en verloopinzicht terugvoert naar Leadscore & Routering.',
+    caption: 'Elke commerciële beweging bij YOUNG doorloopt dezelfde pijplijn — A tot en met X. Afgewezen leads (J) en verloren deals (Q) worden beide teruggevoerd naar Leadscore in plaats van te verdwijnen; behouden omzet (X) rapporteert terug wat gewonnen en wat verloren is.'
+  },
+  legend: [
+    ['A · Prospect / Doelaccount', 'Een naam of bedrijf komt de pijplijn binnen als match voor een van de tien bedrijfsonderdelen.'],
+    ['B · Instroomkanaal', 'Hoe de lead binnenkwam — inbound, outbound of via verwijzing/partner — bepaalt welk leadgeneratiepad het oppakt.'],
+    ['C · Inbound', 'Marketingcontent, de website of advertenties brengen de lead vanzelf binnen.'],
+    ['D · Outbound', 'SDR-prospectie op basis van AI-signalen en intentiedata.'],
+    ['E · Verwijzing / Partner', 'Een introductie via een klant of partner.'],
+    ['F · Lead vastgelegd in CRM', 'Elk pad komt uit bij hetzelfde CRM-record, ongeacht de bron.'],
+    ['G · Leadscore &amp; Routering', 'Het CRM scoort de lead en routeert hem naar de juiste SDR-wachtrij.'],
+    ['H · SDR Outreach', 'AI stelt de eerste outreach op; een mens controleert voordat die verstuurd wordt.'],
+    ['I · Gekwalificeerd?', 'De SDR toetst budget, timing en fit.'],
+    ['J · Nurturen / Recyclen', 'Nog niet gekwalificeerde leads gaan terug de scoring in in plaats van te worden afgeschreven.'],
+    ['K · Afspraak gepland', 'Een gekwalificeerde lead plant een afspraak met een Account Executive.'],
+    ['L · Overdracht naar AE', 'Context en gespreksnotities reizen mee met de lead — geen koude overdracht.'],
+    ['M · Discovery-gesprek', 'De AE brengt het echte probleem en proces in kaart.'],
+    ['N · Demo / Waardecase', 'Een demo opgebouwd rond de reden om te kopen.'],
+    ['O · Voorstel &amp; Onderhandeling', 'Voorwaarden, prijs en scope worden vastgelegd.'],
+    ['P · Dealuitkomst', 'Gewonnen of verloren — elke uitkomst wordt vastgelegd, niet alleen de winst.'],
+    ['Q · Verloren', 'De reden wordt vastgelegd en gaat terug de scoring in, niet weggegooid.'],
+    ['R · Gewonnen, contract getekend', 'De deal is getekend en vastgelegd in het CRM.'],
+    ['S · Onboarding', 'Overdracht van Sales naar het operationele team — “wij verkopen het, jullie exploiteren het.”'],
+    ['T · Actieve klant', 'Het account gaat over naar reguliere dienstverlening.'],
+    ['U · Gezondheidscheck', 'Een terugkerende check op gebruik en tevredenheid bepaalt het vervolg.'],
+    ['V · Groei &amp; verlenging', 'Een gezond account krijgt meer aangeboden, of verlengt.'],
+    ['W · CS reddingsplan', 'Een account met risico krijgt een gerichte reddingsactie voordat het opzegt.'],
+    ['X · Bedrijf, behouden omzet', 'Wat daadwerkelijk beklijft — het cijfer dat telt — en win- en verloopinzicht teruggeeft aan de scoring.']
+  ],
+  businessNames: {
+    workspaces: 'YOUNG Workspaces', hotels: 'YOUNG Hotels', restaurants: 'Restaurants &amp; Horeca',
+    beach: 'YOUNG.Beach', realestate: 'YOUNG Real Estate', media: 'YOUNG Media', studio: 'YOUNG Studio',
+    products: 'YOUNG Products', deals: 'YOUNG Deals', ownyoung: 'Own YOUNG'
+  },
+  playbook: {
+    workspaces: { entry: 'Inbound — walk-ins, aanvragen via de website, lokale zoekopdrachten — plus lichte outbound naar bedrijven in de buurt.', close: 'Het locatieteam sluit direct, telefonisch of persoonlijk, tegen de gepubliceerde bureau- en kantoorprijzen. Geen overdracht naar een specialist.', support: 'Verhuizing wordt begeleid door het locatieteam; verlenging komt aan het einde van elke termijn ter sprake, met Meetings & Events als logische upsell.' },
+    hotels: { entry: 'Inbound directe boekingen en OTA-overloop; outbound naar zakelijke accounts en trouw-/eventplanners.', close: 'Standaardverblijven sluiten direct. Bruiloften en zakelijke evenementen doorlopen een volledig Discovery → Voorstel-traject als offerte op maat.', support: 'Reserveringen regelt de voorbereiding; opvolging na verblijf stimuleert herhaalboekingen en verlenging van zakelijke accounts.' },
+    restaurants: { entry: 'Walk-in en reservering voor regulier dineren; outbound naar lokale bedrijven voor vaste lunch- en cateringaccounts.', close: 'Dineren sluit ter plekke. Groepsboekingen en cateringcontracten krijgen een snel voorstel.', support: 'Vaste bestellingen worden elk seizoen herbevestigd; managers onderhouden direct contact met zakelijke accounts.' },
+    beach: { entry: 'Verwijzing van hotelgasten; seizoensgebonden outbound voor zakelijke stranddagen; lokale inbound.', close: 'Rep sluit direct, meestal gebundeld met een hotelverblijf of een Deals-pakket.', support: 'Bevestigd tegen de seizoenskalender; herhaalboeking wordt richting het volgende jaar gestimuleerd.' },
+    realestate: { entry: 'Outbound naar investeerderslijsten; verwijzingen en partnerintroducties.', close: 'Telefonische reps toetsen alleen budget en intentie — elke deal escaleert naar de vastgoedspecialist voor de sluiting. Dealgroottes hier (€50k–850k+) liggen ruim boven de telefonische-sluitdrempel van €25.000.', support: 'De specialist regelt juridische en betalingsvoorwaarden; investor relations onderhoudt de pijplijn richting latere fases.' },
+    media: { entry: 'Outbound beldag (VG Visie-prioriteit) plus inbound downloads van mediakits — een Slack-melding gaat af bij openen/downloaden en reps bellen binnen 15 minuten.', close: 'Rep sluit telefonisch alles onder €25.000 direct af. Jaarpakketten en cross-brand deals daarboven doorlopen een offertetraject op maat.', support: 'Contract en creatieve briefing gaan naar Media Ops; verlenging valt op de jaardag van het pakket, met VG Visie → TPO → MGA cross-sell als volgende stap.' },
+    studio: { entry: 'Interne verwijzing vanuit een ander YOUNG-onderdeel dat een deal sluit die content nodig heeft; inbound portfolio-aanvragen.', close: 'Scope en budget bepalen een Voorstel & Onderhandelingstraject — altijd projectbasis, nooit telefonisch gesloten.', support: 'Kick-off-briefing gaat naar het productieteam; retainer- of vervolgprojectgesprekken volgen na oplevering.' },
+    products: { entry: 'Outbound B2B-groothandelbenadering; inbound via youngcoffee.com.', close: 'Standaard SKU’s sluiten direct tegen lijst-/volumeprijzen; zakelijke relatiegeschenken en maatwerk krijgen een offerte op maat.', support: 'Levertijd en eerste zending worden vooraf bevestigd; herbestelritme is de verlenging.' },
+    deals: { entry: 'Outbound partnerbenadering; inbound partneraanvragen — dit onderdeel verkoopt partnerschap, geen product.', close: 'Doelgroepfit en commissiemodel worden direct onderhandeld; de “sluiting” is een getekende partnerovereenkomst, geen klantcontract.', support: 'Deal gaat live in de directory; een prestatiereview bij verlenging bepaalt of de voorwaarden blijven staan of veranderen.' },
+    ownyoung: { entry: 'Inbound interesse vanuit community/investeerders; outbound naar gerichte investeerders; verwijzing door bestaande mede-eigenaren.', close: 'Compliance-gevoelig — elke certificaatverkoop escaleert naar CEO/COO, nooit telefonisch gesloten door een rep.', support: 'Uitgifte van certificaten plus welkomstpakket en verblijf; jaarlijkse check-in tegen de 5-jarige terugkoopverplichting.' }
+  },
+  dmSteps: [
+    { t: 'SDR ontvangt de lead', actor: 'SDR' },
+    { t: 'SDR ontmoet de lead en gebruikt de catalogus om het aanbod vorm te geven', actor: 'SDR' },
+    { t: 'SDR sluit het voorstel met de lead', actor: 'SDR' },
+    { t: 'SDR neemt contact op met de eigenaar van de business unit', actor: 'SDR' },
+    { t: 'SDR stuurt het contract naar de lead', actor: 'SDR' },
+    { t: 'SDR formaliseert de sluiting van de deal met de business unit', actor: 'SDR' },
+    { t: 'SDR werkt het CRM bij', actor: 'SDR' },
+    { t: 'Commercial Lead verzorgt accountbeheer bij de business unit en de klant', actor: 'Commercial Lead' },
+    { t: 'Commercial Lead stuurt de factuur naar de klant', actor: 'Commercial Lead' },
+    { t: 'Commercial Lead betaalt de business unit uit', actor: 'Commercial Lead' }
+  ]
+},
+es: {
+  mastheadEyebrow: 'GRUPO YOUNG — PROCEDIMIENTO DE VENTAS',
+  h1Suffix: 'SOP de Ventas',
+  statement: '“Si existe una oportunidad comercial en cualquier parte de YOUNG, Ventas debe saberlo y saber cómo hacerla avanzar.”',
+  stat1: 'Pasos del proceso (A–X)', stat2: 'Verticales de negocio', stat3: 'Países', stat4: 'Umbral de cierre telefónico',
+  processEyebrow: 'Proceso de Ventas',
+  processH2: 'Un solo motor. Diez verticales debajo.',
+  processStatement: 'Las etapas son las mismas en todas partes — lo que cambia según la vertical es cómo entra un lead y el tamaño de operación a partir del cual un representante la transfiere a un especialista en vez de cerrarla él mismo.',
+  glanceEyebrow: 'De un vistazo',
+  glanceH3: 'El motor, simplificado',
+  stepEyebrow: 'Paso a paso',
+  stepH3: 'El proceso completo, de la A a la X',
+  stepIntro: 'Los bordes sólidos son una acción o un estado; los bordes discontinuos son un punto de decisión. Cada letra se explica en la tabla debajo del diagrama.',
+  legendHeadStep: 'Paso', legendHeadWhat: 'Qué ocurre',
+  perVerticalEyebrow: 'Por vertical',
+  perVerticalH3: 'Cómo cada negocio recorre el mismo motor',
+  vLabelEntry: 'Entrada', vLabelClose: 'Calificación y cierre', vLabelSupport: 'Incorporación y soporte',
+  dmEyebrow: 'Matriz de Decisión',
+  dmH2: 'Del lead al pago — quién es responsable de cada paso',
+  dmLead: 'Diez pasos, dos responsables. El SDR lleva la operación hasta el contrato firmado; el Commercial Lead gestiona después la relación y el dinero.',
+  dmDivider: 'Traspaso — de SDR a Commercial Lead',
+  colophon1: 'SOP de Ventas de YOUNG — una referencia viva de cómo YOUNG vende, traspasa y retiene.',
+  colophon2: 'El catálogo de producto vive en un documento aparte.',
+  svg1: {
+    feedback: 'la señal de renovación y abandono da forma a la mezcla de canales del próximo trimestre',
+    prospect: 'PROSPECTO', entry: 'CANAL DE ENTRADA', demandgen1: 'GENERAR DEMANDA', demandgen2: '+ CAPTURAR LEAD',
+    sdrqualify: 'CALIFICACIÓN', meeting1: 'REUNIÓN AGENDADA', meeting2: 'TRASPASO A AE', close: 'CIERRE',
+    onboarding: 'ONBOARDING', activecustomer: 'CLIENTE ACTIVO',
+    forklabel: 'tamaño de operación frente al umbral de cierre telefónico',
+    rep1: 'REP CIERRA POR TELÉFONO', rep2: 'por debajo del umbral', spec1: 'CIERRA EL ESPECIALISTA', spec2: 'en el umbral o por encima',
+    health1: 'REVISIÓN DE SALUD', health2: 'sano: expandir', health3: 'en riesgo: plan de rescate',
+    loops1: 'se repite', loops2: 'cada trimestre',
+    aria: 'Un lead avanza desde Prospecto por Canal de Entrada, Generación de Demanda, Calificación SDR, Traspaso a AE y Cierre, luego Onboarding y Cliente Activo. En Cierre, el camino se bifurca según el tamaño de la operación: un representante cierra por teléfono por debajo del umbral de la vertical, un especialista cierra por encima — ambos se reencuentran en Onboarding. Cliente Activo ejecuta una Revisión de Salud recurrente que deriva en Expansión o un Plan de Rescate. La señal de renovación y abandono retroalimenta la mezcla de canales siguiente.',
+    caption: 'El proceso completo: el canal de entrada y la generación de demanda alimentan la calificación SDR; Cierre se bifurca según el tamaño de la operación (rep frente a especialista) y se reencuentra en Onboarding; Cliente Activo ejecuta una Revisión de Salud recurrente hacia expansión o un plan de rescate; la señal de renovación y abandono retroalimenta la siguiente ronda de prospección.'
+  },
+  svg2: {
+    regionDG: 'GENERACIÓN DE DEMANDA', regionSD: 'DESARROLLO DE VENTAS', regionAE: 'ACCOUNT EXECUTIVE / CIERRE', regionCS: 'ÉXITO DEL CLIENTE',
+    A: 'PROSPECTO / CUENTA META (A)', B: 'CANAL DE ENTRADA (B)',
+    inbound_lbl: 'Inbound', outbound_lbl: 'Outbound', referral_lbl: 'Referido · Socio',
+    C1: 'INBOUND (C)', C2: 'Marketing: contenido, web, anuncios',
+    D1: 'OUTBOUND (D)', D2: 'Prospección SDR, señal e intención IA',
+    E1: 'REFERIDO / SOCIO (E)', E2: 'Referido de cliente o socio',
+    F: 'LEAD REGISTRADO EN EL CRM (F)', G: 'PUNTUACIÓN Y ENRUTAMIENTO (G)',
+    H1: 'SDR OUTREACH (H)', H2: 'redactado por IA, revisión humana',
+    I: '¿CALIFICADO? (I)',
+    J_no: 'no', J: 'NUTRIR / RECICLAR (J)', J_sub: 'retorna a la puntuación',
+    K_yes: 'sí', K: 'REUNIÓN AGENDADA (K)',
+    L1: 'TRASPASO A AE (L)', L2: 'contexto + notas de llamada',
+    M: 'LLAMADA DE DESCUBRIMIENTO (M)', N: 'DEMO / CASO DE VALOR (N)', O: 'PROPUESTA Y NEGOCIACIÓN (O)',
+    P: 'RESULTADO DE LA OPERACIÓN (P)',
+    Q_lost: 'perdida', Q1: 'PERDIDA (Q)', Q2: 'motivo registrado',
+    R_won: 'ganada', R1: 'GANADA (R)', R2: 'contrato firmado',
+    S: 'ONBOARDING (S)', T: 'CLIENTE ACTIVO (T)', U: 'REVISIÓN DE SALUD (U)',
+    V_healthy: 'sano', V: 'EXPANSIÓN Y RENOVACIÓN (V)',
+    W_atrisk: 'en riesgo', W: 'PLAN DE RESCATE CS (W)',
+    X1: 'EMPRESA,', X2: 'INGRESOS', X3: 'RETENIDOS (X)',
+    feedback: 'la señal de ganancias y pérdidas alimenta la siguiente ronda de puntuación',
+    aria: 'Proceso detallado desde Prospecto/Cuenta Meta (A) por Canal de Entrada (B), tres rutas de Generación de Demanda — Inbound (C), Outbound (D), Referido/Socio (E) — hacia Lead registrado en el CRM (F), Puntuación y Enrutamiento (G), SDR Outreach (H), una decisión de Calificado (I) que vuelve a Nutrir/Reciclar (J) o continúa a Reunión Agendada (K), Traspaso a AE (L), Llamada de Descubrimiento (M), Demo/Caso de Valor (N), Propuesta y Negociación (O), una decisión de Resultado de la Operación (P) que vuelve a Perdida (Q) o continúa a Ganada (R), Onboarding (S), Cliente Activo (T), una decisión de Revisión de Salud (U) que deriva en Expansión y Renovación (V) o Plan de Rescate CS (W), terminando en Empresa, Ingresos Retenidos (X), que retroalimenta la señal de ganancias y pérdidas hacia Puntuación y Enrutamiento.',
+    caption: 'Cada movimiento comercial de YOUNG recorre este mismo proceso, de la A a la X. Los leads descalificados (J) y las operaciones perdidas (Q) se reincorporan a la puntuación en lugar de desaparecer; los ingresos retenidos (X) informan qué se ganó y qué se perdió.'
+  },
+  legend: [
+    ['A · Prospecto / Cuenta Meta', 'Una empresa o contacto con nombre entra al proceso como encaje para una de las diez verticales.'],
+    ['B · Canal de Entrada', 'Cómo llegó — inbound, outbound o referido/socio — decide qué ruta de generación de demanda lo recoge.'],
+    ['C · Inbound', 'El contenido de marketing, la web o los anuncios traen al lead por su cuenta.'],
+    ['D · Outbound', 'Prospección SDR usando señal e intención detectadas por IA.'],
+    ['E · Referido / Socio', 'Una introducción de un cliente o un socio.'],
+    ['F · Lead registrado en el CRM', 'Cada ruta termina en el mismo registro del CRM, sin importar el origen.'],
+    ['G · Puntuación y Enrutamiento', 'El CRM puntúa el lead y lo enruta a la cola SDR correcta.'],
+    ['H · SDR Outreach', 'La IA redacta el primer contacto; una persona lo revisa antes de enviarlo.'],
+    ['I · ¿Calificado?', 'El SDR verifica presupuesto, momento y encaje.'],
+    ['J · Nutrir / Reciclar', 'Los leads aún no calificados vuelven a la puntuación en lugar de descartarse.'],
+    ['K · Reunión Agendada', 'Un lead calificado agenda tiempo con un Account Executive.'],
+    ['L · Traspaso a AE', 'El contexto y las notas de la llamada viajan con el lead — sin traspaso en frío.'],
+    ['M · Llamada de Descubrimiento', 'El AE conoce el problema y el proceso reales.'],
+    ['N · Demo / Caso de Valor', 'Una demo construida alrededor del motivo de compra.'],
+    ['O · Propuesta y Negociación', 'Se finalizan condiciones, precio y alcance.'],
+    ['P · Resultado de la Operación', 'Ganada o perdida — se registra cada resultado, no solo las ganadas.'],
+    ['Q · Perdida', 'El motivo se registra y retroalimenta la puntuación, no se descarta.'],
+    ['R · Ganada, Contrato Firmado', 'La operación queda firmada y registrada en el CRM.'],
+    ['S · Onboarding', 'Traspaso de Ventas al equipo operativo — “nosotros vendemos, ustedes operan.”'],
+    ['T · Cliente Activo', 'La cuenta pasa a un servicio estable y continuo.'],
+    ['U · Revisión de Salud', 'Una revisión recurrente de uso y satisfacción decide qué sigue.'],
+    ['V · Expansión y Renovación', 'Una cuenta sana recibe más oferta, o renueva.'],
+    ['W · Plan de Rescate CS', 'Una cuenta en riesgo recibe una acción de rescate deliberada antes de darse de baja.'],
+    ['X · Empresa, Ingresos Retenidos', 'Lo que realmente quedó — la cifra que importa — y retroalimenta la señal de ganancias y pérdidas hacia la puntuación.']
+  ],
+  businessNames: {
+    workspaces: 'YOUNG Workspaces', hotels: 'YOUNG Hotels', restaurants: 'Restaurantes y Hostelería',
+    beach: 'YOUNG.Beach', realestate: 'YOUNG Real Estate', media: 'YOUNG Media', studio: 'YOUNG Studio',
+    products: 'YOUNG Products', deals: 'YOUNG Deals', ownyoung: 'Own YOUNG'
+  },
+  playbook: {
+    workspaces: { entry: 'Inbound — visitas espontáneas, consultas por la web, búsqueda local — más outbound ligero a negocios cercanos.', close: 'El equipo de la sede cierra directamente, por teléfono o en persona, con las tarifas publicadas de puestos y oficinas. Sin traspaso a un especialista.', support: 'La mudanza la coordina el equipo de la sede; la renovación se plantea al final de cada plazo, con Meetings & Events como upsell natural.' },
+    hotels: { entry: 'Reservas directas inbound y exceso de OTA; outbound a cuentas corporativas y organizadores de bodas/eventos.', close: 'Las estancias estándar se cierran de inmediato. Bodas y eventos corporativos siguen un ciclo completo de Descubrimiento → Propuesta como presupuesto a medida.', support: 'Reservas gestiona la preestancia; el seguimiento posterior impulsa reservas repetidas y la renovación de cuentas corporativas.' },
+    restaurants: { entry: 'Walk-in y reserva para el servicio habitual; outbound a negocios locales para cuentas fijas de almuerzo y catering.', close: 'El servicio se cierra en el momento. Las reservas de grupo y los contratos de catering reciben una propuesta rápida.', support: 'Los pedidos fijos se reconfirman cada temporada; los encargados mantienen contacto directo con las cuentas corporativas.' },
+    beach: { entry: 'Referido de huéspedes de Hotels; outbound estacional para días de playa corporativos; inbound local.', close: 'El representante cierra directamente, normalmente incluido en una estancia de Hotels o un paquete de Deals.', support: 'Se confirma según el calendario de temporada; se impulsa la reserva repetida de cara al año siguiente.' },
+    realestate: { entry: 'Outbound a listas de inversores; referidos e introducciones de socios.', close: 'Los representantes telefónicos solo califican presupuesto e intención — toda operación escala al Especialista Inmobiliario para el cierre. Los importes aquí (€50k–850k+) superan ampliamente el umbral de cierre telefónico de €25.000.', support: 'El especialista gestiona los términos legales y de pago; relaciones con inversores nutre el proceso hacia fases posteriores.' },
+    media: { entry: 'Día de llamadas outbound (prioridad VG Visie) más descargas inbound de kits de prensa — una alerta de Slack salta al abrir/descargar y los representantes llaman en 15 minutos.', close: 'El representante cierra por teléfono de inmediato cualquier operación por debajo de €25.000. Los paquetes anuales y acuerdos entre marcas por encima de ese importe siguen una propuesta de presupuesto a medida.', support: 'El contrato y el brief creativo pasan a Media Ops; la renovación llega en el aniversario del paquete, con la venta cruzada VG Visie → TPO → MGA como siguiente paso.' },
+    studio: { entry: 'Referido interno de otra vertical de YOUNG que cierra una operación que necesita contenido; consultas inbound de portafolio.', close: 'El alcance y el presupuesto definen un ciclo de Propuesta y Negociación — siempre por proyecto, nunca cierre telefónico.', support: 'El brief de arranque pasa al equipo de producción; las conversaciones de retainer o proyectos repetidos siguen a la entrega.' },
+    products: { entry: 'Outbound de venta mayorista B2B; inbound a través de youngcoffee.com.', close: 'Los SKU estándar se cierran directamente con precios de lista/volumen; los regalos corporativos y la personalización reciben un presupuesto a medida.', support: 'El plazo de entrega y el primer envío se confirman por adelantado; el ritmo de reposición es la renovación.' },
+    deals: { entry: 'Outbound a posibles socios; solicitudes de socios inbound — este lado vende alianza, no producto.', close: 'El encaje de audiencia y el modelo de comisión se negocian directamente; el “cierre” es un acuerdo de alianza firmado, no un contrato de cliente.', support: 'La alianza sale en vivo en el directorio; una revisión de rendimiento en la renovación decide si las condiciones se mantienen o cambian.' },
+    ownyoung: { entry: 'Interés inbound de comunidad/inversores; outbound a inversores objetivo; referidos de copropietarios actuales.', close: 'Sensible al cumplimiento normativo — toda venta de certificados escala al CEO/COO, nunca cierre telefónico por un representante.', support: 'Emisión del certificado más pack de bienvenida y estancia; revisión anual frente al compromiso de recompra a 5 años.' }
+  },
+  dmSteps: [
+    { t: 'El SDR recibe el lead', actor: 'SDR' },
+    { t: 'El SDR se reúne con el lead y usa el catálogo para dar forma a la oferta', actor: 'SDR' },
+    { t: 'El SDR cierra la propuesta con el lead', actor: 'SDR' },
+    { t: 'El SDR se pone en contacto con el responsable de la unidad de negocio', actor: 'SDR' },
+    { t: 'El SDR envía el contrato al lead', actor: 'SDR' },
+    { t: 'El SDR formaliza el cierre de la operación con la unidad de negocio', actor: 'SDR' },
+    { t: 'El SDR actualiza el CRM', actor: 'SDR' },
+    { t: 'El Commercial Lead se encarga de la gestión de cuenta con la unidad de negocio y el cliente', actor: 'Commercial Lead' },
+    { t: 'El Commercial Lead envía la factura al cliente', actor: 'Commercial Lead' },
+    { t: 'El Commercial Lead paga a la unidad de negocio', actor: 'Commercial Lead' }
+  ]
+}
   };
 
-  const vgridEl = document.getElementById('vertical-grid');
-  vgridEl.innerHTML = BUSINESS_ORDER.map(id => {
-    const p = VERTICAL_PLAYBOOK[id];
-    return `
-      <div class="vcard">
-        <h3>${BUSINESS_NAMES[id]}</h3>
-        <dl>
-          <dt>Entry</dt><dd>${p.entry}</dd>
-          <dt>Qualify &amp; close</dt><dd>${p.close}</dd>
-          <dt>Onboard &amp; support</dt><dd>${p.support}</dd>
-        </dl>
-      </div>`;
-  }).join('');
+  function decodeEntities(str) {
+    const ta = document.createElement('textarea');
+    ta.innerHTML = str;
+    return ta.value;
+  }
+
+  function applyLang(lang) {
+    const S = STR[lang];
+    document.documentElement.lang = lang;
+    localStorage.setItem('sb-lang', lang);
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (S[key] != null) el.innerHTML = S[key];
+    });
+
+    Object.keys(S.svg1).forEach(k => {
+      if (k === 'aria') { document.getElementById('svg1').setAttribute('aria-label', S.svg1.aria); return; }
+      if (k === 'caption') { document.getElementById('t1_caption').textContent = S.svg1.caption; return; }
+      const el = document.getElementById('t1_' + k);
+      if (el) el.textContent = S.svg1[k];
+    });
+
+    Object.keys(S.svg2).forEach(k => {
+      if (k === 'aria') { document.getElementById('svg2').setAttribute('aria-label', S.svg2.aria); return; }
+      if (k === 'caption') { document.getElementById('t2_caption').textContent = S.svg2.caption; return; }
+      const el = document.getElementById('t2_' + k);
+      if (el) el.textContent = S.svg2[k];
+    });
+
+    document.getElementById('legendHeadStep').textContent = S.legendHeadStep;
+    document.getElementById('legendHeadWhat').textContent = S.legendHeadWhat;
+    document.getElementById('legend-body').innerHTML = S.legend.map(row =>
+      `<tr><td>${decodeEntities(row[0])}</td><td>${decodeEntities(row[1])}</td></tr>`
+    ).join('');
+
+    const vgridEl = document.getElementById('vertical-grid');
+    vgridEl.innerHTML = BUSINESS_ORDER.map(id => {
+      const p = S.playbook[id];
+      return `
+        <div class="vcard">
+          <h3>${decodeEntities(S.businessNames[id])}</h3>
+          <dl>
+            <dt>${decodeEntities(S.vLabelEntry)}</dt><dd>${decodeEntities(p.entry)}</dd>
+            <dt>${decodeEntities(S.vLabelClose)}</dt><dd>${decodeEntities(p.close)}</dd>
+            <dt>${decodeEntities(S.vLabelSupport)}</dt><dd>${decodeEntities(p.support)}</dd>
+          </dl>
+        </div>`;
+    }).join('');
+
+    const listEl = document.getElementById('handoff-list');
+    let html = '';
+    S.dmSteps.forEach((step, i) => {
+      if (i === 7) html += `<li class="handoff-divider">${decodeEntities(S.dmDivider)}</li>`;
+      html += `<li><span class="n">${String(i + 1).padStart(2, '0')}</span><span class="t">${decodeEntities(step.t)}</span><span class="actor">${decodeEntities(step.actor)}</span></li>`;
+    });
+    listEl.innerHTML = html;
+
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('is-active', b.dataset.lang === lang));
+  }
+
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => applyLang(btn.dataset.lang));
+  });
+
+  const saved = localStorage.getItem('sb-lang');
+  const browser = (navigator.language || 'en').slice(0, 2);
+  const initial = STR[saved] ? saved : (STR[browser] ? browser : 'en');
+  applyLang(initial);
 })();
 </script>
