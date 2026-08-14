@@ -1,5 +1,5 @@
 <meta charset="utf-8" />
-<title>YOUNG.Sales — The Sales Book</title>
+<title>YOUNG.Sales — Sales SOP</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <style>
   @font-face {
@@ -53,9 +53,6 @@
     --font-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
 
     --container: 1180px;
-    --col: 720px;
-    --rail: 220px;
-    --gap: 56px;
   }
 
   * { box-sizing: border-box; }
@@ -75,13 +72,6 @@
   a:hover { color: var(--ink); }
   button { font-family: inherit; }
   :focus-visible { outline: 2px solid var(--klein); outline-offset: 2px; }
-
-  /* reveal-on-scroll — the source's one motion pattern */
-  .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.7s ease, transform 0.7s ease; }
-  .reveal.is-visible { opacity: 1; transform: translateY(0); }
-  @media (prefers-reduced-motion: reduce) {
-    .reveal { opacity: 1; transform: none; transition: none; }
-  }
 
   /* ---------- Klein band (masthead) ---------- */
   .masthead {
@@ -196,6 +186,26 @@
     margin-top: 10px;
   }
 
+  .dtable-wrap { overflow-x: auto; margin: 4px 0 14px; }
+  table.dtable { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+  table.dtable th, table.dtable td {
+    text-align: left;
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--rule);
+    white-space: nowrap;
+  }
+  table.dtable th {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--steel);
+    font-weight: 500;
+  }
+  table.dtable td { font-variant-numeric: tabular-nums; }
+  table.dtable td:not(:first-child), table.dtable th:not(:first-child) { white-space: normal; }
+  table.dtable tbody tr:hover { background: var(--klein-tint); }
+
   .vgrid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -237,398 +247,94 @@
     line-height: 1.5;
     color: var(--ink);
   }
-  .vcard .jump {
-    display: inline-block;
-    margin-top: 14px;
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: var(--klein);
-    text-decoration: underline;
-    text-underline-offset: 3px;
-  }
-  .vcard .jump:hover { color: var(--ink); }
 
-  /* ---------- Search bar (light section) ---------- */
-  .searchbar-wrap {
-    max-width: var(--container);
-    margin: 0 auto;
-    padding: 40px clamp(22px, 4vw, 32px) 0;
+  /* ---------- Decision Matrix (Klein band, closing) ---------- */
+  .handoff {
+    background: var(--klein);
+    color: var(--white);
+    padding: 72px clamp(22px, 4vw, 32px);
+    margin-top: 64px;
   }
-  .searchbar {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    background: var(--white);
-    border: 1px solid var(--rule);
-    padding: 14px 16px;
-  }
-  .searchbar svg { flex: none; color: var(--steel); }
-  .searchbar input {
-    flex: 1;
-    border: none;
-    background: transparent;
-    color: var(--ink);
-    font-family: var(--font-body);
-    font-size: 1.05rem;
-    outline: none;
-  }
-  .searchbar input::placeholder { color: var(--steel); opacity: 0.8; }
-  .searchbar .kbd {
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
-    color: var(--steel);
-    border: 1px solid var(--rule);
-    padding: 2px 6px;
-  }
-
-  /* ---------- Workspace layout: 220px rail + fluid column ---------- */
-  .workspace {
-    max-width: var(--container);
-    margin: 0 auto;
-    padding: 40px clamp(22px, 4vw, 32px) 96px;
-    display: grid;
-    grid-template-columns: var(--rail) minmax(0, 1fr);
-    gap: var(--gap);
-    align-items: start;
-  }
-
-  .mobile-toolbar { display: none; }
-
-  .spine {
-    position: sticky;
-    top: 20px;
-    max-height: calc(100vh - 40px);
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 28px;
-    padding-right: 4px;
-  }
-  .spine::-webkit-scrollbar { width: 6px; }
-  .spine::-webkit-scrollbar-thumb { background: var(--rule); }
-
-  .spine-block h3 {
+  .handoff-inner { max-width: var(--container); margin: 0 auto; }
+  .handoff .eyebrow {
     font-family: var(--font-mono);
     font-weight: 600;
     font-size: 11px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--klein);
-    margin: 0 0 10px;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .handoff h2 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.6rem, 1.3rem + 1.4vw, 2.4rem);
+    letter-spacing: -0.02em;
+    color: var(--white);
+    margin: 10px 0 0;
+    max-width: 26ch;
+  }
+  .handoff .lead {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.05rem, 1rem + 0.4vw, 1.25rem);
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 62ch;
+    line-height: 1.4;
+    margin: 16px 0 0;
+  }
+  .handoff-list { list-style: none; margin: 40px 0 0; padding: 0; border-top: 1px solid rgba(255, 255, 255, 0.25); }
+  .handoff-list li {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    align-items: baseline;
+    gap: 18px;
+    padding: 16px 4px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
   }
-  .spine-block h3 button {
-    background: none; border: none; color: var(--steel); cursor: pointer;
-    font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.05em;
-    text-transform: none; padding: 0; text-decoration: underline; text-underline-offset: 2px;
-  }
-  .spine-block h3 button:hover { color: var(--klein); }
-
-  /* Contents = "Rule list" component: hairline-divided, em-dash marker */
-  .toc { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
-  .toc li a {
-    display: flex;
-    justify-content: space-between;
-    gap: 8px;
-    text-decoration: none;
-    color: var(--ink);
-    font-size: 0.86rem;
-    padding: 9px 0;
-    border-bottom: 1px solid var(--rule);
-    line-height: 1.3;
-  }
-  .toc li a::before { content: "—"; color: var(--klein); margin-right: 8px; }
-  .toc li a:hover { color: var(--klein); }
-  .toc li a.is-active { color: var(--klein); font-weight: 600; }
-  .toc li a .n {
+  .handoff-list .n {
     font-family: var(--font-mono);
-    font-size: 0.72rem;
-    color: var(--steel);
+    font-weight: 600;
+    font-size: 0.82rem;
+    color: rgba(255, 255, 255, 0.6);
+    min-width: 26px;
     flex: none;
   }
-
-  .chip-group { display: flex; flex-wrap: wrap; gap: 6px; }
-  .chip {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.02em;
-    color: var(--ink);
-    background: var(--white);
-    border: 1px solid var(--rule);
-    padding: 5px 9px;
-    cursor: pointer;
-    line-height: 1.2;
-  }
-  .chip:hover { border-color: var(--klein); color: var(--klein); background: var(--klein-tint); }
-  .chip.is-on {
-    background: var(--klein);
-    border-color: var(--klein);
-    color: var(--white);
-    font-weight: 600;
-  }
-
-  .clear-btn {
-    background: none;
-    border: 1px dashed var(--steel);
-    color: var(--steel);
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    letter-spacing: 0.04em;
-    padding: 8px 10px;
-    cursor: pointer;
-    text-align: left;
-  }
-  .clear-btn:hover { border-color: var(--klein); color: var(--klein); }
-
-  /* ---------- Ledger / results ---------- */
-  .ledger-meta {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 12px;
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    color: var(--steel);
-    padding: 0 0 18px;
-    border-bottom: 1px solid var(--rule);
-    margin-bottom: 30px;
-  }
-  .ledger-meta b { color: var(--ink); font-variant-numeric: tabular-nums; }
-
-  .part-group { margin-bottom: 48px; scroll-margin-top: 20px; }
-  .part-heading {
-    display: flex;
-    align-items: baseline;
-    gap: 12px;
+  .handoff-list .t {
     font-family: var(--font-display);
-    font-weight: 800;
-    font-size: clamp(1.3rem, 1.1rem + 0.6vw, 1.7rem);
-    letter-spacing: -0.02em;
-    color: var(--ink);
-    margin: 0 0 18px;
-    padding-bottom: 12px;
-    border-bottom: 2px solid var(--ink);
+    font-weight: 600;
+    font-size: 1.05rem;
+    line-height: 1.35;
+    color: var(--white);
+    flex: 1;
   }
-  .part-heading .count {
-    font-family: var(--font-mono);
-    font-weight: 500;
-    font-size: 0.72rem;
-    color: var(--steel);
-    letter-spacing: 0.04em;
-  }
-
-  /* Category card grid — 1px seam technique: cards touch, rule shows through */
-  .entry-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 0;
-    border-top: 1px solid var(--rule);
-    border-left: 1px solid var(--rule);
-  }
-
-  .entry {
-    background: var(--white);
-    display: flex;
-    flex-direction: column;
-    border-right: 1px solid var(--rule);
-    border-bottom: 1px solid var(--rule);
-  }
-  .entry-head {
-    display: block;
-    width: 100%;
-    text-align: left;
-    background: none;
-    border: none;
-    padding: 20px 22px 18px;
-    cursor: pointer;
-    color: inherit;
-  }
-  .entry-head:hover { background: var(--klein-tint); }
-  .entry-eyebrow {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--steel);
-    margin-bottom: 10px;
-  }
-  .entry-eyebrow .badges { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
-
-  /* status pills — reasoned from existing tokens only: Klein = live/actionable,
-     Ink = closed/final, TBC-orange dashed = the brand's own "unconfirmed" marker,
-     Steel = needs involvement but not urgent. No colors invented beyond the brand's four. */
-  .pill {
+  .handoff-list .actor {
     font-family: var(--font-mono);
     font-size: 0.62rem;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    padding: 2px 8px;
+    color: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    padding: 3px 8px;
     white-space: nowrap;
-    border: 1px solid transparent;
+    flex: none;
   }
-  .pill-tag { background: none; border: none; color: var(--steel); padding: 2px 0; }
-  .pill-live { background: var(--klein); color: var(--white); }
-  .pill-opening { background: none; border-color: var(--klein); color: var(--klein); }
-  .pill-custom { background: none; border-color: var(--steel); color: var(--steel); }
-  .pill-avail, .pill-dev { background: var(--tbc-tint); border: 1px dashed var(--tbc); color: var(--tbc); }
-  .pill-closed { background: var(--ink); color: var(--white); }
-
-  .entry h4 {
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 1.2rem;
-    letter-spacing: -0.01em;
-    line-height: 1.25;
-    margin: 0 0 8px;
-    text-wrap: balance;
-    color: var(--ink);
-  }
-  .entry .price {
-    font-family: var(--font-mono);
-    font-weight: 600;
-    font-size: 0.92rem;
-    color: var(--klein);
-    font-variant-numeric: tabular-nums;
-    margin-bottom: 10px;
-  }
-  .entry .blurb {
-    font-family: var(--font-body);
-    font-size: 1.05rem;
-    font-style: italic;
-    color: var(--steel);
-    margin: 0 0 14px;
-  }
-  .meta-chips { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 2px; }
-  .meta-chip {
-    font-size: 0.66rem;
-    color: var(--steel);
-    background: none;
-    border: 1px solid var(--rule);
-    padding: 2px 6px;
-    font-family: var(--font-mono);
-  }
-
-  .entry-toggle {
-    margin-top: 14px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: var(--klein);
-    text-decoration: underline;
-    text-underline-offset: 3px;
-  }
-  .entry-toggle svg { transition: transform 0.18s ease; text-decoration: none; }
-  .entry[data-open="true"] .entry-toggle svg { transform: rotate(180deg); }
-
-  .entry-body {
-    display: none;
-    padding: 2px 22px 24px;
-    border-top: 1px solid var(--rule);
-  }
-  .entry[data-open="true"] .entry-body { display: block; }
-
-  .entry-content { font-size: 0.97rem; padding-top: 16px; }
-  .entry-content h4 { font-size: 1rem; margin: 18px 0 6px; font-weight: 600; }
-  .entry-content h4:first-child { margin-top: 16px; }
-  .entry-content p { margin: 0 0 10px; }
-  .entry-content em { color: var(--steel); }
-
-  .blist { list-style: none; margin: 0 0 10px; padding: 0; }
-  .blist li { position: relative; padding-left: 16px; margin-bottom: 5px; font-size: 0.95rem; }
-  .blist li::before { content: "—"; position: absolute; left: 0; top: 0; color: var(--klein); }
-
-  .dtable-wrap { overflow-x: auto; margin: 4px 0 14px; }
-  table.dtable { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
-  table.dtable th, table.dtable td {
-    text-align: left;
-    padding: 8px 12px;
-    border-bottom: 1px solid var(--rule);
-    white-space: nowrap;
-  }
-  table.dtable th {
-    font-family: var(--font-mono);
-    font-size: 0.66rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: var(--steel);
-    font-weight: 500;
-  }
-  table.dtable td { font-variant-numeric: tabular-nums; }
-  table.dtable td:not(:first-child), table.dtable th:not(:first-child) { white-space: normal; }
-  table.dtable tbody tr:hover { background: var(--klein-tint); }
-
-  /* inline commercial-status badges from the source content HTML */
-  .badge {
-    font-family: var(--font-mono);
-    font-size: 0.64rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    padding: 2px 8px;
-    white-space: nowrap;
-    border: 1px solid transparent;
-  }
-  .badge.live { background: var(--klein); color: var(--white); }
-  .badge.avail, .badge.dev { background: var(--tbc-tint); border: 1px dashed var(--tbc); color: var(--tbc); }
-  .badge.custom { background: none; border-color: var(--steel); color: var(--steel); }
-
-  .entry-footer {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    margin-top: 4px;
-    padding-top: 16px;
-    border-top: 1px solid var(--rule);
-  }
-  .footer-block h5 {
-    font-family: var(--font-mono);
-    font-size: 0.64rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--klein);
-    margin: 0 0 6px;
-  }
-  .contact-row { display: flex; flex-wrap: wrap; gap: 4px 8px; font-size: 0.87rem; margin-bottom: 4px; align-items: baseline; }
-  .contact-row .name { font-weight: 600; font-family: var(--font-display); }
-  .contact-row .role { color: var(--steel); }
-  .contact-row a { font-family: var(--font-mono); font-size: 0.78rem; }
-  .contact-row .unconfirmed {
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    text-transform: uppercase;
-    color: var(--tbc);
-    border: 1px dashed var(--tbc);
-    background: var(--tbc-tint);
-    padding: 0 5px;
-  }
-  .contact-row.pending { color: var(--steel); font-style: italic; }
-  .tagline-list { margin: 0; padding-left: 0; list-style: none; font-size: 0.87rem; }
-  .tagline-list li { margin-bottom: 3px; }
-  .tagline-list li::before { content: "↳ "; color: var(--steel); }
-  .link-row { display: flex; flex-wrap: wrap; gap: 6px; }
-  .link-row a.meta-chip { color: var(--klein); text-decoration: none; }
-
-  .no-results {
-    padding: 60px 20px;
+  .handoff-divider {
+    justify-content: center;
     text-align: center;
-    color: var(--steel);
     font-family: var(--font-mono);
-    font-size: 0.9rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.85);
+    border-top: 1px dashed rgba(255, 255, 255, 0.5) !important;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.5) !important;
+    padding: 14px 4px;
+    background: rgba(255, 255, 255, 0.06);
+  }
+  @media (max-width: 600px) {
+    .handoff-list li { flex-wrap: wrap; }
+    .handoff-list .t { order: 1; flex-basis: 100%; }
+    .handoff-list .n { order: 0; }
+    .handoff-list .actor { order: 2; }
   }
 
   .colophon {
@@ -647,40 +353,21 @@
 
   @media (max-width: 860px) {
     .stat-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .workspace { grid-template-columns: 1fr; }
-    .spine {
-      position: static;
-      max-height: none;
-      display: none;
-      border: 1px solid var(--rule);
-      padding: 20px;
-      margin-bottom: 20px;
-    }
-    .spine.is-open { display: flex; }
-    .mobile-toolbar { display: flex; gap: 10px; margin-bottom: 4px; }
-    .mobile-toolbar button {
-      flex: 1;
-      background: var(--white);
-      border: 1px solid var(--rule);
-      color: var(--ink);
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
-      padding: 11px;
-      cursor: pointer;
-    }
     .masthead { padding: 48px 22px 40px; }
-    .searchbar-wrap, .workspace { padding-left: 22px; padding-right: 22px; }
   }
 </style>
 
 <div class="masthead">
   <div class="masthead-inner">
-    <div class="masthead-eyebrow">YOUNG GROUP — MASTER COMMERCIAL CATALOG</div>
-    <h1>YOUNG<span class="dim">.</span>Sales — The Sales Book</h1>
+    <div class="masthead-eyebrow">YOUNG GROUP — SALES OPERATING PROCEDURE</div>
+    <h1>YOUNG<span class="dim">.</span>Sales — Sales SOP</h1>
     <p class="statement">“If there is a commercial opportunity anywhere within YOUNG, Sales should know about it and know how to move it forward.”</p>
-    <div class="stat-strip" id="stat-strip"></div>
+    <div class="stat-strip">
+      <div class="stat"><b>24</b><span>Pipeline steps (A&ndash;X)</span></div>
+      <div class="stat"><b>10</b><span>Business verticals</span></div>
+      <div class="stat"><b>3</b><span>Countries</span></div>
+      <div class="stat"><b>&euro;25K</b><span>Phone-close threshold</span></div>
+    </div>
   </div>
 </div>
 
@@ -693,7 +380,7 @@
   <h3 style="font-family:var(--font-display);font-weight:600;font-size:1.15rem;color:var(--ink);margin:8px 0 0;">The engine, simplified</h3>
 
   <figure class="diagram-wrap">
-    <svg viewBox="0 0 1340 250" role="img" aria-label="A lead moves from Prospect through Entry Channel, Demand Generation, SDR Qualification, Meeting Handoff, and Close, then Onboarding and Active Customer. At Close, the path forks by deal size: a rep phone-closes below the vertical's threshold, a specialist closes above it — both rejoin at Onboarding. Active Customer runs a recurring Health Check that loops to Expansion or a Save Play. Renewal and churn signal feeds back to shape the next Entry Channel mix.">
+    <svg viewBox="0 0 1520 250" role="img" aria-label="A lead moves from Prospect through Entry Channel, Demand Generation, SDR Qualification, Meeting Handoff, and Close, then Onboarding and Active Customer. At Close, the path forks by deal size: a rep phone-closes below the vertical's threshold, a specialist closes above it — both rejoin at Onboarding. Active Customer runs a recurring Health Check that loops to Expansion or a Save Play. Renewal and churn signal feeds back to shape the next Entry Channel mix.">
       <defs>
         <marker id="sb-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
           <path d="M0,0 L10,5 L0,10 z" fill="currentColor"></path>
@@ -701,8 +388,8 @@
       </defs>
 
       <!-- feedback loop -->
-      <text x="676" y="13" text-anchor="middle" font-family="var(--font-mono)" font-size="10" fill="var(--steel)">renewal &amp; churn signal shapes next quarter's channel mix</text>
-      <path d="M1137,78 L1137,20 L215,20 L215,78" fill="none" stroke="var(--steel)" stroke-width="1.25" stroke-dasharray="4 3" marker-end="url(#sb-arrow)"></path>
+      <text x="774" y="13" text-anchor="middle" font-family="var(--font-mono)" font-size="10" fill="var(--steel)">renewal &amp; churn signal shapes next quarter's channel mix</text>
+      <path d="M1332,78 L1332,20 L215,20 L215,78" fill="none" stroke="var(--steel)" stroke-width="1.25" stroke-dasharray="4 3" marker-end="url(#sb-arrow)"></path>
 
       <!-- main spine boxes -->
       <g font-family="var(--font-mono)" font-size="11" text-anchor="middle">
@@ -729,8 +416,8 @@
         <rect x="920" y="78" width="115" height="50" fill="var(--white)" stroke="currentColor" stroke-width="1.5"></rect>
         <text x="977" y="107" fill="var(--ink)">ONBOARDING</text>
 
-        <rect x="1055" y="78" width="165" height="50" fill="var(--white)" stroke="currentColor" stroke-width="1.5"></rect>
-        <text x="1137" y="107" fill="var(--ink)">ACTIVE CUSTOMER</text>
+        <rect x="1250" y="78" width="165" height="50" fill="var(--white)" stroke="currentColor" stroke-width="1.5"></rect>
+        <text x="1332" y="107" fill="var(--ink)">ACTIVE CUSTOMER</text>
       </g>
 
       <!-- spine arrows -->
@@ -741,7 +428,7 @@
         <line x1="605" y1="103" x2="624" y2="103"></line>
         <line x1="780" y1="103" x2="799" y2="103"></line>
         <line x1="900" y1="103" x2="919" y2="103"></line>
-        <line x1="1035" y1="103" x2="1054" y2="103"></line>
+        <line x1="1035" y1="103" x2="1249" y2="103"></line>
       </g>
 
       <!-- close fork: strictly orthogonal, no diagonals, no crossings -->
@@ -761,22 +448,23 @@
         <text x="1000" y="200" fill="var(--steel)">at or above threshold</text>
       </g>
 
-      <!-- merge back into Onboarding: routed below the fork boxes, no overlap with the down-lines above -->
-      <path d="M700,212 L700,230 L977,230" fill="none" stroke="currentColor" stroke-width="1.25"></path>
-      <path d="M1000,212 L1000,230 L977,230" fill="none" stroke="currentColor" stroke-width="1.25"></path>
-      <path d="M977,230 L977,129" fill="none" stroke="currentColor" stroke-width="1.5" marker-end="url(#sb-arrow)"></path>
+      <!-- merge back into Onboarding: routed through the gap BETWEEN the two fork boxes (x=850),
+           never through either box, then jogs right to Onboarding's own column above box height -->
+      <path d="M700,212 L700,230 L850,230" fill="none" stroke="currentColor" stroke-width="1.25"></path>
+      <path d="M1000,212 L1000,230 L850,230" fill="none" stroke="currentColor" stroke-width="1.25"></path>
+      <path d="M850,230 L850,155 L977,155 L977,129" fill="none" stroke="currentColor" stroke-width="1.5" marker-end="url(#sb-arrow)"></path>
 
       <!-- CS loop: orthogonal out-and-back to the right, clear of the Close fork -->
-      <path d="M1137,128 L1137,167" fill="none" stroke="currentColor" stroke-width="1.5" marker-end="url(#sb-arrow)"></path>
+      <path d="M1332,128 L1332,167" fill="none" stroke="currentColor" stroke-width="1.5" marker-end="url(#sb-arrow)"></path>
       <g font-family="var(--font-mono)" font-size="10.5" text-anchor="middle">
-        <rect x="1032" y="168" width="210" height="62" fill="var(--white)" stroke="var(--klein)" stroke-width="1.25"></rect>
-        <text x="1137" y="186" fill="var(--ink)">HEALTH CHECK</text>
-        <text x="1137" y="200" fill="var(--steel)">healthy: expand</text>
-        <text x="1137" y="213" fill="var(--steel)">at risk: save play</text>
+        <rect x="1227" y="168" width="210" height="62" fill="var(--white)" stroke="var(--klein)" stroke-width="1.25"></rect>
+        <text x="1332" y="186" fill="var(--ink)">HEALTH CHECK</text>
+        <text x="1332" y="200" fill="var(--steel)">healthy: expand</text>
+        <text x="1332" y="213" fill="var(--steel)">at risk: save play</text>
       </g>
-      <path d="M1242,199 L1290,199 L1290,103 L1221,103" fill="none" stroke="currentColor" stroke-width="1.5" marker-end="url(#sb-arrow)"></path>
-      <text x="1281" y="144" text-anchor="end" font-family="var(--font-mono)" font-size="9.5" fill="var(--steel)">loops</text>
-      <text x="1281" y="156" text-anchor="end" font-family="var(--font-mono)" font-size="9.5" fill="var(--steel)">quarterly</text>
+      <path d="M1437,199 L1485,199 L1485,103 L1416,103" fill="none" stroke="currentColor" stroke-width="1.5" marker-end="url(#sb-arrow)"></path>
+      <text x="1476" y="144" text-anchor="end" font-family="var(--font-mono)" font-size="9.5" fill="var(--steel)">loops</text>
+      <text x="1476" y="156" text-anchor="end" font-family="var(--font-mono)" font-size="9.5" fill="var(--steel)">quarterly</text>
     </svg>
     <figcaption>The full pipeline: entry channel and demand generation feed SDR qualification; Close forks by deal size (rep vs. specialist) and rejoins at Onboarding; Active Customer runs a recurring Health Check back into expansion or a save play; renewal and churn signal loops back to shape the next round of outreach.</figcaption>
   </figure>
@@ -993,1801 +681,53 @@
     </table>
   </div>
 
+  <div class="eyebrow" style="margin-top:56px;">Per vertical</div>
+  <h3 style="font-family:var(--font-display);font-weight:600;font-size:1.15rem;color:var(--ink);margin:8px 0 0;">How each business runs the same engine</h3>
   <div class="vgrid" id="vertical-grid"></div>
 </div>
 
-<div class="searchbar-wrap">
-  <div class="searchbar">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-    <input id="search" type="text" placeholder="Search the Sales Book — a business, a city, “podcast”, “desk”, a contact…" autocomplete="off" />
-    <span class="kbd">/</span>
+<div class="handoff">
+  <div class="handoff-inner">
+    <div class="eyebrow">Decision Matrix</div>
+    <h2>From lead to payout — who owns each step</h2>
+    <p class="lead">Ten steps, two owners. The SDR runs the deal to a signed contract; the Commercial Lead runs the relationship and the money after that.</p>
+    <ul class="handoff-list">
+      <li><span class="n">01</span><span class="t">SDR receives the lead</span><span class="actor">SDR</span></li>
+      <li><span class="n">02</span><span class="t">SDR meets the lead and uses the catalog to shape the offer</span><span class="actor">SDR</span></li>
+      <li><span class="n">03</span><span class="t">SDR closes the proposal with the lead</span><span class="actor">SDR</span></li>
+      <li><span class="n">04</span><span class="t">SDR connects with the business unit owner</span><span class="actor">SDR</span></li>
+      <li><span class="n">05</span><span class="t">SDR sends the contract to the lead</span><span class="actor">SDR</span></li>
+      <li><span class="n">06</span><span class="t">SDR formalizes the closure of the business with the business unit</span><span class="actor">SDR</span></li>
+      <li><span class="n">07</span><span class="t">SDR updates the CRM</span><span class="actor">SDR</span></li>
+      <li class="handoff-divider">Handoff — SDR to Commercial Lead</li>
+      <li><span class="n">08</span><span class="t">Commercial Lead takes care of Account Management with the business unit and the customer</span><span class="actor">Commercial Lead</span></li>
+      <li><span class="n">09</span><span class="t">Commercial Lead sends the invoice to the customer</span><span class="actor">Commercial Lead</span></li>
+      <li><span class="n">10</span><span class="t">Commercial Lead pays the business unit</span><span class="actor">Commercial Lead</span></li>
+    </ul>
   </div>
-</div>
-
-<div class="workspace">
-  <div class="mobile-toolbar">
-    <button id="toggle-contents" type="button">Contents</button>
-    <button id="toggle-filters" type="button">Filters</button>
-  </div>
-
-  <aside class="spine" id="spine">
-    <div class="spine-block">
-      <h3>Contents</h3>
-      <ul class="toc" id="toc"></ul>
-    </div>
-    <div class="spine-block">
-      <h3>Business <button type="button" data-clear-facet="business">clear</button></h3>
-      <div class="chip-group" id="facet-business"></div>
-    </div>
-    <div class="spine-block">
-      <h3>Customer need <button type="button" data-clear-facet="need">clear</button></h3>
-      <div class="chip-group" id="facet-need"></div>
-    </div>
-    <div class="spine-block">
-      <h3>Country <button type="button" data-clear-facet="country">clear</button></h3>
-      <div class="chip-group" id="facet-country"></div>
-    </div>
-    <div class="spine-block">
-      <h3>Pricing <button type="button" data-clear-facet="tag">clear</button></h3>
-      <div class="chip-group" id="facet-tag"></div>
-    </div>
-    <div class="spine-block">
-      <h3>Status <button type="button" data-clear-facet="status">clear</button></h3>
-      <div class="chip-group" id="facet-status"></div>
-    </div>
-    <button class="clear-btn" id="clear-all">Clear all filters &amp; search</button>
-  </aside>
-
-  <main class="ledger">
-    <div class="ledger-meta">
-      <span>Showing <b id="visible-count">0</b> of <b id="total-count">0</b> entries</span>
-      <span id="active-filters"></span>
-    </div>
-    <div id="results"></div>
-  </main>
 </div>
 
 <div class="colophon">
-  <span>YOUNG.Sales Book — a living commercial reference for the YOUNG Group ecosystem.</span>
-  <span>Master Catalog · young-sales-catalog-v2.vercel.app</span>
+  <span>YOUNG.Sales SOP — a living reference for how YOUNG sells, hands off, and retains.</span>
+  <span>The product catalog lives in a separate reference document.</span>
 </div>
-
-<script type="application/json" id="catalog-data">
-{
-  "sections": [
-    {
-      "id": "fm-01",
-      "part": "Front Matter",
-      "chapter": "01",
-      "title": "Welcome to YOUNG.Sales",
-      "tag": "Reference",
-      "blurb": "Why this Sales Book exists and how to use it.",
-      "content": "<p>YOUNG is an ecosystem of companies operating across workspaces, hospitality, real estate, media, creative services, products, investments and experiences. This Sales Book brings together everything we can commercially offer across YOUNG &mdash; one place to understand what we sell, where, for whom, at what cost, with what flexibility, what's available, what's included, what can be added, what can be cross-sold, where to learn more, and who to contact.</p><p><strong>Objective:</strong> if there is a commercial opportunity anywhere within YOUNG, Sales should know about it and know how to move it forward. If Sales identifies an opportunity YOUNG is not yet capturing, we want to know about it.</p><p><em>This is a living commercial tool. Products, prices, locations, availability and opportunities will continue to evolve as YOUNG grows.</em></p>",
-      "status": "",
-      "contacts": [],
-      "links": {},
-      "materials": [],
-      "crosssell": [],
-      "business": null,
-      "needs": [],
-      "country": [],
-      "priceTeaser": "",
-      "order": 1
-    },
-    {
-      "id": "fm-02",
-      "part": "Front Matter",
-      "chapter": "02",
-      "title": "How to Use This Sales Book &mdash; Pricing Structures",
-      "tag": "Reference",
-      "blurb": "The four ways YOUNG prices things: fixed, from, range, or custom quote.",
-      "content": "<p>Not everything we sell works the same way. Some products have a clear fixed price (a desk, office, hotel room, ad placement). Others require a custom proposal (a wedding, corporate event, large workspace requirement, media partnership, Studio production). We use four pricing structures:</p><table class=\"dtable\"><thead><tr><th>Structure</th><th>Meaning</th></tr></thead><tbody><tr><td><strong>FIXED PRICE</strong></td><td>A defined selling price.</td></tr><tr><td><strong>FROM PRICE</strong></td><td>The starting price; final amount depends on configuration, volume, duration or requirements.</td></tr><tr><td><strong>COMMERCIAL RANGE</strong></td><td>The range within which Sales can negotiate without additional approval.</td></tr><tr><td><strong>CUSTOM QUOTE</strong></td><td>Pricing prepared based on the customer's specific requirements &mdash; collect relevant information and involve the designated company contacts.</td></tr></tbody></table>",
-      "status": "",
-      "contacts": [],
-      "links": {},
-      "materials": [],
-      "crosssell": [],
-      "business": null,
-      "needs": [],
-      "country": [],
-      "priceTeaser": "",
-      "order": 2
-    },
-    {
-      "id": "fm-03",
-      "part": "Front Matter",
-      "chapter": "03",
-      "title": "Sell YOUNG, Not Only One Product",
-      "tag": "Reference",
-      "blurb": "Why every conversation should ask: what else can YOUNG do for this customer?",
-      "content": "<p>A customer may enter YOUNG through one company but have needs served across the ecosystem &mdash; an office customer may need hotel rooms, a hotel customer may need an event, a corporate event may need catering/photography/video, a media customer may need Studio production, a company may need workspace + accommodation + events + media exposure at once.</p><p><strong>Every commercial conversation should include one question: What else can YOUNG do for this customer?</strong></p><p>Commercial model:<br><strong>YOUNG.Sales</strong> (what we sell) &rarr; <strong>YOUNG Deals</strong> (why people buy now) &rarr; <strong>YOUNG Loyalty</strong> (why they buy again) &rarr; <strong>YOUNG Ecosystem</strong> (where we cross-sell).</p>",
-      "status": "",
-      "contacts": [],
-      "links": {},
-      "materials": [],
-      "crosssell": [],
-      "business": null,
-      "needs": [],
-      "country": [],
-      "priceTeaser": "",
-      "order": 3
-    },
-    {
-      "id": "fm-04",
-      "part": "Front Matter",
-      "chapter": "04",
-      "title": "Help Us Make This Better",
-      "tag": "Reference",
-      "blurb": "How to send market feedback back to the team that owns this book.",
-      "content": "<p>YOUNG.Sales is one of the teams closest to the market. Every conversation with a customer, prospect or partner can tell us something about what people want, don't understand, are willing to pay for, and what we could do better. We actively encourage Sales to communicate:</p><ul class=\"blist\"><li>Customer and prospect feedback</li><li>Frequently asked questions</li><li>Products or packages customers are requesting</li><li>Pricing feedback</li><li>Missing or unclear information</li><li>Cross-sell opportunities</li><li>New commercial ideas</li><li>Competitor insights</li><li>Improvements to the customer experience</li><li>Improvements to this Sales Book</li></ul><p>If you see something obvious that we could improve, say it. Sales is not only here to sell what already exists &mdash; Sales can help us understand the market and make the YOUNG ecosystem commercially stronger.</p>",
-      "status": "",
-      "contacts": [],
-      "links": {},
-      "materials": [],
-      "crosssell": [],
-      "business": null,
-      "needs": [],
-      "country": [],
-      "priceTeaser": "",
-      "order": 4
-    },
-    {
-      "id": "fm-05",
-      "part": "Front Matter",
-      "chapter": "05",
-      "title": "Standard Commercial Information (Fields Template)",
-      "tag": "Reference",
-      "blurb": "The standard fields every product listing should have.",
-      "content": "<p>For each company, brand, location, product or service, we collect as much of the following as applicable:</p><table class=\"dtable\"><thead><tr><th>Field</th><th>Information</th></tr></thead><tbody><tr><td>Company</td><td>Responsible YOUNG company</td></tr><tr><td>Brand / Location</td><td>Brand, property or location</td></tr><tr><td>Product / Service</td><td>What we sell</td></tr><tr><td>Description</td><td>Clear commercial explanation</td></tr><tr><td>Target Customer</td><td>Main customer profile</td></tr><tr><td>Capacity / Size</td><td>Where applicable</td></tr><tr><td>Standard Price</td><td>Published/list price</td></tr><tr><td>From Price</td><td>Where applicable</td></tr><tr><td>Commercial Range</td><td>Negotiation range</td></tr><tr><td>Approval Required Below</td><td>Approval threshold</td></tr><tr><td>Minimum Commitment</td><td>Where applicable</td></tr><tr><td>Availability</td><td>Current commercial status</td></tr><tr><td>What's Included</td><td>Included products/services</td></tr><tr><td>Optional Add-ons</td><td>Additional opportunities</td></tr><tr><td>Pricing Drivers</td><td>For Custom Quotes</td></tr><tr><td>Key Selling Points</td><td>Why customers should buy</td></tr><tr><td>Commercial Conditions</td><td>Relevant conditions</td></tr><tr><td>Cross-sell Opportunities</td><td>Other YOUNG products</td></tr><tr><td>Primary Contact</td><td>Internal contact</td></tr><tr><td>Secondary Contact</td><td>Internal backup</td></tr><tr><td>Sales Materials</td><td>Brochures, decks, menus, floorplans, etc.</td></tr></tbody></table><p>Every company/brand/location should also contain a <strong>Learn More</strong> block: Website, Instagram, LinkedIn, other social channels, Sales/Marketing materials &mdash; so Sales can learn independently before speaking with a customer.</p>",
-      "status": "",
-      "contacts": [],
-      "links": {},
-      "materials": [],
-      "crosssell": [],
-      "business": null,
-      "needs": [],
-      "country": [],
-      "priceTeaser": "",
-      "order": 5
-    },
-    {
-      "id": "p1-overview",
-      "part": "PART I &middot; YOUNG Workspaces",
-      "chapter": "Overview",
-      "title": "Workspace Products, Meetings &amp; Events &mdash; Portfolio",
-      "tag": "Mixed",
-      "business": "workspaces",
-      "needs": [
-        "Office & Workspace",
-        "Meetings & Events"
-      ],
-      "country": [
-        "Netherlands",
-        "Spain"
-      ],
-      "blurb": "The full menu of desks, offices and event spaces across every YOUNG Workspaces location.",
-      "priceTeaser": "From &euro;113/mo",
-      "content": "<h4>Workspace Products</h4><ul class=\"blist\"><li>Private offices</li><li>Larger offices / full-floor solutions</li><li>Fixed desks</li><li>Flex desks</li><li>Day passes</li><li>Multi-day passes</li><li>YOUNG Workstations</li><li>YOUNG Office Pods</li><li>Virtual offices</li><li>Mail services</li><li>Parking</li><li>Other location-specific products</li></ul><h4>Meetings</h4><ul class=\"blist\"><li>Meeting rooms</li><li>Boardrooms</li><li>Interviews</li><li>Workshops</li><li>Trainings</li><li>Presentations</li><li>Team meetings</li></ul><h4>Meetings &amp; Events</h4><ul class=\"blist\"><li>Corporate events</li><li>Networking events</li><li>Workshops</li><li>Trainings</li><li>Presentations</li><li>Product launches</li><li>Community events</li><li>Team events</li><li>Private events where appropriate</li><li>Full / partial location hire</li><li>Custom events</li></ul><p><strong>Events pricing: CUSTOM QUOTE</strong> &mdash; depends on requirements, location, number of guests, duration, setup, equipment, F&amp;B and additional services.</p>",
-      "crosssell": [
-        "YOUNG Hotels (corporate stays for visiting teams)",
-        "YOUNG Media (launch/event coverage)",
-        "YOUNG Studio (event content)"
-      ],
-      "status": "",
-      "contacts": [],
-      "links": {},
-      "materials": [],
-      "order": 6
-    },
-    {
-      "id": "p1-zeestraat",
-      "part": "PART I &middot; YOUNG Workspaces",
-      "chapter": "Location",
-      "title": "Zeestraat 100 &middot; The Hague",
-      "tag": "Mixed",
-      "status": "Live",
-      "business": "workspaces",
-      "needs": [
-        "Office & Workspace"
-      ],
-      "country": [
-        "Netherlands"
-      ],
-      "blurb": "Flex and fixed desks plus private offices in the heart of The Hague.",
-      "priceTeaser": "From &euro;113/mo",
-      "content": "<p>Full individual office inventory + Fixed + Flex + Meeting Rooms + Events + Parking.</p><table class=\"dtable\"><thead><tr><th>Product</th><th>Intro Price</th><th>Standard Price</th></tr></thead><tbody><tr><td>Flex Desk</td><td>&euro;113 / month</td><td>&euro;150 / month</td></tr><tr><td>Fixed Desk</td><td>&euro;262.50 / month</td><td>&euro;350 / month</td></tr></tbody></table><p>Individual private-office units and prices per current listing (see location materials).</p>",
-      "materials": [
-        "Zeestraat 100 floorplan",
-        "Zeestraat 100 price list"
-      ],
-      "contacts": [],
-      "links": {},
-      "crosssell": [],
-      "order": 7
-    },
-    {
-      "id": "p1-kerkstraat",
-      "part": "PART I &middot; YOUNG Workspaces",
-      "chapter": "Location",
-      "title": "Kerkstraat &middot; Amsterdam",
-      "tag": "Mixed",
-      "status": "Live",
-      "business": "workspaces",
-      "needs": [
-        "Office & Workspace"
-      ],
-      "country": [
-        "Netherlands"
-      ],
-      "blurb": "Amsterdam coworking with room to grow into a private office or full floor.",
-      "priceTeaser": "From &euro;113/mo",
-      "content": "<p>Private offices + larger office/floor possibilities + Fixed + Flex + Meeting Room + Events.</p><table class=\"dtable\"><thead><tr><th>Product</th><th>Intro Price</th><th>Standard Price</th></tr></thead><tbody><tr><td>Flex Desk</td><td>&euro;113 / month</td><td>&euro;150 / month</td></tr><tr><td>Fixed Desk</td><td>&euro;225 / month</td><td>&euro;300 / month</td></tr></tbody></table>",
-      "materials": [
-        "Kerkstraat floorplan",
-        "Kerkstraat price list"
-      ],
-      "contacts": [],
-      "links": {},
-      "crosssell": [],
-      "order": 8
-    },
-    {
-      "id": "p1-volmerlaan",
-      "part": "PART I &middot; YOUNG Workspaces",
-      "chapter": "Location",
-      "title": "Volmerlaan &middot; Rijswijk",
-      "tag": "From Price",
-      "status": "Live",
-      "business": "workspaces",
-      "needs": [
-        "Office & Workspace"
-      ],
-      "country": [
-        "Netherlands"
-      ],
-      "blurb": "Private offices of every size in Rijswijk, from a small room to a 55m&sup2; suite.",
-      "priceTeaser": "From &euro;399/mo",
-      "content": "<p>Individual private-office inventory, currently ranging approximately from <strong>12 m&sup2; to 55 m&sup2;</strong> and <strong>&euro;399 to &euro;1,500/month</strong>.</p>",
-      "materials": [
-        "Volmerlaan floorplan / unit list"
-      ],
-      "contacts": [],
-      "links": {},
-      "crosssell": [],
-      "order": 9
-    },
-    {
-      "id": "p1-cabanyal",
-      "part": "PART I &middot; YOUNG Workspaces",
-      "chapter": "Location",
-      "title": "Cabanyal &middot; Valencia",
-      "tag": "Mixed",
-      "status": "Live",
-      "business": "workspaces",
-      "needs": [
-        "Office & Workspace",
-        "Meetings & Events"
-      ],
-      "country": [
-        "Spain"
-      ],
-      "blurb": "Valencia's Cabanyal coworking hub &mdash; desks, day passes, private offices and pods.",
-      "priceTeaser": "From &euro;22/day",
-      "content": "<table class=\"dtable\"><thead><tr><th>Product</th><th>Price</th></tr></thead><tbody><tr><td>Private Office (8 people / 20 m&sup2;)</td><td>&euro;2,500 / month</td></tr><tr><td>Fixed Desk</td><td>&euro;220 / month</td></tr><tr><td>Flex Desk</td><td>&euro;180 / month</td></tr><tr><td>Day Pass</td><td>&euro;22</td></tr><tr><td>10 Day Passes</td><td>&euro;130</td></tr></tbody></table><ul class=\"blist\"><li>Meeting room</li><li>Virtual office / mail services</li><li>Office Pods &mdash; approx. 10 / 20 / 30 m&sup2;, built on demand</li><li>Meetings &amp; Events</li></ul><p><em>Note: Inn Offices (also Cabanyal, CEO Pedro Navarro) is a separate/possibly related coworking operator in the same area &mdash; exact relationship to Young Workspaces is not yet confirmed internally.</em></p>",
-      "contacts": [
-        {
-          "name": "Vinicius Carreira",
-          "role": "Marketing Manager Spain, Young Workspaces",
-          "email": "vinicius@youngworkspaces.com",
-          "sourced": true
-        }
-      ],
-      "crosssell": [
-        "Young Coffee Coffee Wall (evaluated for Cabanyal site)"
-      ],
-      "links": {},
-      "materials": [],
-      "order": 10
-    },
-    {
-      "id": "p1-mercurion",
-      "part": "PART I &middot; YOUNG Workspaces",
-      "chapter": "Location",
-      "title": "Mercurion &middot; Zevenaar",
-      "tag": "Mixed",
-      "status": "Live",
-      "business": "workspaces",
-      "needs": [
-        "Office & Workspace"
-      ],
-      "country": [
-        "Netherlands"
-      ],
-      "blurb": "Zevenaar private offices with on-site parking.",
-      "priceTeaser": "From &euro;449/mo",
-      "content": "<table class=\"dtable\"><thead><tr><th>Product</th><th>Intro Price</th><th>Standard Price</th></tr></thead><tbody><tr><td>18 m&sup2; Private Office</td><td>&euro;449</td><td>&euro;598</td></tr></tbody></table><p>Parking: &euro;115/month. Plus meeting rooms and event/corporate possibilities.</p>",
-      "contacts": [],
-      "links": {},
-      "materials": [],
-      "crosssell": [],
-      "order": 11
-    },
-    {
-      "id": "p1-parkstraat",
-      "part": "PART I &middot; YOUNG Workspaces",
-      "chapter": "Location",
-      "title": "Parkstraat &middot; The Hague",
-      "tag": "&mdash;",
-      "status": "Fully Occupied",
-      "business": "workspaces",
-      "needs": [
-        "Office & Workspace"
-      ],
-      "country": [
-        "Netherlands"
-      ],
-      "blurb": "A 600m&sup2; loft office in The Hague &mdash; fully booked today, worth keeping prospects warm for.",
-      "priceTeaser": "Fully occupied",
-      "content": "<p>Approximately <strong>600 m&sup2; loft office</strong>.</p><p><strong>Current status: FULLY OCCUPIED.</strong> Remains in the Sales Book for future availability &mdash; useful to keep prospects warm for when space frees up.</p>",
-      "contacts": [],
-      "links": {},
-      "materials": [],
-      "crosssell": [],
-      "order": 12
-    },
-    {
-      "id": "p2-hotels-overview",
-      "part": "PART II &middot; YOUNG Hospitality",
-      "chapter": "6. YOUNG Hotels",
-      "title": "YOUNG Hotels &mdash; Portfolio &amp; Commercial Families",
-      "tag": "Mixed",
-      "business": "hotels",
-      "needs": [
-        "Hotel Stay",
-        "Meetings & Events",
-        "Wedding & Celebration",
-        "Dining & Catering"
-      ],
-      "country": [
-        "Netherlands",
-        "Spain"
-      ],
-      "blurb": "Rooms, corporate stays, weddings and private dining across all four YOUNG Hotels.",
-      "priceTeaser": "Custom Quote",
-      "content": "<p>Properties: <strong>D&eacute;nia &middot; The Hague &middot; Kaag &middot; Learning Hotel</strong>.</p><h4>STAY</h4><ul class=\"blist\"><li>Individual rooms</li><li>Room categories</li><li>Breakfast</li><li>Weekend stays</li><li>Corporate stays</li><li>Corporate rates</li><li>Group bookings</li><li>Long stays</li><li>Packages</li><li>Large/full-property bookings where possible</li></ul><h4>MEET &amp; CORPORATE</h4><ul class=\"blist\"><li>Meetings</li><li>Corporate events</li><li>Off-sites</li><li>Team days</li><li>Workshops</li><li>Trainings</li><li>Presentations</li><li>Corporate dinners</li><li>Multi-day company events</li></ul><h4>WEDDINGS &amp; CELEBRATIONS</h4><ul class=\"blist\"><li>Weddings</li><li>Wedding ceremonies</li><li>Wedding receptions</li><li>Wedding dinners</li><li>Baptisms</li><li>Communions</li><li>Birthdays</li><li>Anniversaries</li><li>Family celebrations</li><li>Private dinners</li><li>Other private events</li></ul><h4>FOOD &amp; BEVERAGE</h4><ul class=\"blist\"><li>Breakfast</li><li>Lunch</li><li>Dinner</li><li>Group menus</li><li>Drinks packages</li><li>Catering</li><li>Private dining</li></ul><h4>EXPERIENCES &amp; PACKAGES</h4><p>Property-specific experiences and combined offers.</p><p><strong>Events &amp; celebrations pricing: CUSTOM QUOTE</strong> &mdash; based on guests, spaces, F&amp;B, accommodation, setup, equipment, entertainment and other requirements.</p>",
-      "contacts": [
-        {
-          "name": "Felipe Robles",
-          "role": "CEO, Young Hospitality",
-          "email": "felipe@younghotels.nl",
-          "sourced": true
-        },
-        {
-          "name": "Alejandra Muzzio",
-          "role": "Young Hotels &mdash; management/admin",
-          "email": "alejandra@young.com",
-          "sourced": true
-        }
-      ],
-      "links": {
-        "website": "younghotels.nl (unconfirmed)"
-      },
-      "crosssell": [
-        "YOUNG Workspaces (corporate stays for office clients)",
-        "YOUNG Studio (wedding/event content)",
-        "YOUNG Media (PR for launches)"
-      ],
-      "status": "",
-      "materials": [],
-      "order": 13
-    },
-    {
-      "id": "p2-runners-hague",
-      "part": "PART II &middot; YOUNG Hospitality",
-      "chapter": "7. Restaurants &amp; Hospitality",
-      "title": "Runners The Hague",
-      "tag": "Mixed",
-      "business": "restaurants",
-      "needs": [
-        "Dining & Catering"
-      ],
-      "country": [
-        "Netherlands"
-      ],
-      "blurb": "Everyday lunch and dinner service in The Hague, built for groups and business meals too.",
-      "priceTeaser": "Custom Quote",
-      "content": "<p>Lunch / Dinner / Events.</p>",
-      "contacts": [
-        {
-          "name": "Jessica Chica",
-          "role": "Manager, Brasserie Runners",
-          "email": "jessica@young-hospitality.com",
-          "sourced": true
-        }
-      ],
-      "status": "",
-      "links": {},
-      "materials": [],
-      "crosssell": [],
-      "order": 14
-    },
-    {
-      "id": "p2-bitterkoud",
-      "part": "PART II &middot; YOUNG Hospitality",
-      "chapter": "7. Restaurants &amp; Hospitality",
-      "title": "Bitterkoud",
-      "tag": "Mixed",
-      "status": "Opening",
-      "business": "restaurants",
-      "needs": [
-        "Dining & Catering"
-      ],
-      "country": [
-        "Netherlands"
-      ],
-      "blurb": "The Hague's new ice cream concept &mdash; great for kids' events and casual gatherings.",
-      "priceTeaser": "Custom Quote",
-      "content": "<p>Hospitality / Events / Kids Events. <em>Ice cream concept opening in The Hague; operations coordinated by Jessica Chica pre-opening.</em></p>",
-      "contacts": [
-        {
-          "name": "Jessica Chica",
-          "role": "Coordinates Bitterkoud scheduling",
-          "email": "jessica@young-hospitality.com",
-          "sourced": true
-        }
-      ],
-      "links": {},
-      "materials": [],
-      "crosssell": [],
-      "order": 15
-    },
-    {
-      "id": "p2-italo",
-      "part": "PART II &middot; YOUNG Hospitality",
-      "chapter": "7. Restaurants &amp; Hospitality",
-      "title": "Italo Disco",
-      "tag": "Mixed",
-      "business": "restaurants",
-      "needs": [
-        "Dining & Catering"
-      ],
-      "country": [
-        "Netherlands"
-      ],
-      "blurb": "Corporate sandwich and lunch packages, ready to drop into any office day.",
-      "priceTeaser": "Custom Quote",
-      "content": "<p>Corporate Sandwich &amp; Lunch Packages.</p>",
-      "status": "",
-      "contacts": [],
-      "links": {},
-      "materials": [],
-      "crosssell": [],
-      "order": 16
-    },
-    {
-      "id": "p2-runners-house",
-      "part": "PART II &middot; YOUNG Hospitality",
-      "chapter": "7. Restaurants &amp; Hospitality",
-      "title": "Runners at YOUNG House",
-      "tag": "Mixed",
-      "business": "restaurants",
-      "needs": [
-        "Dining & Catering"
-      ],
-      "country": [
-        "Netherlands"
-      ],
-      "blurb": "In-house dining at YOUNG House for business lunches, dinners and guests.",
-      "priceTeaser": "Custom Quote",
-      "content": "<p>Business Lunches / Dinners / Guests.</p>",
-      "status": "",
-      "contacts": [],
-      "links": {},
-      "materials": [],
-      "crosssell": [],
-      "order": 17
-    },
-    {
-      "id": "p2-lof",
-      "part": "PART II &middot; YOUNG Hospitality",
-      "chapter": "7. Restaurants &amp; Hospitality",
-      "title": "LOF The Hague",
-      "tag": "Mixed",
-      "business": "restaurants",
-      "needs": [
-        "Dining & Catering"
-      ],
-      "country": [
-        "Netherlands"
-      ],
-      "blurb": "LOF The Hague for lunch, dinner and private events.",
-      "priceTeaser": "Custom Quote",
-      "content": "<p>Lunch / Dinner / Events.</p>",
-      "status": "",
-      "contacts": [],
-      "links": {},
-      "materials": [],
-      "crosssell": [],
-      "order": 18
-    },
-    {
-      "id": "p2-elporto",
-      "part": "PART II &middot; YOUNG Hospitality",
-      "chapter": "7. Restaurants &amp; Hospitality",
-      "title": "El Porto D&eacute;nia",
-      "tag": "Mixed",
-      "business": "restaurants",
-      "needs": [
-        "Dining & Catering"
-      ],
-      "country": [
-        "Spain"
-      ],
-      "blurb": "El Porto in D&eacute;nia &mdash; lunch, dinner and events on the Spanish coast.",
-      "priceTeaser": "Custom Quote",
-      "content": "<p>Lunch / Dinner / Events.</p>",
-      "status": "",
-      "contacts": [],
-      "links": {},
-      "materials": [],
-      "crosssell": [],
-      "order": 19
-    },
-    {
-      "id": "p2-restaurants-model",
-      "part": "PART II &middot; YOUNG Hospitality",
-      "chapter": "7. Restaurants &amp; Hospitality",
-      "title": "Standard Commercial Model &mdash; All Restaurant Concepts",
-      "tag": "Mixed",
-      "business": "restaurants",
-      "needs": [
-        "Dining & Catering"
-      ],
-      "country": [
-        "Netherlands",
-        "Spain"
-      ],
-      "blurb": "The standard commercial menu every YOUNG restaurant concept can offer.",
-      "priceTeaser": "Custom Quote",
-      "content": "<ul class=\"blist\"><li>Regular dining</li><li>Group dining</li><li>Business lunches</li><li>Corporate dinners</li><li>Group menus</li><li>Private events</li><li>Celebrations</li><li>Kids events where relevant</li><li>Full / partial venue hire</li><li>Catering where applicable</li><li>Corporate packages</li><li>Custom requests</li></ul>",
-      "status": "",
-      "contacts": [],
-      "links": {},
-      "materials": [],
-      "crosssell": [],
-      "order": 20
-    },
-    {
-      "id": "p2-beach",
-      "part": "PART II &middot; YOUNG Hospitality",
-      "chapter": "8. YOUNG.Beach",
-      "title": "YOUNG.Beach &mdash; Inventory &amp; Combinations",
-      "tag": "Mixed",
-      "business": "beach",
-      "needs": [
-        "Beach & Leisure",
-        "Dining & Catering"
-      ],
-      "country": [
-        "Spain"
-      ],
-      "blurb": "Beach dining, surf camps and bachelor/family experiences, sold solo or combined.",
-      "priceTeaser": "Custom Quote",
-      "content": "<h4>Core Inventory</h4><ul class=\"blist\"><li>Restaurant</li><li>Dinners</li><li>Events</li><li>Surf camps</li><li>Bachelor events</li><li>Kids &amp; family activities</li><li>Ice cream / beach products</li><li>Other experiences</li></ul><h4>Combination Packages</h4><ul class=\"blist\"><li>Corporate Beach Day</li><li>Team Day</li><li>Bachelor Experience</li><li>Family Beach Day</li><li>Surf + Lunch</li><li>Beach Event + Dinner</li><li>Private Event</li></ul>",
-      "crosssell": [
-        "YOUNG Hotels (Stay + Beach packages)",
-        "YOUNG Studio (content capture for events)"
-      ],
-      "status": "",
-      "contacts": [],
-      "links": {},
-      "materials": [],
-      "order": 21
-    },
-    {
-      "id": "p3-baiavista",
-      "part": "PART III &middot; YOUNG Real Estate",
-      "chapter": "Real Estate",
-      "title": "Baia Vista Cura&ccedil;ao &mdash; Phase 2",
-      "tag": "Custom Quote",
-      "business": "realestate",
-      "needs": [
-        "Real Estate Investment"
-      ],
-      "country": [
-        "Curaçao"
-      ],
-      "blurb": "60 new apartments and penthouses at Baia Vista, Cura&ccedil;ao &mdash; Phase 2.",
-      "priceTeaser": "Custom Quote",
-      "content": "<p><strong>60 homes</strong>: Apartments &amp; Penthouses.</p><p>Each available unit eventually contains: Unit / Type / Size / Bedrooms / Price / Availability / Payment Terms / Completion / Key Selling Points / Commercial Conditions / Materials / Contacts.</p><p><em>Future YOUNG real estate projects and investment opportunities can be added to this chapter as they are confirmed.</em></p>",
-      "status": "",
-      "contacts": [],
-      "links": {},
-      "materials": [],
-      "crosssell": [],
-      "order": 22
-    },
-    {
-      "id": "p4-status",
-      "part": "PART IV &middot; YOUNG Media",
-      "chapter": "13. Commercial Status",
-      "title": "YOUNG Media &mdash; Commercial Status Legend",
-      "tag": "Reference",
-      "business": "media",
-      "country": [
-        "Netherlands"
-      ],
-      "blurb": "How to read the LIVE / SUBJECT TO AVAILABILITY / CUSTOM QUOTE / IN DEVELOPMENT tags.",
-      "content": "<table class=\"dtable\"><thead><tr><th>Marker</th><th>Meaning</th></tr></thead><tbody><tr><td><span class=\"badge live\">LIVE NOW</span></td><td>Can be sold immediately.</td></tr><tr><td><span class=\"badge avail\">SUBJECT TO AVAILABILITY</span></td><td>Existing product but inventory/slot must be confirmed.</td></tr><tr><td><span class=\"badge custom\">CUSTOM QUOTE</span></td><td>Needs YOUNG Media involvement.</td></tr><tr><td><span class=\"badge dev\">IN DEVELOPMENT</span></td><td>Can be discussed but must not be sold as a live product without approval.</td></tr></tbody></table><p>Especially important for the TPO Channel and other new formats explicitly described as future plans.</p>",
-      "status": "",
-      "contacts": [],
-      "links": {},
-      "materials": [],
-      "crosssell": [],
-      "needs": [],
-      "priceTeaser": "",
-      "order": 23
-    },
-    {
-      "id": "p4-vgvisie-audience",
-      "part": "PART IV &middot; YOUNG Media",
-      "chapter": "9. VG Visie",
-      "title": "VG Visie &mdash; Overview &amp; Audience",
-      "tag": "Reference",
-      "status": "Live",
-      "business": "media",
-      "needs": [
-        "Media & Advertising"
-      ],
-      "country": [
-        "Netherlands"
-      ],
-      "blurb": "VG Visie reaches 27,500 real estate professionals through print, newsletters, podcasts and events.",
-      "priceTeaser": "From &euro;200/week",
-      "content": "<p><strong>Real Estate Media Platform.</strong> Independent Dutch real estate media platform combining print, e-magazines, podcasts, newsletters, events and media partnerships. All prices excl. VAT (Media Kit 2026).</p><table class=\"dtable\"><thead><tr><th>Metric</th><th>Value</th></tr></thead><tbody><tr><td>Professionals reached</td><td>27,500</td></tr><tr><td>Newsletter subscribers</td><td>9,000 (sent 3x/week)</td></tr><tr><td>Magazine circulation</td><td>5,400</td></tr><tr><td>VG Specials circulation</td><td>6,500</td></tr><tr><td>Real Estate Weeks</td><td>20</td></tr><tr><td>Editions per year</td><td>12</td></tr></tbody></table><p>Core audience: developers, investors, housing corporations, property managers, architects, construction companies, policymakers, public institutions, retailers, logistics companies.</p>",
-      "contacts": [
-        {
-          "name": "Jeroen Krab",
-          "role": "Sales Manager, VG Visie",
-          "email": "jeroen@young.media",
-          "sourced": false
-        },
-        {
-          "name": "YOUNG Media (Publisher)",
-          "role": "Publisher",
-          "email": "marketing@young.media",
-          "sourced": false
-        },
-        {
-          "name": "General",
-          "role": "VG Visie general",
-          "email": "info@vgvisie.nl",
-          "sourced": false
-        }
-      ],
-      "links": {
-        "website": "www.vgvisie.nl"
-      },
-      "materials": [],
-      "crosssell": [],
-      "order": 24
-    },
-    {
-      "id": "p4-vgvisie-newsletter",
-      "part": "PART IV &middot; YOUNG Media",
-      "chapter": "9. VG Visie",
-      "title": "VG Visie &mdash; Newsletter Advertising",
-      "tag": "Fixed Price",
-      "status": "Live",
-      "business": "media",
-      "needs": [
-        "Media & Advertising"
-      ],
-      "country": [
-        "Netherlands"
-      ],
-      "blurb": "Weekly newsletter banners, advertorials and job listings on VG Visie.",
-      "priceTeaser": "From &euro;200/week",
-      "content": "<table class=\"dtable\"><thead><tr><th>Product</th><th>Standard Rate</th></tr></thead><tbody><tr><td>1st Top Position &middot; Full Banner</td><td>&euro;500 / week</td></tr><tr><td>2nd Top Position &middot; Full Banner</td><td>&euro;450 / week</td></tr><tr><td>Advertorial</td><td>&euro;500 / week</td></tr><tr><td>Job Listing</td><td>&euro;200 / week</td></tr><tr><td>Standalone Article via Newsletter + LinkedIn</td><td>&euro;4,250</td></tr></tbody></table><h4>Annual Newsletter Positions</h4><table class=\"dtable\"><thead><tr><th>Position</th><th>Annual Rate</th></tr></thead><tbody><tr><td>Position 1</td><td>&euro;5,000</td></tr><tr><td>Position 2</td><td>&euro;4,500</td></tr><tr><td>Position 3</td><td>&euro;4,000</td></tr><tr><td>Position 4</td><td>&euro;3,750</td></tr></tbody></table><p>Specs: full-size banner 900&times;120px, blockbuster 550&times;150px, large rectangle 336&times;280px. Delivery deadline: 5 working days before placement.</p>",
-      "contacts": [],
-      "links": {},
-      "materials": [],
-      "crosssell": [],
-      "order": 25
-    },
-    {
-      "id": "p4-vgvisie-print",
-      "part": "PART IV &middot; YOUNG Media",
-      "chapter": "9. VG Visie",
-      "title": "VG Visie &mdash; Print Advertising",
-      "tag": "Fixed Price",
-      "status": "Live",
-      "business": "media",
-      "needs": [
-        "Media & Advertising"
-      ],
-      "country": [
-        "Netherlands"
-      ],
-      "blurb": "Print ad pages and sponsored interviews in the VG Visie magazine.",
-      "priceTeaser": "From &euro;1,750",
-      "content": "<h4>Standard Advertising</h4><table class=\"dtable\"><thead><tr><th>Product</th><th>Rate</th></tr></thead><tbody><tr><td>2/1 Page Spread</td><td>&euro;4,950</td></tr><tr><td>1/1 Page</td><td>&euro;3,250</td></tr><tr><td>1/2 Page</td><td>&euro;1,950</td></tr></tbody></table><h4>Special Positions</h4><table class=\"dtable\"><thead><tr><th>Product</th><th>Rate</th></tr></thead><tbody><tr><td>Inside Front Cover Spread</td><td>&euro;5,500</td></tr><tr><td>Spread Pages 4&ndash;5</td><td>&euro;5,000</td></tr><tr><td>Inside Cover / Back Page</td><td>&euro;4,250</td></tr><tr><td>Other Special Positions</td><td>&euro;3,750</td></tr><tr><td>Horizontal Block Below Foreword</td><td>&euro;1,750</td></tr></tbody></table><h4>Editorial Content</h4><table class=\"dtable\"><thead><tr><th>Product</th><th>Rate</th></tr></thead><tbody><tr><td>Interview &middot; 2 Pages</td><td>&euro;2,500</td></tr><tr><td>Interview &middot; 4 Pages</td><td>&euro;3,950</td></tr><tr><td>Interview &middot; 6 Pages</td><td>&euro;4,495</td></tr><tr><td>Interview &middot; 8 Pages</td><td>&euro;4,895</td></tr></tbody></table><p>Summer and winter flagship editions with premium distribution and sector specials also available.</p>",
-      "contacts": [],
-      "links": {},
-      "materials": [],
-      "crosssell": [],
-      "order": 26
-    },
-    {
-      "id": "p4-vgvisie-emag",
-      "part": "PART IV &middot; YOUNG Media",
-      "chapter": "9. VG Visie",
-      "title": "VG Visie &mdash; E-Magazines",
-      "tag": "Custom Quote",
-      "status": "Live",
-      "business": "media",
-      "needs": [
-        "Media & Advertising"
-      ],
-      "country": [
-        "Netherlands"
-      ],
-      "blurb": "Premium placement in VG Visie's monthly e-magazine.",
-      "priceTeaser": "Custom Quote",
-      "content": "<p>10 monthly e-magazines planned, plus summer and winter editions. Can include: cover story, person of the month, video interview, data page, podcast &amp; events page, sponsored content, editorial profiles, brand integration.</p><p>One advertiser per edition receives premium positioning. <strong>Price: TO COMPLETE / custom commercial proposal.</strong></p>",
-      "contacts": [],
-      "links": {},
-      "materials": [],
-      "crosssell": [],
-      "order": 27
-    },
-    {
-      "id": "p4-vgvisie-podcasts",
-      "part": "PART IV &middot; YOUNG Media",
-      "chapter": "9. VG Visie",
-      "title": "VG Visie &mdash; Podcasts (REI &amp; Real Deal)",
-      "tag": "Custom Quote",
-      "status": "Live",
-      "business": "media",
-      "needs": [
-        "Media & Advertising",
-        "Founder & Investor Content"
-      ],
-      "country": [
-        "Netherlands"
-      ],
-      "blurb": "Sponsor slots on VG Visie's two real estate podcasts, REI and Real Deal.",
-      "priceTeaser": "Custom Quote",
-      "content": "<h4>REI</h4><p>B2B real estate market analysis, expert interviews, data-driven conversations.</p><ul class=\"blist\"><li>Integrated sponsor slots</li><li>Branded episodes</li><li>Season sponsorship</li><li>Cross-promotion</li><li>Newsletter exposure</li><li>Social exposure</li></ul><h4>Real Deal</h4><p>Long-form storytelling with entrepreneurs and real estate leaders.</p><ul class=\"blist\"><li>Episode sponsorship</li><li>Season sponsorship</li><li>Branded integrations</li><li>Social clips</li><li>Audiograms</li><li>Video integrations</li></ul><p><strong>Individual sponsorship rates: TO COMPLETE.</strong></p>",
-      "contacts": [],
-      "links": {},
-      "materials": [],
-      "crosssell": [],
-      "order": 28
-    },
-    {
-      "id": "p4-vgvisie-branded",
-      "part": "PART IV &middot; YOUNG Media",
-      "chapter": "9. VG Visie",
-      "title": "VG Visie &mdash; Branded Podcast Formats",
-      "tag": "Custom Quote",
-      "status": "Live",
-      "business": "media",
-      "needs": [
-        "Media & Advertising"
-      ],
-      "country": [
-        "Netherlands"
-      ],
-      "blurb": "Co-branded podcast formats with Met Grenzeloze Ambitie and The Code to Success.",
-      "priceTeaser": "Custom Quote",
-      "content": "<h4>VG Visie &times; Met Grenzeloze Ambitie</h4><ul class=\"blist\"><li>Sponsorship</li><li>Branded specials</li><li>VG Visie content integration</li><li>Cross-promotion</li><li>Magazine placement</li></ul><h4>VG Visie &times; The Code to Success</h4><ul class=\"blist\"><li>Sponsorship</li><li>Partnered series</li><li>“Powered by” sponsorship</li><li>Season sponsorship</li><li>Content integration</li><li>Magazine placement</li></ul><p><strong>Pricing: Custom Quote.</strong></p>",
-      "contacts": [],
-      "links": {},
-      "materials": [],
-      "crosssell": [],
-      "order": 29
-    },
-    {
-      "id": "p4-vgvisie-events",
-      "part": "PART IV &middot; YOUNG Media",
-      "chapter": "9. VG Visie",
-      "title": "VG Visie &mdash; Events &amp; Trade Fairs",
-      "tag": "Custom Quote",
-      "status": "Subject to Availability",
-      "business": "media",
-      "needs": [
-        "Media & Advertising",
-        "Meetings & Events"
-      ],
-      "country": [
-        "Netherlands"
-      ],
-      "blurb": "Sponsorship at VG Visie's Business Lunches, Annual Conference and trade fair presence.",
-      "priceTeaser": "Custom Quote",
-      "content": "<h4>Quarterly Business Lunch</h4><p>4 per year, approx. 30&ndash;40 guests, curated professional audience, sponsor/partnership opportunities.</p><h4>Annual Conference</h4><p>200+ attendees, keynotes, panels, winter edition launch, headline sponsorship, brand stand, ticket revenue.</p><h4>Trade Fairs / Real Estate Weeks</h4><p>Opportunities around PROVADA, MIPIM, Real Estate Week (Amsterdam, Utrecht, Rotterdam, Eindhoven, The Hague, additional cities).</p><p><strong>Event sponsorship rates: Custom Quote / TO COMPLETE.</strong></p>",
-      "contacts": [],
-      "links": {},
-      "materials": [],
-      "crosssell": [],
-      "order": 30
-    },
-    {
-      "id": "p4-vgvisie-packages",
-      "part": "PART IV &middot; YOUNG Media",
-      "chapter": "9. VG Visie",
-      "title": "VG Visie &mdash; Annual Partnership Packages",
-      "tag": "Fixed Price",
-      "status": "Live",
-      "business": "media",
-      "needs": [
-        "Media & Advertising"
-      ],
-      "country": [
-        "Netherlands"
-      ],
-      "blurb": "Three ready-made annual sponsorship tiers bundling print, podcast, newsletter and events.",
-      "priceTeaser": "From &euro;4,999/yr",
-      "content": "<table class=\"dtable\"><thead><tr><th>Package</th><th>Price / Year</th><th>Includes</th><th>Indicative Value</th></tr></thead><tbody><tr><td><strong>PRESENCE</strong></td><td>&euro;4,999</td><td>Season sponsor of REI or Real Deal &middot; 2 magazine pages in 1 edition &middot; Quarterly newsletter slot &middot; 1 annual conference ticket</td><td>&asymp; &euro;8,250</td></tr><tr><td><strong>AUTHORITY</strong></td><td>&euro;11,999</td><td>Everything in Presence, plus: both podcasts as season sponsor &middot; 4 magazine pages across both editions &middot; e-magazine sponsor across 6 editions &middot; monthly newsletter slot &middot; annual conference + 2 business lunch tickets</td><td>&asymp; &euro;22,500</td></tr><tr><td><strong>OWNERSHIP</strong></td><td>&euro;24,999</td><td>Everything in Authority, plus: full-year presence across both podcasts &middot; 6 magazine pages across both editions &middot; sponsor slot in all e-magazine editions &middot; co-produced branded podcast episode &middot; headline annual conference position &middot; 5 conference tickets &middot; social content series</td><td>&asymp; &euro;45,000</td></tr></tbody></table>",
-      "contacts": [],
-      "links": {},
-      "materials": [],
-      "crosssell": [],
-      "order": 31
-    },
-    {
-      "id": "p4-tpo-audience",
-      "part": "PART IV &middot; YOUNG Media",
-      "chapter": "10. TPO",
-      "title": "TPO &middot; The Post Online &mdash; Overview &amp; Audience",
-      "tag": "Reference",
-      "status": "Live",
-      "business": "media",
-      "needs": [
-        "Media & Advertising"
-      ],
-      "country": [
-        "Netherlands"
-      ],
-      "blurb": "TPO reaches Dutch news readers with 207,000+ organic clicks and a 17k-subscriber newsletter.",
-      "priceTeaser": "From &euro;200/send",
-      "content": "<p><strong>Dutch News Platform</strong>, founded 2009.</p><table class=\"dtable\"><thead><tr><th>Metric</th><th>Value</th></tr></thead><tbody><tr><td>Organic search clicks (12mo)</td><td>207,000+</td></tr><tr><td>Search impressions</td><td>8.4 million</td></tr><tr><td>Daily newsletter subscribers</td><td>17,394</td></tr><tr><td>Newsletter open rate</td><td>27.2%</td></tr><tr><td>X followers</td><td>40,800</td></tr><tr><td>YouTube subscribers</td><td>30,000+</td></tr><tr><td>Apps</td><td>iOS + Android</td></tr></tbody></table><p>Core audience: Dutch news consumers, approx. 30&ndash;65, interested in politics, economy, housing and world affairs.</p>",
-      "contacts": [
-        {
-          "name": "Primary Contact",
-          "role": "TO COMPLETE",
-          "email": "",
-          "sourced": false
-        },
-        {
-          "name": "Secondary Contact",
-          "role": "TO COMPLETE",
-          "email": "",
-          "sourced": false
-        },
-        {
-          "name": "YOUNG Media (fallback, unconfirmed for TPO)",
-          "role": "Publisher",
-          "email": "marketing@young.media",
-          "sourced": false
-        }
-      ],
-      "links": {
-        "website": "tpo.nl",
-        "x": "@TPONL",
-        "youtube": "TO COMPLETE",
-        "linkedin": "TO COMPLETE"
-      },
-      "materials": [],
-      "crosssell": [],
-      "order": 32
-    },
-    {
-      "id": "p4-tpo-website",
-      "part": "PART IV &middot; YOUNG Media",
-      "chapter": "10. TPO",
-      "title": "TPO &mdash; Website Advertising",
-      "tag": "Fixed Price",
-      "status": "Live",
-      "business": "media",
-      "needs": [
-        "Media & Advertising"
-      ],
-      "country": [
-        "Netherlands"
-      ],
-      "blurb": "Site-wide banners and section takeovers on tpo.nl.",
-      "priceTeaser": "From &euro;600/mo",
-      "content": "<table class=\"dtable\"><thead><tr><th>Product</th><th>Rate</th></tr></thead><tbody><tr><td>Leaderboard &middot; Site-wide</td><td>&euro;950 / month</td></tr><tr><td>In-Article Rectangle</td><td>&euro;750 / month</td></tr><tr><td>Sidebar Half-Page</td><td>&euro;600 / month</td></tr><tr><td>Section Takeover</td><td>&euro;1,250 / month</td></tr></tbody></table><p>Section takeover can focus on politics, economy or sport.</p>",
-      "contacts": [],
-      "links": {},
-      "materials": [],
-      "crosssell": [],
-      "order": 33
-    },
-    {
-      "id": "p4-tpo-branded",
-      "part": "PART IV &middot; YOUNG Media",
-      "chapter": "10. TPO",
-      "title": "TPO &mdash; Branded Content",
-      "tag": "Fixed Price",
-      "status": "Live",
-      "business": "media",
-      "needs": [
-        "Media & Advertising"
-      ],
-      "country": [
-        "Netherlands"
-      ],
-      "blurb": "Branded articles, interviews and sponsored X posts on TPO.",
-      "priceTeaser": "From &euro;300",
-      "content": "<table class=\"dtable\"><thead><tr><th>Product</th><th>Rate</th></tr></thead><tbody><tr><td>Branded Article</td><td>&euro;1,250</td></tr><tr><td>Branded Interview</td><td>&euro;1,750</td></tr><tr><td>Article Series &middot; 4&times;</td><td>&euro;3,999</td></tr><tr><td>Sponsored Post on X</td><td>&euro;300 / post</td></tr></tbody></table><p>Branded articles include publication on TPO, newsletter amplification and X exposure.</p>",
-      "contacts": [],
-      "links": {},
-      "materials": [],
-      "crosssell": [],
-      "order": 34
-    },
-    {
-      "id": "p4-tpo-newsletter",
-      "part": "PART IV &middot; YOUNG Media",
-      "chapter": "10. TPO",
-      "title": "TPO &mdash; Newsletter (“Vandaag op TPO”)",
-      "tag": "Fixed Price",
-      "status": "Live",
-      "business": "media",
-      "needs": [
-        "Media & Advertising"
-      ],
-      "country": [
-        "Netherlands"
-      ],
-      "blurb": "Daily newsletter banners and annual positions reaching 17,394 subscribers.",
-      "priceTeaser": "From &euro;200/send",
-      "content": "<p>Sent daily to 17,394 subscribers (&asymp;250 sends/year).</p><h4>Per Placement</h4><table class=\"dtable\"><thead><tr><th>Product</th><th>Rate</th></tr></thead><tbody><tr><td>Top Banner</td><td>&euro;250 / send</td></tr><tr><td>Mid Banner</td><td>&euro;200 / send</td></tr><tr><td>Sponsored Native Item</td><td>&euro;350 / send</td></tr><tr><td>Week Run &middot; 5 Sends</td><td>&euro;995</td></tr></tbody></table><h4>Annual Positions</h4><table class=\"dtable\"><thead><tr><th>Product</th><th>Rate</th></tr></thead><tbody><tr><td>Annual Position 1 &middot; Top</td><td>&euro;4,500 / year</td></tr><tr><td>Annual Position 2 &middot; Mid</td><td>&euro;3,500 / year</td></tr><tr><td>Monthly Native Slot</td><td>&euro;5,999 / year</td></tr></tbody></table>",
-      "contacts": [],
-      "links": {},
-      "materials": [],
-      "crosssell": [],
-      "order": 35
-    },
-    {
-      "id": "p4-tpo-channel",
-      "part": "PART IV &middot; YOUNG Media",
-      "chapter": "10. TPO",
-      "title": "TPO Channel",
-      "tag": "Custom Quote",
-      "status": "In Development",
-      "business": "media",
-      "needs": [
-        "Media & Advertising"
-      ],
-      "country": [
-        "Netherlands"
-      ],
-      "blurb": "TPO's upcoming video channel &mdash; discuss with prospects now, but don't sell as live yet.",
-      "priceTeaser": "From &euro;450/episode",
-      "content": "<p><span class=\"badge dev\">STATUS: IN DEVELOPMENT</span> &mdash; future plan, not yet on air. Discuss with prospects but do not sell as a live product without approval.</p><h4>Planned Formats</h4><ul class=\"blist\"><li>TPO Daily</li><li>TPO Football Show</li><li>Debate Table</li><li>Combat Breakdown</li><li>TPO Comedy</li><li>Street Interviews / mini formats</li></ul><h4>Potential Sponsor Products From Launch</h4><table class=\"dtable\"><thead><tr><th>Product</th><th>Price</th></tr></thead><tbody><tr><td>Episode Advertising</td><td>From &euro;450 / episode</td></tr><tr><td>Branded Episode</td><td>From &euro;2,500</td></tr><tr><td>Programme Sponsorship</td><td>Custom Quote</td></tr><tr><td>Section Sponsorship</td><td>Custom Quote</td></tr><tr><td>Channel Title Sponsorship</td><td>Custom Quote</td></tr><tr><td>Own Programme / “Your Show on TPO”</td><td>Custom Proposal</td></tr></tbody></table><p>Partners signing before launch may receive first choice of programme slots and launch-rate access.</p>",
-      "contacts": [],
-      "links": {},
-      "materials": [],
-      "crosssell": [],
-      "order": 36
-    },
-    {
-      "id": "p4-tpo-packages",
-      "part": "PART IV &middot; YOUNG Media",
-      "chapter": "10. TPO",
-      "title": "TPO &mdash; Annual Partnership Packages",
-      "tag": "Fixed Price",
-      "status": "Live",
-      "business": "media",
-      "needs": [
-        "Media & Advertising"
-      ],
-      "country": [
-        "Netherlands"
-      ],
-      "blurb": "Three annual TPO sponsorship tiers, with the top tier limited to one partner.",
-      "priceTeaser": "From &euro;6,999/yr",
-      "content": "<table class=\"dtable\"><thead><tr><th>Package</th><th>Price / Year</th><th>Includes</th><th>Indicative Value</th></tr></thead><tbody><tr><td><strong>PRESENCE</strong></td><td>&euro;6,999</td><td>150,000 display impressions on tpo.nl &middot; 24 newsletter placements &middot; 2 branded articles &middot; 6 sponsored X posts &middot; logo on tpo.nl as official partner &middot; quarterly reporting</td><td>&asymp; &euro;11,800</td></tr><tr><td><strong>SHOW SPONSOR</strong></td><td>&euro;14,999</td><td>Presence plus: 250,000 display impressions &middot; 36 newsletter placements &middot; 12 sponsored X posts &middot; presenting sponsor of 1 weekly TPO programme from launch &middot; logo in programme titles/thumbnails &middot; 60-sec host-read segment every episode &middot; 4 co-produced branded episodes/year &middot; full social integration &middot; cross-brand newsletter feature with VG Visie + MGA. <em>Programme components activate only once TPO Channel launches.</em></td><td>&asymp; &euro;22,500 (VG Visie tier ref.)</td></tr><tr><td><strong>NETWORK PARTNER</strong> <span class=\"badge dev\">1 slot only</span></td><td>&euro;39,999</td><td>Show Sponsor plus: TPO platform + channel title sponsorship &middot; presence across all programmes/sections &middot; 2 fully co-produced branded programmes/year &middot; TPO Daily anchor sponsorship &middot; homepage presence year-round &middot; annual newsletter Position 1 &middot; always-on X presence &middot; bi-weekly strategy sessions with YOUNG Media leadership. <em>Channel components activate from launch.</em></td><td>&mdash;</td></tr></tbody></table>",
-      "contacts": [],
-      "links": {},
-      "materials": [],
-      "crosssell": [],
-      "order": 37
-    },
-    {
-      "id": "p4-mga-audience",
-      "part": "PART IV &middot; YOUNG Media",
-      "chapter": "11. MGA",
-      "title": "Met Grenzeloze Ambitie &mdash; Overview &amp; Reach",
-      "tag": "Reference",
-      "status": "Live",
-      "business": "media",
-      "needs": [
-        "Founder & Investor Content",
-        "Media & Advertising"
-      ],
-      "country": [
-        "Netherlands"
-      ],
-      "blurb": "Met Grenzeloze Ambitie's weekly founder podcast, reaching 30,000+ subscribers.",
-      "priceTeaser": "Custom Quote",
-      "content": "<p><strong>Entrepreneurship &middot; Founders &middot; Investors</strong> platform centred on a weekly long-form podcast, supported by events, video, social content and branded content.</p><table class=\"dtable\"><thead><tr><th>Metric</th><th>Value</th></tr></thead><tbody><tr><td>YouTube views (12mo)</td><td>28,029</td></tr><tr><td>YouTube impressions</td><td>59,692</td></tr><tr><td>Watch time</td><td>600+ hours</td></tr><tr><td>Instagram followers</td><td>6,504</td></tr><tr><td>Numbered episodes</td><td>23+</td></tr><tr><td>YouTube partner distribution audience</td><td>30,000+ subscribers</td></tr><tr><td>Community events / year</td><td>4</td></tr><tr><td>Clips per episode</td><td>5+</td></tr></tbody></table><p>Main audience: early-stage founders, aspiring entrepreneurs, angel investors, scale-up operators.</p>",
-      "contacts": [
-        {
-          "name": "Primary Contact",
-          "role": "TO COMPLETE",
-          "email": "",
-          "sourced": false
-        },
-        {
-          "name": "Secondary Contact",
-          "role": "TO COMPLETE",
-          "email": "",
-          "sourced": false
-        },
-        {
-          "name": "YOUNG Media (fallback, unconfirmed for MGA)",
-          "role": "Publisher",
-          "email": "marketing@young.media",
-          "sourced": false
-        }
-      ],
-      "links": {
-        "website": "TO COMPLETE",
-        "instagram": "TO COMPLETE",
-        "linkedin": "TO COMPLETE",
-        "youtube": "TO COMPLETE",
-        "spotify": "TO COMPLETE",
-        "apple": "TO COMPLETE"
-      },
-      "materials": [],
-      "crosssell": [],
-      "order": 38
-    },
-    {
-      "id": "p4-mga-podcast",
-      "part": "PART IV &middot; YOUNG Media",
-      "chapter": "11. MGA",
-      "title": "MGA Podcast &mdash; Sponsor Integration",
-      "tag": "Custom Quote",
-      "status": "Live",
-      "business": "media",
-      "needs": [
-        "Founder & Investor Content"
-      ],
-      "country": [
-        "Netherlands"
-      ],
-      "blurb": "Pre-roll, mid-roll and season sponsorship on the MGA podcast.",
-      "priceTeaser": "Custom Quote",
-      "content": "<p>Weekly, 60&ndash;90 minutes, founder/operator/investor interviews, audio + video, Amsterdam studio. Distributed via Spotify, Apple Podcasts, YouTube and social channels.</p><ul class=\"blist\"><li>30-second host-read pre-roll</li><li>60&ndash;90 second mid-roll branded segment</li><li>20-second post-roll</li><li>Paid episode</li><li>Season sponsorship</li><li>“Powered by [brand]” integration</li></ul><p><strong>Individual rates: TO COMPLETE / Custom Quote.</strong></p>",
-      "contacts": [],
-      "links": {},
-      "materials": [],
-      "crosssell": [],
-      "order": 39
-    },
-    {
-      "id": "p4-mga-events",
-      "part": "PART IV &middot; YOUNG Media",
-      "chapter": "11. MGA",
-      "title": "MGA Events",
-      "tag": "Custom Quote",
-      "status": "Subject to Availability",
-      "business": "media",
-      "needs": [
-        "Founder & Investor Content",
-        "Meetings & Events"
-      ],
-      "country": [
-        "Netherlands"
-      ],
-      "blurb": "Sponsor Founder Networking Sessions and Investor Pitch Sessions.",
-      "priceTeaser": "Custom Quote",
-      "content": "<h4>Founder Networking Sessions</h4><p>4 per year, approx. 40&ndash;60 guests (founders, operators, investors).</p><ul class=\"blist\"><li>Sponsor presence</li><li>Brand mention</li><li>Sponsor table</li><li>Full recording + content clips</li></ul><h4>Investor Pitch Sessions</h4><p>2 per year (spring + autumn). Founders pitch to angels and early-stage investors.</p><ul class=\"blist\"><li>Presenting partner slot available</li></ul><p><strong>Individual event rates: Custom Quote / TO COMPLETE.</strong></p>",
-      "contacts": [],
-      "links": {},
-      "materials": [],
-      "crosssell": [],
-      "order": 40
-    },
-    {
-      "id": "p4-mga-branded",
-      "part": "PART IV &middot; YOUNG Media",
-      "chapter": "11. MGA",
-      "title": "MGA Branded Content",
-      "tag": "Custom Quote",
-      "status": "Live",
-      "business": "media",
-      "needs": [
-        "Founder & Investor Content"
-      ],
-      "country": [
-        "Netherlands"
-      ],
-      "blurb": "Fully co-produced branded podcast content with MGA.",
-      "priceTeaser": "Custom Quote",
-      "content": "<ul class=\"blist\"><li>Paid podcast episodes</li><li>Co-produced content</li><li>Founder interviews</li><li>Full audio distribution</li><li>YouTube video</li><li>5+ social clips</li><li>LinkedIn content</li><li>Instagram content</li><li>Sponsor integrations</li></ul><p><strong>Price: Custom Quote / TO COMPLETE.</strong></p>",
-      "contacts": [],
-      "links": {},
-      "materials": [],
-      "crosssell": [],
-      "order": 41
-    },
-    {
-      "id": "p4-mga-packages",
-      "part": "PART IV &middot; YOUNG Media",
-      "chapter": "11. MGA",
-      "title": "MGA &mdash; Annual Partnership Packages",
-      "tag": "Fixed Price",
-      "status": "Live",
-      "business": "media",
-      "needs": [
-        "Founder & Investor Content"
-      ],
-      "country": [
-        "Netherlands"
-      ],
-      "blurb": "Three annual MGA sponsorship tiers, from a single mention to exclusive Presenting Partner.",
-      "priceTeaser": "From &euro;4,999/yr",
-      "content": "<table class=\"dtable\"><thead><tr><th>Package</th><th>Price / Year</th><th>Includes</th></tr></thead><tbody><tr><td><strong>SIGNAL</strong></td><td>&euro;4,999</td><td>Pre-/post-roll mention in 2 podcast episodes &middot; 2 social media posts &middot; logo on MGA website as collaborator &middot; access to community networking events</td></tr><tr><td><strong>MOMENTUM</strong></td><td>&euro;11,999</td><td>Sponsor mention in 10 podcast episodes &middot; pre-/mid-roll integration &middot; 7 social media posts &middot; presenting sponsor of all 4 quarterly networking events &middot; 2 event access passes per event &middot; logo/mention in event communications</td></tr><tr><td><strong>DOMINANCE</strong> <span class=\"badge dev\">1 slot only</span></td><td>&euro;17,999</td><td>Season sponsorship “Powered by [brand]” &middot; 10+ consecutive episodes &middot; 1 social post per episode &middot; 1 paid episode with sponsor founder/team member &middot; presenting sponsor at both Investor Pitch Sessions &middot; opening remarks at Investor Pitch Sessions &middot; 5 access passes across MGA events &middot; exclusive Presenting Partner status</td></tr></tbody></table><p>Packages may be structured as mid-year or full-year arrangements.</p>",
-      "contacts": [],
-      "links": {},
-      "materials": [],
-      "crosssell": [],
-      "order": 42
-    },
-    {
-      "id": "p4-crossbrand",
-      "part": "PART IV &middot; YOUNG Media",
-      "chapter": "12. Cross-Brand Sales",
-      "title": "YOUNG Media &mdash; Cross-Brand Packages",
-      "tag": "Custom Quote",
-      "business": "media",
-      "needs": [
-        "Media & Advertising",
-        "Founder & Investor Content"
-      ],
-      "country": [
-        "Netherlands"
-      ],
-      "blurb": "Combine VG Visie, TPO and MGA into one cross-brand media partnership.",
-      "priceTeaser": "Custom Quote",
-      "content": "<p>VG Visie, TPO and MGA reach different but complementary audiences &mdash; clients can be offered combinations across brands.</p><table class=\"dtable\"><thead><tr><th>Package</th><th>Combination</th></tr></thead><tbody><tr><td>REAL ESTATE LEADERSHIP</td><td>VG Visie editorial + podcast + event exposure + MGA founder content</td></tr><tr><td>FOUNDER VISIBILITY</td><td>MGA podcast + TPO branded article + social content</td></tr><tr><td>NATIONAL REACH</td><td>TPO digital + newsletter + MGA content + VG Visie professional audience</td></tr><tr><td>THOUGHT LEADERSHIP</td><td>Interview + podcast + branded content + event appearance</td></tr><tr><td>CUSTOM MEDIA PARTNERSHIP</td><td>Built around the client's target audience, objective and budget</td></tr></tbody></table><p><strong>Pricing: Custom Quote.</strong> Media should be sold not only as individual placements, but through partnerships, sponsorships and cross-ecosystem opportunities.</p>",
-      "status": "",
-      "contacts": [],
-      "links": {},
-      "materials": [],
-      "crosssell": [],
-      "order": 43
-    },
-    {
-      "id": "p5-studio",
-      "part": "PART V &middot; YOUNG Studio",
-      "chapter": "Studio",
-      "title": "YOUNG Studio &mdash; Capabilities",
-      "tag": "Custom Quote",
-      "business": "studio",
-      "needs": [
-        "Studio & Creative Production"
-      ],
-      "country": [
-        "Netherlands",
-        "Spain"
-      ],
-      "blurb": "Brand, content, production, web and marketing support for any YOUNG business or external client.",
-      "priceTeaser": "Custom Quote",
-      "content": "<p>Create &middot; Produce &middot; Amplify. An expansion beyond the explicit initial inventory, positioned as a sellable YOUNG Media capability.</p><table class=\"dtable\"><thead><tr><th>Capability</th><th>Includes</th></tr></thead><tbody><tr><td>Brand &amp; Creative</td><td>Brand strategy / Identity / Creative / Graphic Design</td></tr><tr><td>Content &amp; Social</td><td>Strategy / Content / Social / Community / Copy</td></tr><tr><td>Production</td><td>Photography / Video / Podcasts / Interviews / Event Content / Short-form / Long-form</td></tr><tr><td>Web &amp; Digital</td><td>Websites / Landing Pages / Digital Assets</td></tr><tr><td>Marketing</td><td>Performance / CRM Support / Campaigns / AI Marketing</td></tr><tr><td>Ongoing Creative Support</td><td>Retainers / Packages / Custom Projects</td></tr></tbody></table><p>For each capability, capture: Hourly Rate / Package Price / Custom Quote / Commercial Range / Delivery / Contacts.</p>",
-      "crosssell": [
-        "YOUNG Hotels weddings/events (content production)",
-        "YOUNG Media (branded content execution)",
-        "YOUNG Workspaces launches"
-      ],
-      "status": "",
-      "contacts": [],
-      "links": {},
-      "materials": [],
-      "order": 44
-    },
-    {
-      "id": "p6-certificates",
-      "part": "PART VI &middot; Own YOUNG",
-      "chapter": "Own",
-      "title": "YOUNG Certificates",
-      "tag": "Fixed Price",
-      "business": "ownyoung",
-      "needs": [
-        "Ownership & Co-Investment"
-      ],
-      "country": [
-        "Netherlands",
-        "Curaçao"
-      ],
-      "blurb": "Buy into YOUNG itself &mdash; certificates from &euro;15, bundled with stays and community perks.",
-      "priceTeaser": "From &euro;15/certificate",
-      "content": "<table class=\"dtable\"><thead><tr><th>Field</th><th>Value</th></tr></thead><tbody><tr><td>Price</td><td>&euro;15 per certificate</td></tr><tr><td>Minimum investment</td><td>&euro;1,500 / 100 certificates</td></tr><tr><td>Total offered</td><td>100,000 certificates</td></tr></tbody></table><h4>Current Proposition Includes</h4><ul class=\"blist\"><li>YOUNG Merchandise Pack</li><li>2 nights in D&eacute;nia for two</li><li>Co-Owner Membership Card</li><li>Loyalty &amp; discounts</li><li>Exclusive community/events</li></ul><p>5-year buyback commitment, subject to terms and conditions. <em>This section remains subject to the final commercial/legal proposition.</em></p>",
-      "contacts": [
-        {
-          "name": "Escalation (suggested)",
-          "role": "Valeria Zancaner, CEO YOUNG / Juan Cruz Mesigos, COO YOUNG",
-          "email": "valeria@young.com / juancruz@young.com",
-          "sourced": true
-        }
-      ],
-      "status": "",
-      "links": {},
-      "materials": [],
-      "crosssell": [],
-      "order": 45
-    },
-    {
-      "id": "p7-products",
-      "part": "PART VII &middot; YOUNG Products",
-      "chapter": "Products",
-      "title": "YOUNG Products",
-      "tag": "Custom Quote",
-      "business": "products",
-      "needs": [
-        "Product & Merch"
-      ],
-      "country": [
-        "Netherlands",
-        "Spain"
-      ],
-      "blurb": "YOUNG-branded coffee, water, merchandise and corporate gifts.",
-      "priceTeaser": "Custom Quote",
-      "content": "<ul class=\"blist\"><li>YOUNG Water</li><li>YOUNG Coffee</li><li>YOUNG Travel Bag, Limited Edition</li><li>YOUNG Merchandise</li><li>YOUNG Hospitality clothing</li><li>Corporate gifts</li></ul><p>Commercial fields: Unit Price / MOQ / Volume Price / Customisation / Lead Time / Commercial Range.</p>",
-      "contacts": [
-        {
-          "name": "Marcos Herrero Anzorena / Bruno",
-          "role": "Co-managers, Young Coffee",
-          "email": "marcos@youngcoffee.com / bruno@youngcoffee.com",
-          "sourced": true
-        }
-      ],
-      "links": {
-        "website": "youngcoffee.com",
-        "instagram": "@youngcoffee_es"
-      },
-      "status": "",
-      "materials": [],
-      "crosssell": [],
-      "order": 46
-    },
-    {
-      "id": "p7-hospitality-line",
-      "part": "PART VII &middot; YOUNG Products",
-      "chapter": "Products",
-      "title": "Hospitality Product Line",
-      "tag": "Custom Quote",
-      "business": "products",
-      "needs": [
-        "Product & Merch"
-      ],
-      "country": [
-        "Netherlands",
-        "Spain"
-      ],
-      "blurb": "Branded hospitality supplies &mdash; cups, cutlery, towels and more &mdash; sellable B2B too.",
-      "priceTeaser": "Custom Quote",
-      "content": "<ul class=\"blist\"><li>Sugar sachets</li><li>Cups</li><li>Plates</li><li>Cutlery</li><li>Towels</li><li>Sunbeds</li><li>Other branded hospitality supplies</li></ul><p>May eventually be sold both internally and externally B2B. Commercial fields: Unit Price / MOQ / Volume Price / Customisation / Lead Time / Commercial Range.</p>",
-      "status": "",
-      "contacts": [],
-      "links": {},
-      "materials": [],
-      "crosssell": [],
-      "order": 47
-    },
-    {
-      "id": "p8-deals",
-      "part": "PART VIII &middot; YOUNG Deals",
-      "chapter": "Deals",
-      "title": "YOUNG Deals &mdash; Portfolio",
-      "tag": "Mixed",
-      "business": "deals",
-      "needs": [
-        "Deal & Package"
-      ],
-      "country": [
-        "Netherlands",
-        "Spain"
-      ],
-      "blurb": "Bundled offers across YOUNG businesses, plus a home for external Partner Deals.",
-      "priceTeaser": "Custom Quote",
-      "content": "<table class=\"dtable\"><thead><tr><th>Deal</th><th>Combination</th></tr></thead><tbody><tr><td>WORK Deal</td><td>Workspace + Meeting Credits</td></tr><tr><td>STAY Deal</td><td>Hotel D&eacute;nia + Dinner at El Porto</td></tr><tr><td>BUSINESS Deal</td><td>Workspace + Lunch + Meeting + Media Exposure</td></tr><tr><td>BEACH Deal</td><td>Stay + YOUNG.Beach + Dinner / Experience</td></tr><tr><td>CO-OWNER Deal</td><td>Exclusive YOUNG Co-Owner offers</td></tr></tbody></table><h4>Partner Deals</h4><p>External companies offering exclusive deals to the YOUNG community. Potential revenue models:</p><ul class=\"blist\"><li>Commission per transaction</li><li>Lead / booking fee</li><li>Featured Deals</li><li>Partner membership</li><li>Sponsored Deals through YOUNG Media</li></ul>",
-      "status": "",
-      "contacts": [],
-      "links": {},
-      "materials": [],
-      "crosssell": [],
-      "order": 48
-    },
-    {
-      "id": "p9-loyalty",
-      "part": "PART IX &middot; YOUNG Loyalty",
-      "chapter": "Loyalty",
-      "title": "YOUNG Loyalty &mdash; Structure",
-      "tag": "Reference",
-      "needs": [
-        "Loyalty & Membership"
-      ],
-      "country": [
-        "Netherlands",
-        "Spain"
-      ],
-      "blurb": "One YOUNG account that follows the customer from Workspaces into everything else.",
-      "content": "<p><strong>ONE YOUNG. ONE ACCOUNT.</strong> A customer can enter through Workspaces and subsequently spend across Hospitality, Media, Beach, Products, Deals and other YOUNG businesses.</p><p>Potential structure: <strong>YOUNG Member &rarr; YOUNG Insider &rarr; YOUNG VIP</strong>. YOUNG Co-Owner remains a separate ownership status.</p><p><em>This chapter should clearly distinguish LIVE from IN DEVELOPMENT products.</em></p>",
-      "status": "",
-      "contacts": [],
-      "links": {},
-      "materials": [],
-      "crosssell": [],
-      "business": null,
-      "priceTeaser": "",
-      "order": 49
-    },
-    {
-      "id": "p10-expansion",
-      "part": "PART X &middot; YOUNG Expansion",
-      "chapter": "Expansion",
-      "title": "YOUNG Expansion &mdash; Business Development Pipeline",
-      "tag": "Reference",
-      "status": "In Development",
-      "blurb": "The business-development pipeline for new hotels, locations and partnerships.",
-      "content": "<p>A separate business-development pipeline, not regular sales inventory.</p><ul class=\"blist\"><li>Existing hotels in Spain, approx. 20&ndash;40 rooms</li><li>Partnerships with existing hotel owners</li><li>Introduction of YOUNG concept / branding</li><li>Improvement of operations and commercial performance</li><li>New hospitality locations</li><li>New branded products</li><li>New partnerships</li></ul>",
-      "contacts": [],
-      "links": {},
-      "materials": [],
-      "crosssell": [],
-      "business": null,
-      "needs": [],
-      "country": [],
-      "priceTeaser": "",
-      "order": 50
-    },
-    {
-      "id": "p11-ecosystem",
-      "part": "PART XI &middot; YOUNG Ecosystem Packages",
-      "chapter": "Ecosystem",
-      "title": "Ecosystem Packages &mdash; Sell More Than One Thing",
-      "tag": "Mixed",
-      "needs": [
-        "Deal & Package"
-      ],
-      "country": [
-        "Netherlands",
-        "Spain"
-      ],
-      "blurb": "Ready-made cross-sell combinations spanning two or more YOUNG businesses.",
-      "priceTeaser": "Custom Quote",
-      "content": "<table class=\"dtable\"><thead><tr><th>Package</th><th>Combination</th></tr></thead><tbody><tr><td>WORK Deal</td><td>Workspace + Meeting Credits</td></tr><tr><td>BUSINESS PACKAGE</td><td>Workspace + Meeting + Lunch + Hotel + Media</td></tr><tr><td>CORPORATE EVENT</td><td>Venue + F&amp;B + Accommodation + Studio</td></tr><tr><td>COMPANY OFF-SITE</td><td>Meeting + Hotel + Dinner + Experience</td></tr><tr><td>WEDDING EXPERIENCE</td><td>Venue + F&amp;B + Accommodation + Studio Production</td></tr><tr><td>BRAND LAUNCH</td><td>Venue + F&amp;B + Studio + Media</td></tr><tr><td>BEACH EXPERIENCE</td><td>Stay + Beach + F&amp;B + Activities</td></tr><tr><td>CORPORATE ACCOUNT</td><td>Workspace + Hotels + Meetings + Restaurants + Events</td></tr></tbody></table><p>Some of these come directly from the Deals concept; others are additional cross-sell opportunities built around it.</p>",
-      "status": "",
-      "contacts": [],
-      "links": {},
-      "materials": [],
-      "crosssell": [],
-      "business": null,
-      "order": 51
-    },
-    {
-      "id": "p12-directory",
-      "part": "PART XII &middot; Sales Directory &amp; Resources",
-      "chapter": "Directory",
-      "title": "Company Directory",
-      "tag": "Reference",
-      "blurb": "Who to contact for every business and brand across YOUNG.",
-      "content": "<table class=\"dtable\"><thead><tr><th>Company</th><th>Primary Contact</th><th>Secondary Contact</th><th>Website</th><th>Social</th></tr></thead><tbody><tr><td>Workspaces</td><td>Vinicius Carreira (Marketing Mgr, Spain)</td><td>TBD</td><td>TBD</td><td>TBD</td></tr><tr><td>Hotels</td><td>Felipe Robles (CEO, Young Hospitality)</td><td>Alejandra Muzzio (admin)</td><td>younghotels.nl (unconfirmed)</td><td>TBD</td></tr><tr><td>Hospitality (Restaurants)</td><td>Jessica Chica (Mgr, Brasserie Runners)</td><td>TBD</td><td>TBD</td><td>TBD</td></tr><tr><td>Beach</td><td>TBD</td><td>TBD</td><td>TBD</td><td>TBD</td></tr><tr><td>Real Estate</td><td>TBD</td><td>TBD</td><td>TBD</td><td>TBD</td></tr><tr><td>Media</td><td>Jeroen Krab (VG Visie Sales Mgr)</td><td>marketing@young.media</td><td>vgvisie.nl (VG Visie)</td><td>TBD</td></tr><tr><td>Studio</td><td>TBD</td><td>TBD</td><td>TBD</td><td>TBD</td></tr><tr><td>Products (Young Coffee)</td><td>Marcos Herrero Anzorena</td><td>Bruno</td><td>youngcoffee.com</td><td>@youngcoffee_es</td></tr><tr><td>Deals</td><td>TBD</td><td>TBD</td><td>TBD</td><td>TBD</td></tr><tr><td>Own YOUNG</td><td>TBD</td><td>TBD</td><td>TBD</td><td>TBD</td></tr><tr><td>YOUNG Group (escalation)</td><td>Valeria Zancaner (CEO)</td><td>Juan Cruz Mesigos (COO)</td><td>young.com</td><td>TBD</td></tr></tbody></table><p><em>Cells filled from available YOUNG contact records are marked; all remaining TBD cells need confirmation from the relevant company/brand owner. Note: the exact relationship between Young Workspaces and Inn Offices (Cabanyal, CEO Pedro Navarro) is not yet confirmed internally &mdash; verify before quoting cross-referrals there.</em></p>",
-      "status": "",
-      "contacts": [],
-      "links": {},
-      "materials": [],
-      "crosssell": [],
-      "business": null,
-      "needs": [],
-      "country": [],
-      "priceTeaser": "",
-      "order": 52
-    },
-    {
-      "id": "p12-materials",
-      "part": "PART XII &middot; Sales Directory &amp; Resources",
-      "chapter": "Directory",
-      "title": "Sales Materials &amp; Resources Index",
-      "tag": "Reference",
-      "blurb": "Where to find brochures, menus, floorplans and media kits.",
-      "content": "<p>Central index of supporting materials Sales should have on hand or know how to request:</p><ul class=\"blist\"><li>Price Lists</li><li>Media Kits (VG Visie, TPO, MGA &mdash; Media Kit 2026)</li><li>Menus</li><li>Floorplans</li><li>Brochures</li><li>Photo Libraries</li><li>Event Information</li><li>Brand Materials</li></ul><p><em>Attach direct links/drive folders here as they are confirmed by each company.</em></p>",
-      "status": "",
-      "contacts": [],
-      "links": {},
-      "materials": [],
-      "crosssell": [],
-      "business": null,
-      "needs": [],
-      "country": [],
-      "priceTeaser": "",
-      "order": 53
-    }
-  ],
-  "partsOrder": [
-    "Front Matter",
-    "PART I &middot; YOUNG Workspaces",
-    "PART II &middot; YOUNG Hospitality",
-    "PART III &middot; YOUNG Real Estate",
-    "PART IV &middot; YOUNG Media",
-    "PART V &middot; YOUNG Studio",
-    "PART VI &middot; Own YOUNG",
-    "PART VII &middot; YOUNG Products",
-    "PART VIII &middot; YOUNG Deals",
-    "PART IX &middot; YOUNG Loyalty",
-    "PART X &middot; YOUNG Expansion",
-    "PART XI &middot; YOUNG Ecosystem Packages",
-    "PART XII &middot; Sales Directory &amp; Resources"
-  ],
-  "businesses": [
-    {
-      "id": "workspaces",
-      "name": "YOUNG Workspaces",
-      "country": "Netherlands, Spain"
-    },
-    {
-      "id": "hotels",
-      "name": "YOUNG Hotels",
-      "country": "Netherlands, Spain"
-    },
-    {
-      "id": "restaurants",
-      "name": "Restaurants &amp; Hospitality",
-      "country": "Netherlands, Spain"
-    },
-    {
-      "id": "beach",
-      "name": "YOUNG.Beach",
-      "country": "Spain"
-    },
-    {
-      "id": "realestate",
-      "name": "YOUNG Real Estate",
-      "country": "Curaçao"
-    },
-    {
-      "id": "media",
-      "name": "YOUNG Media",
-      "country": "Netherlands"
-    },
-    {
-      "id": "studio",
-      "name": "YOUNG Studio",
-      "country": "Netherlands, Spain"
-    },
-    {
-      "id": "products",
-      "name": "YOUNG Products",
-      "country": "Netherlands, Spain"
-    },
-    {
-      "id": "deals",
-      "name": "YOUNG Deals",
-      "country": "Netherlands, Spain"
-    },
-    {
-      "id": "ownyoung",
-      "name": "Own YOUNG",
-      "country": "Netherlands, Curaçao"
-    }
-  ],
-  "needs": [
-    "Office & Workspace",
-    "Meetings & Events",
-    "Hotel Stay",
-    "Wedding & Celebration",
-    "Dining & Catering",
-    "Beach & Leisure",
-    "Real Estate Investment",
-    "Media & Advertising",
-    "Founder & Investor Content",
-    "Studio & Creative Production",
-    "Product & Merch",
-    "Deal & Package",
-    "Ownership & Co-Investment",
-    "Loyalty & Membership"
-  ],
-  "countries": [
-    "Netherlands",
-    "Spain",
-    "Curaçao"
-  ]
-}
-</script>
 
 <script>
 (function () {
-  const data = JSON.parse(document.getElementById('catalog-data').textContent);
-  const sections = data.sections.slice().sort((a, b) => a.order - b.order);
-  const partsOrder = data.partsOrder;
-  const businessMeta = {};
-  data.businesses.forEach(b => businessMeta[b.id] = decode(b.name));
-  const needs = data.needs;
-  const countries = data.countries;
-
-  const COUNTRY_ABBR = { 'Netherlands': 'NL', 'Spain': 'ES', 'Curaçao': 'CW' };
-
-  const STATUS_CLASS = {
-    'Live': 'pill-live',
-    'Opening': 'pill-opening',
-    'Subject to Availability': 'pill-avail',
-    'In Development': 'pill-dev',
-    'Fully Occupied': 'pill-closed'
+  const BUSINESS_NAMES = {
+    workspaces: 'YOUNG Workspaces',
+    hotels: 'YOUNG Hotels',
+    restaurants: 'Restaurants & Hospitality',
+    beach: 'YOUNG.Beach',
+    realestate: 'YOUNG Real Estate',
+    media: 'YOUNG Media',
+    studio: 'YOUNG Studio',
+    products: 'YOUNG Products',
+    deals: 'YOUNG Deals',
+    ownyoung: 'Own YOUNG'
   };
+  const BUSINESS_ORDER = ['workspaces', 'hotels', 'restaurants', 'beach', 'realestate', 'media', 'studio', 'products', 'deals', 'ownyoung'];
 
-  function decode(str) {
-    if (!str) return '';
-    const ta = document.createElement('textarea');
-    ta.innerHTML = str;
-    return ta.value;
-  }
-
-  function stripTags(html) {
-    const d = document.createElement('div');
-    d.innerHTML = html || '';
-    return d.textContent || '';
-  }
-
-  sections.forEach(s => {
-    s._title = decode(s.title);
-    s._part = decode(s.part);
-    s._chapter = decode(s.chapter || '');
-    s._tag = decode(s.tag || '');
-    s._blurb = decode(s.blurb || '');
-    s._price = decode(s.priceTeaser || '');
-    s._businessName = s.business ? (businessMeta[s.business] || '') : '';
-    s._search = [
-      s._title, s._part, s._chapter, s._tag, s._blurb, s._price, s._businessName,
-      (s.needs || []).join(' '), (s.country || []).join(' '), s.status || '',
-      stripTags(s.content || '')
-    ].join(' ').toLowerCase();
-  });
-
-  const distinctTags = Array.from(new Set(sections.map(s => s._tag).filter(t => t && t !== '—' && t !== '&mdash;')));
-  const distinctStatuses = Array.from(new Set(sections.map(s => s.status).filter(Boolean)));
-
-  const state = { q: '', business: new Set(), need: new Set(), country: new Set(), tag: new Set(), status: new Set() };
-
-  const statStrip = document.getElementById('stat-strip');
-  const stats = [
-    [sections.length, 'Entries'],
-    [partsOrder.length, 'Parts'],
-    [data.businesses.length, 'Businesses'],
-    [countries.length, 'Countries']
-  ];
-  statStrip.innerHTML = stats.map(([n, l]) => `<div class="stat"><b>${n}</b><span>${l}</span></div>`).join('');
-
-  const tocEl = document.getElementById('toc');
-  tocEl.innerHTML = partsOrder.map((p, i) => {
-    const count = sections.filter(s => s.part === p).length;
-    const id = 'part-' + i;
-    return `<li><a href="#${id}" data-part-index="${i}"><span>${decode(p)}</span><span class="n">${count}</span></a></li>`;
-  }).join('');
-
-  function renderFacet(elId, values, key, labelFn) {
-    const el = document.getElementById(elId);
-    el.innerHTML = values.map(v => `<button type="button" class="chip" data-facet="${key}" data-value="${encodeURIComponent(v)}">${labelFn ? labelFn(v) : v}</button>`).join('');
-  }
-  renderFacet('facet-business', data.businesses.map(b => b.id), 'business', id => businessMeta[id]);
-  renderFacet('facet-need', needs, 'need');
-  renderFacet('facet-country', countries, 'country', c => COUNTRY_ABBR[c] ? `${COUNTRY_ABBR[c]} · ${c}` : c);
-  renderFacet('facet-tag', distinctTags, 'tag');
-  renderFacet('facet-status', distinctStatuses, 'status');
-
-  document.querySelectorAll('.chip').forEach(chip => {
-    chip.addEventListener('click', () => {
-      const key = chip.dataset.facet;
-      const val = decodeURIComponent(chip.dataset.value);
-      if (state[key].has(val)) { state[key].delete(val); chip.classList.remove('is-on'); }
-      else { state[key].add(val); chip.classList.add('is-on'); }
-      render();
-    });
-  });
-
-  document.querySelectorAll('[data-clear-facet]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const key = btn.dataset.clearFacet;
-      state[key].clear();
-      document.querySelectorAll(`.chip[data-facet="${key}"]`).forEach(c => c.classList.remove('is-on'));
-      render();
-    });
-  });
-
-  document.getElementById('clear-all').addEventListener('click', () => {
-    ['business', 'need', 'country', 'tag', 'status'].forEach(k => state[k].clear());
-    state.q = '';
-    document.getElementById('search').value = '';
-    document.querySelectorAll('.chip').forEach(c => c.classList.remove('is-on'));
-    render();
-  });
-
-  const searchInput = document.getElementById('search');
-  searchInput.addEventListener('input', () => { state.q = searchInput.value.trim().toLowerCase(); render(); });
-  document.addEventListener('keydown', (e) => {
-    if (e.key === '/' && document.activeElement !== searchInput) { e.preventDefault(); searchInput.focus(); }
-  });
-
-  function matches(s) {
-    if (state.q && !s._search.includes(state.q)) return false;
-    if (state.business.size && !state.business.has(s.business)) return false;
-    if (state.need.size && !(s.needs || []).some(n => state.need.has(n))) return false;
-    if (state.country.size && !(s.country || []).some(c => state.country.has(c))) return false;
-    if (state.tag.size && !state.tag.has(s._tag)) return false;
-    if (state.status.size && !state.status.has(s.status)) return false;
-    return true;
-  }
-
-  function pillFor(s) {
-    const cls = STATUS_CLASS[s.status];
-    return cls ? `<span class="pill ${cls}">${s.status}</span>` : '';
-  }
-
-  function contactRow(c) {
-    const pending = !c.email;
-    const roleTxt = c.role === 'TO COMPLETE' ? 'Contact not yet confirmed' : decode(c.role || '');
-    if (pending) {
-      return `<div class="contact-row pending"><span class="name">${decode(c.name)}</span><span class="role">— ${roleTxt}</span></div>`;
-    }
-    const emails = c.email.split('/').map(e => e.trim()).filter(Boolean);
-    const emailLinks = emails.map(e => `<a href="mailto:${e}">${e}</a>`).join(' · ');
-    const unconfirmed = c.sourced === false ? '<span class="unconfirmed">unverified</span>' : '';
-    return `<div class="contact-row"><span class="name">${decode(c.name)}</span><span class="role">${roleTxt}</span>${emailLinks}${unconfirmed}</div>`;
-  }
-
-  function entryHtml(s, idx) {
-    const needChips = (s.needs || []).map(n => `<span class="meta-chip">${n}</span>`).join('');
-    const countryChips = (s.country || []).map(c => `<span class="meta-chip">${COUNTRY_ABBR[c] || c}</span>`).join('');
-    const tagPill = s._tag && s._tag !== '—' ? `<span class="pill pill-tag">${s._tag}</span>` : '';
-
-    let footer = '';
-    const contacts = (s.contacts || []).filter(c => c && c.name);
-    const crosssell = s.crosssell || [];
-    const materials = s.materials || [];
-    const links = s.links || {};
-    const linkEntries = Object.keys(links).filter(k => links[k] && links[k] !== 'TO COMPLETE');
-
-    if (contacts.length) {
-      footer += `<div class="footer-block"><h5>Contacts</h5>${contacts.map(contactRow).join('')}</div>`;
-    }
-    if (crosssell.length) {
-      footer += `<div class="footer-block"><h5>Cross-sell</h5><ul class="tagline-list">${crosssell.map(c => `<li>${decode(c)}</li>`).join('')}</ul></div>`;
-    }
-    if (materials.length) {
-      footer += `<div class="footer-block"><h5>Sales materials</h5><ul class="tagline-list">${materials.map(m => `<li>${decode(m)}</li>`).join('')}</ul></div>`;
-    }
-    if (linkEntries.length) {
-      footer += `<div class="footer-block"><h5>Learn more</h5><div class="link-row">${linkEntries.map(k => `<span class="meta-chip">${k}: ${decode(links[k])}</span>`).join('')}</div></div>`;
-    }
-
-    return `
-      <article class="entry" data-open="false" data-idx="${idx}">
-        <button type="button" class="entry-head" data-toggle="${idx}">
-          <div class="entry-eyebrow">
-            <span>${s._chapter ? s._chapter + ' · ' : ''}${String(s.order).padStart(2, '0')}</span>
-            <span class="badges">${pillFor(s)}${tagPill}</span>
-          </div>
-          <h4>${s._title}</h4>
-          ${s._price ? `<div class="price">${s._price}</div>` : ''}
-          ${s._blurb ? `<p class="blurb">${s._blurb}</p>` : ''}
-          <div class="meta-chips">${countryChips}${needChips}</div>
-          <div class="entry-toggle">
-            <span class="toggle-label">Open entry</span>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-          </div>
-        </button>
-        <div class="entry-body">
-          <div class="entry-content">${s.content || ''}</div>
-          ${footer ? `<div class="entry-footer">${footer}</div>` : ''}
-        </div>
-      </article>`;
-  }
-
-  const resultsEl = document.getElementById('results');
-  const visibleCountEl = document.getElementById('visible-count');
-  const totalCountEl = document.getElementById('total-count');
-  const activeFiltersEl = document.getElementById('active-filters');
-  totalCountEl.textContent = sections.length;
-
-  // Reveal-on-scroll, checked against the viewport directly rather than left to
-  // IntersectionObserver alone — an instant jump (TOC click, fast scroll) can pass a
-  // section without the observer ever reporting it intersecting, which would strand
-  // it permanently at opacity:0. A rAF-throttled scroll/resize check is the safety net.
-  let revealTicking = false;
-  function revealCheck() {
-    revealTicking = false;
-    const vh = window.innerHeight;
-    document.querySelectorAll('.part-group.reveal:not(.is-visible)').forEach(g => {
-      const r = g.getBoundingClientRect();
-      if (r.top < vh * 0.95 && r.bottom > -100) g.classList.add('is-visible');
-    });
-  }
-  function setupReveal() {
-    revealCheck();
-    if (!revealTicking) {
-      revealTicking = true;
-      requestAnimationFrame(revealCheck);
-    }
-  }
-  window.addEventListener('scroll', () => {
-    if (!revealTicking) { revealTicking = true; requestAnimationFrame(revealCheck); }
-  }, { passive: true });
-  window.addEventListener('resize', () => {
-    if (!revealTicking) { revealTicking = true; requestAnimationFrame(revealCheck); }
-  });
-
-  function render() {
-    const openIdx = new Set();
-    resultsEl.querySelectorAll('.entry[data-open="true"]').forEach(el => openIdx.add(el.dataset.idx));
-
-    let visible = 0;
-    let html = '';
-    partsOrder.forEach((p, i) => {
-      const group = sections.filter(s => s.part === p && matches(s));
-      if (!group.length) return;
-      visible += group.length;
-      html += `<section class="part-group reveal" id="part-${i}">
-        <h2 class="part-heading"><span>${decode(p)}</span><span class="count">${group.length} ${group.length === 1 ? 'entry' : 'entries'}</span></h2>
-        <div class="entry-grid">${group.map(s => entryHtml(s, sections.indexOf(s))).join('')}</div>
-      </section>`;
-    });
-
-    resultsEl.innerHTML = html || `<div class="no-results">No entries match this combination of search &amp; filters.<br>Try clearing a facet on the left.</div>`;
-    visibleCountEl.textContent = visible;
-
-    const activeCount = state.business.size + state.need.size + state.country.size + state.tag.size + state.status.size + (state.q ? 1 : 0);
-    activeFiltersEl.textContent = activeCount ? `${activeCount} filter${activeCount === 1 ? '' : 's'} active` : '';
-
-    resultsEl.querySelectorAll('[data-toggle]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const entry = btn.closest('.entry');
-        const isOpen = entry.dataset.open === 'true';
-        entry.dataset.open = isOpen ? 'false' : 'true';
-        btn.querySelector('.toggle-label').textContent = isOpen ? 'Open entry' : 'Close entry';
-      });
-    });
-
-    if (openIdx.size) {
-      resultsEl.querySelectorAll('.entry').forEach(el => {
-        if (openIdx.has(el.dataset.idx)) {
-          el.dataset.open = 'true';
-          el.querySelector('.toggle-label').textContent = 'Close entry';
-        }
-      });
-    }
-
-    setupReveal();
-  }
-
-  render();
-
-  const tocLinks = Array.from(document.querySelectorAll('#toc a'));
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      const link = tocLinks.find(a => a.getAttribute('href') === '#' + entry.target.id);
-      if (!link) return;
-      if (entry.isIntersecting) {
-        tocLinks.forEach(a => a.classList.remove('is-active'));
-        link.classList.add('is-active');
-      }
-    });
-  }, { rootMargin: '-10% 0px -75% 0px' });
-  function observeGroups() { document.querySelectorAll('.part-group').forEach(g => io.observe(g)); }
-  observeGroups();
-  const resultsObserver = new MutationObserver(() => { io.disconnect(); observeGroups(); });
-  resultsObserver.observe(resultsEl, { childList: true });
-
-  const spine = document.getElementById('spine');
-  document.getElementById('toggle-contents').addEventListener('click', () => spine.classList.toggle('is-open'));
-  document.getElementById('toggle-filters').addEventListener('click', () => spine.classList.toggle('is-open'));
-
-  // ---- Sales process: vertical playbook ----
   const VERTICAL_PLAYBOOK = {
     workspaces: {
       entry: 'Inbound — walk-ins, website inquiries, local search — plus light outbound to nearby businesses.',
@@ -2842,32 +782,17 @@
   };
 
   const vgridEl = document.getElementById('vertical-grid');
-  vgridEl.innerHTML = data.businesses.map(b => {
-    const p = VERTICAL_PLAYBOOK[b.id];
-    if (!p) return '';
+  vgridEl.innerHTML = BUSINESS_ORDER.map(id => {
+    const p = VERTICAL_PLAYBOOK[id];
     return `
       <div class="vcard">
-        <h3>${businessMeta[b.id]}</h3>
+        <h3>${BUSINESS_NAMES[id]}</h3>
         <dl>
           <dt>Entry</dt><dd>${p.entry}</dd>
           <dt>Qualify &amp; close</dt><dd>${p.close}</dd>
           <dt>Onboard &amp; support</dt><dd>${p.support}</dd>
         </dl>
-        <button type="button" class="jump" data-jump-business="${b.id}">View catalog for this vertical</button>
       </div>`;
   }).join('');
-
-  vgridEl.querySelectorAll('[data-jump-business]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const id = btn.dataset.jumpBusiness;
-      state.business.clear();
-      state.business.add(id);
-      document.querySelectorAll('.chip[data-facet="business"]').forEach(c => {
-        c.classList.toggle('is-on', decodeURIComponent(c.dataset.value) === id);
-      });
-      render();
-      document.querySelector('.searchbar-wrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-  });
 })();
 </script>
