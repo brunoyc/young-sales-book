@@ -382,6 +382,48 @@
     .handoff-list .actor { order: 2; }
   }
 
+  /* decision point inserted between steps — dashed border, matching the
+     diagrams' own convention that a dashed border marks a decision, not a fixed step */
+  .handoff-decision {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 16px 18px !important;
+    border-top: 1px dashed rgba(255, 255, 255, 0.5) !important;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.5) !important;
+    background: rgba(255, 255, 255, 0.06);
+  }
+  .hd-label {
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.6);
+  }
+  .hd-branch {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .hd-tag {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--white);
+    border: 1px dashed rgba(255, 255, 255, 0.5);
+    padding: 2px 7px;
+    flex: none;
+  }
+  .hd-text {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.96rem;
+    line-height: 1.35;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
   .colophon {
     max-width: var(--container);
     margin: 0 auto;
@@ -753,6 +795,11 @@ en: {
   dmH2: 'From lead to payout — who owns each step',
   dmLead: 'Ten steps, two owners. The SDR runs the deal to a signed contract; the Commercial Lead runs the relationship and the money after that.',
   dmDivider: 'Handoff — SDR to Commercial Lead',
+  dmDecisionLabel: 'Decision point — after the proposal is closed',
+  dmDecisionIf: 'IF',
+  dmDecisionIfText: 'the business unit needs to join after the discovery call, to help get the deal closed as fast as possible',
+  dmDecisionOr: 'OR',
+  dmDecisionOrText: 'Young.Sales handles everything solo, through to close',
   colophon1: 'YOUNG.Sales SOP — a living reference for how YOUNG sells, hands off, and retains.',
   colophon2: 'The product catalog lives in a separate reference document.',
   svg1: {
@@ -869,6 +916,11 @@ nl: {
   dmH2: 'Van lead tot uitbetaling — wie doet wat',
   dmLead: 'Tien stappen, twee eigenaren. De SDR brengt de deal tot een getekend contract; de Commercial Lead beheert daarna de relatie en het geld.',
   dmDivider: 'Overdracht — SDR naar Commercial Lead',
+  dmDecisionLabel: 'Beslismoment — na het sluiten van het voorstel',
+  dmDecisionIf: 'ALS',
+  dmDecisionIfText: 'de business unit na het discovery-gesprek moet aanhaken om de deal zo snel mogelijk gesloten te krijgen',
+  dmDecisionOr: 'OF',
+  dmDecisionOrText: 'Young.Sales alles zelfstandig regelt, tot en met de sluiting',
   colophon1: 'YOUNG.Sales SOP — een levend naslagwerk over hoe YOUNG verkoopt, overdraagt en behoudt.',
   colophon2: 'De productcatalogus staat in een apart document.',
   svg1: {
@@ -985,6 +1037,11 @@ es: {
   dmH2: 'Del lead al pago — quién es responsable de cada paso',
   dmLead: 'Diez pasos, dos responsables. El SDR lleva la operación hasta el contrato firmado; el Commercial Lead gestiona después la relación y el dinero.',
   dmDivider: 'Traspaso — de SDR a Commercial Lead',
+  dmDecisionLabel: 'Punto de decisión — tras cerrar la propuesta',
+  dmDecisionIf: 'SI',
+  dmDecisionIfText: 'la unidad de negocio debe involucrarse tras la llamada de descubrimiento, para ayudar a cerrar la operación lo antes posible',
+  dmDecisionOr: 'O',
+  dmDecisionOrText: 'Young.Sales gestiona todo en solitario, hasta el cierre',
   colophon1: 'SOP de Ventas de YOUNG — una referencia viva de cómo YOUNG vende, traspasa y retiene.',
   colophon2: 'El catálogo de producto vive en un documento aparte.',
   svg1: {
@@ -1135,6 +1192,13 @@ es: {
     const listEl = document.getElementById('handoff-list');
     let html = '';
     S.dmSteps.forEach((step, i) => {
+      if (i === 3) {
+        html += `<li class="handoff-decision">
+          <div class="hd-label">${decodeEntities(S.dmDecisionLabel)}</div>
+          <div class="hd-branch"><span class="hd-tag">${decodeEntities(S.dmDecisionIf)}</span><span class="hd-text">${decodeEntities(S.dmDecisionIfText)}</span></div>
+          <div class="hd-branch"><span class="hd-tag">${decodeEntities(S.dmDecisionOr)}</span><span class="hd-text">${decodeEntities(S.dmDecisionOrText)}</span></div>
+        </li>`;
+      }
       if (i === 7) html += `<li class="handoff-divider">${decodeEntities(S.dmDivider)}</li>`;
       html += `<li><span class="n">${String(i + 1).padStart(2, '0')}</span><span class="t">${decodeEntities(step.t)}</span><span class="actor">${decodeEntities(step.actor)}</span></li>`;
     });
