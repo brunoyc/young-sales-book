@@ -689,8 +689,11 @@
   <h2>One engine. Ten verticals underneath it.</h2>
   <p class="statement-light">The stages are the same everywhere — what changes per vertical is how a lead enters, and the deal size at which a rep hands off to a specialist instead of closing it themselves.</p>
 
+  <div class="eyebrow" style="margin-top:48px;">At a glance</div>
+  <h3 style="font-family:var(--font-display);font-weight:600;font-size:1.15rem;color:var(--ink);margin:8px 0 0;">The engine, simplified</h3>
+
   <figure class="diagram-wrap">
-    <svg viewBox="0 0 1340 230" role="img" aria-label="A lead moves from Prospect through Entry Channel, Demand Generation, SDR Qualification, Meeting Handoff, and Close, then Onboarding and Active Customer. At Close, the path forks by deal size: a rep phone-closes below the vertical's threshold, a specialist closes above it — both rejoin at Onboarding. Active Customer runs a recurring Health Check that loops to Expansion or a Save Play. Renewal and churn signal feeds back to shape the next Entry Channel mix.">
+    <svg viewBox="0 0 1340 250" role="img" aria-label="A lead moves from Prospect through Entry Channel, Demand Generation, SDR Qualification, Meeting Handoff, and Close, then Onboarding and Active Customer. At Close, the path forks by deal size: a rep phone-closes below the vertical's threshold, a specialist closes above it — both rejoin at Onboarding. Active Customer runs a recurring Health Check that loops to Expansion or a Save Play. Renewal and churn signal feeds back to shape the next Entry Channel mix.">
       <defs>
         <marker id="sb-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
           <path d="M0,0 L10,5 L0,10 z" fill="currentColor"></path>
@@ -741,38 +744,254 @@
         <line x1="1035" y1="103" x2="1054" y2="103"></line>
       </g>
 
-      <!-- close fork -->
-      <line x1="850" y1="128" x2="850" y2="150" stroke="currentColor" stroke-width="1.5"></line>
-      <text x="858" y="144" font-family="var(--font-mono)" font-size="10" fill="var(--steel)">deal size vs. phone-close threshold</text>
-      <g stroke="currentColor" stroke-width="1.5" marker-end="url(#sb-arrow)">
-        <line x1="850" y1="150" x2="760" y2="167"></line>
-        <line x1="850" y1="150" x2="965" y2="167"></line>
-      </g>
-      <g font-family="var(--font-mono)" font-size="10.5" text-anchor="middle">
-        <rect x="680" y="168" width="160" height="40" fill="var(--white)" stroke="var(--klein)" stroke-width="1.25"></rect>
-        <text x="760" y="185" fill="var(--ink)">REP PHONE-CLOSES</text>
-        <text x="760" y="199" fill="var(--steel)">below threshold</text>
+      <!-- close fork: strictly orthogonal, no diagonals, no crossings -->
+      <path d="M850,128 L850,148" fill="none" stroke="currentColor" stroke-width="1.5"></path>
+      <text x="850" y="143" text-anchor="middle" font-family="var(--font-mono)" font-size="9.5" fill="var(--steel)">deal size vs. phone-close threshold</text>
+      <path d="M700,148 L1000,148" fill="none" stroke="currentColor" stroke-width="1.5"></path>
+      <path d="M700,148 L700,167" fill="none" stroke="currentColor" stroke-width="1.5" marker-end="url(#sb-arrow)"></path>
+      <path d="M1000,148 L1000,167" fill="none" stroke="currentColor" stroke-width="1.5" marker-end="url(#sb-arrow)"></path>
 
-        <rect x="880" y="168" width="170" height="40" fill="var(--white)" stroke="var(--klein)" stroke-width="1.25"></rect>
-        <text x="965" y="185" fill="var(--ink)">SPECIALIST CLOSES</text>
-        <text x="965" y="199" fill="var(--steel)">at or above threshold</text>
-      </g>
-      <path d="M760,208 L900,150 L965,208" fill="none" stroke="currentColor" stroke-width="1.25"></path>
-      <line x1="900" y1="150" x2="977" y2="129" stroke="currentColor" stroke-width="1.5" marker-end="url(#sb-arrow)"></line>
-
-      <!-- CS loop -->
-      <line x1="1137" y1="128" x2="1137" y2="150" stroke="currentColor" stroke-width="1.5"></line>
       <g font-family="var(--font-mono)" font-size="10.5" text-anchor="middle">
-        <rect x="1055" y="168" width="165" height="40" fill="var(--white)" stroke="var(--klein)" stroke-width="1.25"></rect>
-        <text x="1137" y="185" fill="var(--ink)">HEALTH CHECK</text>
-        <text x="1137" y="199" fill="var(--steel)">healthy – expand &#183; at risk – save play</text>
+        <rect x="590" y="168" width="220" height="44" fill="var(--white)" stroke="var(--klein)" stroke-width="1.25"></rect>
+        <text x="700" y="186" fill="var(--ink)">REP PHONE-CLOSES</text>
+        <text x="700" y="200" fill="var(--steel)">below threshold</text>
+
+        <rect x="890" y="168" width="220" height="44" fill="var(--white)" stroke="var(--klein)" stroke-width="1.25"></rect>
+        <text x="1000" y="186" fill="var(--ink)">SPECIALIST CLOSES</text>
+        <text x="1000" y="200" fill="var(--steel)">at or above threshold</text>
       </g>
-      <path d="M1220,188 C 1300,188 1300,103 1221,103" fill="none" stroke="currentColor" stroke-width="1.5" marker-end="url(#sb-arrow)"></path>
-      <text x="1260" y="150" font-family="var(--font-mono)" font-size="10" fill="var(--steel)" text-anchor="middle">loops</text>
-      <text x="1260" y="162" font-family="var(--font-mono)" font-size="10" fill="var(--steel)" text-anchor="middle">quarterly</text>
+
+      <!-- merge back into Onboarding: routed below the fork boxes, no overlap with the down-lines above -->
+      <path d="M700,212 L700,230 L977,230" fill="none" stroke="currentColor" stroke-width="1.25"></path>
+      <path d="M1000,212 L1000,230 L977,230" fill="none" stroke="currentColor" stroke-width="1.25"></path>
+      <path d="M977,230 L977,129" fill="none" stroke="currentColor" stroke-width="1.5" marker-end="url(#sb-arrow)"></path>
+
+      <!-- CS loop: orthogonal out-and-back to the right, clear of the Close fork -->
+      <path d="M1137,128 L1137,167" fill="none" stroke="currentColor" stroke-width="1.5" marker-end="url(#sb-arrow)"></path>
+      <g font-family="var(--font-mono)" font-size="10.5" text-anchor="middle">
+        <rect x="1032" y="168" width="210" height="62" fill="var(--white)" stroke="var(--klein)" stroke-width="1.25"></rect>
+        <text x="1137" y="186" fill="var(--ink)">HEALTH CHECK</text>
+        <text x="1137" y="200" fill="var(--steel)">healthy: expand</text>
+        <text x="1137" y="213" fill="var(--steel)">at risk: save play</text>
+      </g>
+      <path d="M1242,199 L1290,199 L1290,103 L1221,103" fill="none" stroke="currentColor" stroke-width="1.5" marker-end="url(#sb-arrow)"></path>
+      <text x="1281" y="144" text-anchor="end" font-family="var(--font-mono)" font-size="9.5" fill="var(--steel)">loops</text>
+      <text x="1281" y="156" text-anchor="end" font-family="var(--font-mono)" font-size="9.5" fill="var(--steel)">quarterly</text>
     </svg>
     <figcaption>The full pipeline: entry channel and demand generation feed SDR qualification; Close forks by deal size (rep vs. specialist) and rejoins at Onboarding; Active Customer runs a recurring Health Check back into expansion or a save play; renewal and churn signal loops back to shape the next round of outreach.</figcaption>
   </figure>
+
+  <div class="eyebrow" style="margin-top:56px;">Step by step</div>
+  <h3 style="font-family:var(--font-display);font-weight:600;font-size:1.15rem;color:var(--ink);margin:8px 0 0;">The full pipeline, lettered A through X</h3>
+  <p style="font-family:var(--font-body);font-size:0.95rem;color:var(--steel);max-width:70ch;margin:8px 0 0;">Solid borders are an action or a state; dashed borders are a decision point. Every letter below is explained in the table under the diagram.</p>
+
+  <figure class="diagram-wrap">
+    <svg viewBox="0 0 1320 1660" role="img" aria-label="Detailed pipeline from Prospect/Target Account (A) through Entry Channel (B), three Demand Generation paths — Inbound (C), Outbound (D), Referral/Partner (E) — into Lead Captured in CRM (F), Lead Scoring and Routing (G), SDR Outreach (H), a Qualified decision (I) that either loops to Nurture/Recycle (J) or continues to Meeting Booked (K), Handoff to AE (L), Discovery Call (M), Demo/Value Case (N), Proposal and Negotiation (O), a Deal Outcome decision (P) that either loops to Closed Lost (Q) or continues to Closed Won (R), Onboarding (S), Active Customer (T), a Health Check decision (U) that loops to Expansion and Renewal (V) or CS Save Play (W), ending at Company Retained Revenue (X), which feeds win and churn insight back to Lead Scoring and Routing.">
+      <defs>
+        <marker id="sb-arrow2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="currentColor"></path>
+        </marker>
+      </defs>
+      <g font-family="var(--font-mono)" fill="none" stroke="currentColor">
+
+      <!-- region backgrounds -->
+      <rect x="40" y="205" width="1140" height="110" fill="var(--klein)" fill-opacity="0.05" stroke-width="1"></rect>
+      <text x="55" y="197" font-size="10" letter-spacing="1" fill="var(--klein)" stroke="none">DEMAND GENERATION</text>
+
+      <rect x="350" y="495" width="300" height="95" fill="var(--klein)" fill-opacity="0.05" stroke-width="1"></rect>
+      <text x="365" y="487" font-size="10" letter-spacing="1" fill="var(--klein)" stroke="none">SALES DEVELOPMENT</text>
+
+      <rect x="340" y="850" width="420" height="373" fill="var(--klein)" fill-opacity="0.05" stroke-width="1"></rect>
+      <text x="355" y="842" font-size="10" letter-spacing="1" fill="var(--klein)" stroke="none">ACCOUNT EXECUTIVE / CLOSE</text>
+
+      <rect x="340" y="1320" width="420" height="170" fill="var(--klein)" fill-opacity="0.05" stroke-width="1"></rect>
+      <text x="355" y="1312" font-size="10" letter-spacing="1" fill="var(--klein)" stroke="none">CUSTOMER SUCCESS</text>
+
+      <!-- A -->
+      <rect x="390" y="15" width="220" height="48" fill="var(--white)" stroke-width="1.5"></rect>
+      <text x="500" y="44" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none">PROSPECT / TARGET ACCOUNT (A)</text>
+      <path d="M500,63 L500,88" marker-end="url(#sb-arrow2)"></path>
+
+      <!-- B -->
+      <rect x="390" y="88" width="220" height="48" fill="var(--white)" stroke-width="1.5" stroke-dasharray="4 3"></rect>
+      <text x="500" y="117" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none">ENTRY CHANNEL (B)</text>
+      <path d="M500,136 L500,180" stroke-width="1.5"></path>
+      <path d="M230,180 L970,180" stroke-width="1.5"></path>
+      <path d="M230,180 L230,224" stroke-width="1.5" marker-end="url(#sb-arrow2)"></path>
+      <path d="M600,180 L600,224" stroke-width="1.5" marker-end="url(#sb-arrow2)"></path>
+      <path d="M970,180 L970,224" stroke-width="1.5" marker-end="url(#sb-arrow2)"></path>
+      <text x="230" y="197" text-anchor="middle" font-size="9" fill="var(--steel)" stroke="none">Inbound</text>
+      <text x="600" y="197" text-anchor="middle" font-size="9" fill="var(--steel)" stroke="none">Outbound</text>
+      <text x="970" y="197" text-anchor="middle" font-size="9" fill="var(--steel)" stroke="none">Referral &#183; Partner</text>
+
+      <!-- C, D, E -->
+      <rect x="60" y="225" width="340" height="64" fill="var(--white)" stroke-width="1.5"></rect>
+      <text x="230" y="251" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none">INBOUND (C)</text>
+      <text x="230" y="267" text-anchor="middle" font-size="9.5" fill="var(--steel)" stroke="none">Marketing: content, website, ads</text>
+
+      <rect x="430" y="225" width="340" height="64" fill="var(--white)" stroke-width="1.5"></rect>
+      <text x="600" y="251" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none">OUTBOUND (D)</text>
+      <text x="600" y="267" text-anchor="middle" font-size="9.5" fill="var(--steel)" stroke="none">SDR prospecting, AI signal + intent</text>
+
+      <rect x="800" y="225" width="340" height="64" fill="var(--white)" stroke-width="1.5"></rect>
+      <text x="970" y="251" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none">REFERRAL / PARTNER (E)</text>
+      <text x="970" y="267" text-anchor="middle" font-size="9.5" fill="var(--steel)" stroke="none">Customer or partner referral</text>
+
+      <!-- converge to F -->
+      <path d="M230,289 L230,320" stroke-width="1.5"></path>
+      <path d="M600,289 L600,320" stroke-width="1.5"></path>
+      <path d="M970,289 L970,320" stroke-width="1.5"></path>
+      <path d="M230,320 L970,320" stroke-width="1.5"></path>
+      <path d="M500,320 L500,345" stroke-width="1.5" marker-end="url(#sb-arrow2)"></path>
+
+      <!-- F -->
+      <rect x="390" y="345" width="220" height="48" fill="var(--white)" stroke-width="1.5"></rect>
+      <text x="500" y="374" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none">LEAD CAPTURED IN CRM (F)</text>
+      <path d="M500,393 L500,415" marker-end="url(#sb-arrow2)"></path>
+
+      <!-- G -->
+      <rect x="390" y="415" width="220" height="48" fill="var(--white)" stroke-width="1.5"></rect>
+      <text x="500" y="444" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none">LEAD SCORING &amp; ROUTING (G)</text>
+      <path d="M500,463 L500,505" marker-end="url(#sb-arrow2)"></path>
+
+      <!-- H -->
+      <rect x="370" y="505" width="260" height="64" fill="var(--white)" stroke-width="1.5"></rect>
+      <text x="500" y="531" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none">SDR OUTREACH (H)</text>
+      <text x="500" y="547" text-anchor="middle" font-size="9.5" fill="var(--steel)" stroke="none">AI-drafted, human-reviewed</text>
+      <path d="M500,569 L500,610" marker-end="url(#sb-arrow2)"></path>
+
+      <!-- I -->
+      <rect x="390" y="610" width="220" height="48" fill="var(--white)" stroke-width="1.5" stroke-dasharray="4 3"></rect>
+      <text x="500" y="639" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none">QUALIFIED? (I)</text>
+      <path d="M500,658 L500,683" marker-end="url(#sb-arrow2)"></path>
+
+      <!-- J (no branch) -->
+      <path d="M610,634 L760,634" stroke-width="1.5" marker-end="url(#sb-arrow2)"></path>
+      <text x="685" y="628" text-anchor="middle" font-size="9" fill="var(--steel)" stroke="none">no</text>
+      <rect x="760" y="610" width="200" height="48" fill="var(--white)" stroke-width="1.5"></rect>
+      <text x="860" y="639" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none">NURTURE / RECYCLE (J)</text>
+      <path d="M860,610 L860,428 L611,428" stroke-width="1.25" stroke-dasharray="4 3" marker-end="url(#sb-arrow2)"></path>
+      <text x="870" y="500" font-size="9" fill="var(--steel)" stroke="none">recycled into scoring</text>
+
+      <!-- K -->
+      <text x="470" y="675" text-anchor="end" font-size="9" fill="var(--steel)" stroke="none">yes</text>
+      <rect x="390" y="683" width="220" height="48" fill="var(--white)" stroke-width="1.5"></rect>
+      <text x="500" y="712" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none">MEETING BOOKED (K)</text>
+      <path d="M500,731 L500,755" marker-end="url(#sb-arrow2)"></path>
+
+      <!-- L -->
+      <rect x="380" y="755" width="240" height="64" fill="var(--white)" stroke-width="1.5"></rect>
+      <text x="500" y="781" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none">HANDOFF TO AE (L)</text>
+      <text x="500" y="797" text-anchor="middle" font-size="9.5" fill="var(--steel)" stroke="none">context + call notes</text>
+      <path d="M500,819 L500,880" marker-end="url(#sb-arrow2)"></path>
+
+      <!-- M, N, O -->
+      <rect x="390" y="880" width="220" height="48" fill="var(--white)" stroke-width="1.5"></rect>
+      <text x="500" y="909" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none">DISCOVERY CALL (M)</text>
+      <path d="M500,928 L500,950" marker-end="url(#sb-arrow2)"></path>
+
+      <rect x="390" y="950" width="220" height="48" fill="var(--white)" stroke-width="1.5"></rect>
+      <text x="500" y="979" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none">DEMO / VALUE CASE (N)</text>
+      <path d="M500,998 L500,1020" marker-end="url(#sb-arrow2)"></path>
+
+      <rect x="390" y="1020" width="220" height="48" fill="var(--white)" stroke-width="1.5"></rect>
+      <text x="500" y="1049" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none">PROPOSAL &amp; NEGOTIATION (O)</text>
+      <path d="M500,1068 L500,1090" marker-end="url(#sb-arrow2)"></path>
+
+      <!-- P -->
+      <rect x="390" y="1090" width="220" height="48" fill="var(--white)" stroke-width="1.5" stroke-dasharray="4 3"></rect>
+      <text x="500" y="1119" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none">DEAL OUTCOME (P)</text>
+      <path d="M500,1138 L500,1160" marker-end="url(#sb-arrow2)"></path>
+
+      <!-- Q (lost branch) -->
+      <path d="M390,1114 L341,1114" stroke-width="1.5" marker-end="url(#sb-arrow2)"></path>
+      <text x="365" y="1108" text-anchor="middle" font-size="9" fill="var(--steel)" stroke="none">lost</text>
+      <rect x="120" y="1090" width="220" height="48" fill="var(--white)" stroke-width="1.5"></rect>
+      <text x="230" y="1112" text-anchor="middle" font-size="10.5" fill="var(--ink)" stroke="none">CLOSED LOST (Q)</text>
+      <text x="230" y="1127" text-anchor="middle" font-size="9" fill="var(--steel)" stroke="none">reason captured</text>
+      <path d="M230,1090 L230,428 L389,428" stroke-width="1.25" stroke-dasharray="4 3" marker-end="url(#sb-arrow2)"></path>
+
+      <!-- R, S (won branch) -->
+      <text x="470" y="1155" text-anchor="end" font-size="9" fill="var(--steel)" stroke="none">won</text>
+      <rect x="390" y="1160" width="220" height="48" fill="var(--white)" stroke-width="1.5"></rect>
+      <text x="500" y="1182" text-anchor="middle" font-size="10.5" fill="var(--ink)" stroke="none">CLOSED WON (R)</text>
+      <text x="500" y="1197" text-anchor="middle" font-size="9" fill="var(--steel)" stroke="none">contract signed</text>
+      <path d="M500,1208 L500,1250" marker-end="url(#sb-arrow2)"></path>
+
+      <rect x="390" y="1250" width="220" height="48" fill="var(--white)" stroke-width="1.5"></rect>
+      <text x="500" y="1279" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none">ONBOARDING (S)</text>
+      <path d="M500,1298 L500,1345" marker-end="url(#sb-arrow2)"></path>
+
+      <!-- T -->
+      <rect x="390" y="1345" width="220" height="48" fill="var(--white)" stroke-width="1.5"></rect>
+      <text x="500" y="1374" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none">ACTIVE CUSTOMER (T)</text>
+      <path d="M500,1393 L500,1415" marker-end="url(#sb-arrow2)"></path>
+
+      <!-- U -->
+      <rect x="390" y="1415" width="220" height="48" fill="var(--white)" stroke-width="1.5" stroke-dasharray="4 3"></rect>
+      <text x="500" y="1444" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none">HEALTH CHECK (U)</text>
+
+      <!-- V (healthy) -->
+      <path d="M610,1439 L760,1439" stroke-width="1.5" marker-end="url(#sb-arrow2)"></path>
+      <text x="685" y="1433" text-anchor="middle" font-size="9" fill="var(--steel)" stroke="none">healthy</text>
+      <rect x="760" y="1415" width="200" height="48" fill="var(--white)" stroke-width="1.5"></rect>
+      <text x="860" y="1444" text-anchor="middle" font-size="10.5" fill="var(--ink)" stroke="none">EXPANSION &amp; RENEWAL (V)</text>
+      <path d="M860,1415 L860,1369 L611,1369" stroke-width="1.25" marker-end="url(#sb-arrow2)"></path>
+
+      <!-- W (at risk) -->
+      <path d="M390,1439 L341,1439" stroke-width="1.5" marker-end="url(#sb-arrow2)"></path>
+      <text x="365" y="1433" text-anchor="middle" font-size="9" fill="var(--steel)" stroke="none">at risk</text>
+      <rect x="140" y="1415" width="200" height="48" fill="var(--white)" stroke-width="1.5"></rect>
+      <text x="240" y="1444" text-anchor="middle" font-size="10.5" fill="var(--ink)" stroke="none">CS SAVE PLAY (W)</text>
+      <path d="M240,1415 L240,1369 L389,1369" stroke-width="1.25" marker-end="url(#sb-arrow2)"></path>
+
+      <!-- X -->
+      <path d="M500,1463 L500,1502" marker-end="url(#sb-arrow2)"></path>
+      <circle cx="500" cy="1560" r="58" fill="var(--klein)" stroke-width="1.5"></circle>
+      <text x="500" y="1553" text-anchor="middle" font-size="11" fill="var(--white)" stroke="none">COMPANY,</text>
+      <text x="500" y="1568" text-anchor="middle" font-size="11" fill="var(--white)" stroke="none">RETAINED</text>
+      <text x="500" y="1583" text-anchor="middle" font-size="11" fill="var(--white)" stroke="none">REVENUE (X)</text>
+
+      <!-- feedback: win + churn insight back to G -->
+      <path d="M558,1540 L1200,1540 L1200,452 L611,452" stroke-width="1.25" stroke-dasharray="4 3" marker-end="url(#sb-arrow2)"></path>
+      <text x="1210" y="1000" font-size="9.5" fill="var(--steel)" stroke="none" transform="rotate(90 1210 1000)">win + churn insight feeds the next scoring pass</text>
+
+      </g>
+    </svg>
+    <figcaption>Every commercial motion at YOUNG runs this same lettered pipeline — A through X. Disqualified leads (J) and lost deals (Q) both recycle into Lead Scoring rather than disappearing; retained revenue (X) reports back what won and what churned.</figcaption>
+  </figure>
+
+  <div class="dtable-wrap" style="margin:24px 0 8px;">
+    <table class="dtable">
+      <thead><tr><th>Step</th><th>What happens</th></tr></thead>
+      <tbody>
+        <tr><td>A &#183; Prospect / Target Account</td><td>A named company or contact enters the pipeline as a fit for one of the ten verticals.</td></tr>
+        <tr><td>B &#183; Entry Channel</td><td>How they arrived — inbound, outbound, or referral/partner — decides which Demand Generation path picks them up.</td></tr>
+        <tr><td>C &#183; Inbound</td><td>Marketing content, the website, or ads bring the lead in on their own.</td></tr>
+        <tr><td>D &#183; Outbound</td><td>SDR prospecting using AI-surfaced signal and intent data.</td></tr>
+        <tr><td>E &#183; Referral / Partner</td><td>A customer or partner introduction.</td></tr>
+        <tr><td>F &#183; Lead Captured in CRM</td><td>Every path lands in the same CRM record, regardless of source.</td></tr>
+        <tr><td>G &#183; Lead Scoring &amp; Routing</td><td>The CRM scores the lead and routes it to the right SDR queue.</td></tr>
+        <tr><td>H &#183; SDR Outreach</td><td>AI drafts the first outreach; a human reviews before it sends.</td></tr>
+        <tr><td>I &#183; Qualified?</td><td>The SDR checks budget, timing and fit.</td></tr>
+        <tr><td>J &#183; Nurture / Recycle</td><td>Not-yet-qualified leads loop back into scoring rather than getting dropped.</td></tr>
+        <tr><td>K &#183; Meeting Booked</td><td>A qualified lead books time with an Account Executive.</td></tr>
+        <tr><td>L &#183; Handoff to AE</td><td>Context and call notes travel with the lead — no cold handoff.</td></tr>
+        <tr><td>M &#183; Discovery Call</td><td>The AE learns the actual problem and process.</td></tr>
+        <tr><td>N &#183; Demo / Value Case</td><td>A demo built around the case for buying.</td></tr>
+        <tr><td>O &#183; Proposal &amp; Negotiation</td><td>Terms, pricing and scope get finalized.</td></tr>
+        <tr><td>P &#183; Deal Outcome</td><td>Won or lost — every outcome is captured, not just wins.</td></tr>
+        <tr><td>Q &#183; Closed Lost</td><td>The reason gets logged and feeds back into scoring, not discarded.</td></tr>
+        <tr><td>R &#183; Closed Won, Contract Signed</td><td>The deal is signed and locked in the CRM.</td></tr>
+        <tr><td>S &#183; Onboarding</td><td>Handoff from Sales to the operating team — "we sell it, you operate it."</td></tr>
+        <tr><td>T &#183; Active Customer</td><td>The account moves into steady-state delivery.</td></tr>
+        <tr><td>U &#183; Health Check</td><td>A recurring check on usage and satisfaction decides what happens next.</td></tr>
+        <tr><td>V &#183; Expansion &amp; Renewal</td><td>A healthy account gets offered more, or renews.</td></tr>
+        <tr><td>W &#183; CS Save Play</td><td>An at-risk account gets a deliberate save motion before it churns.</td></tr>
+        <tr><td>X &#183; Company, Retained Revenue</td><td>What actually stuck — the number that matters — feeding win and churn insight back into scoring.</td></tr>
+      </tbody>
+    </table>
+  </div>
 
   <div class="vgrid" id="vertical-grid"></div>
 </div>
