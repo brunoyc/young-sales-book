@@ -443,6 +443,111 @@
     .masthead { padding: 32px 22px 40px; }
   }
 
+  /* ---------- Top nav (SOP / Routine & Training) ---------- */
+  .topnav {
+    background: var(--white);
+    border-bottom: 1px solid var(--rule);
+    position: sticky;
+    top: 0;
+    z-index: 20;
+  }
+  .topnav-inner {
+    max-width: var(--container);
+    margin: 0 auto;
+    display: flex;
+    padding: 0 clamp(22px, 4vw, 32px);
+    overflow-x: auto;
+  }
+  .topnav-tab {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 0.76rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: var(--steel);
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 16px 4px;
+    margin-right: 30px;
+    cursor: pointer;
+  }
+  .topnav-tab:hover { color: var(--ink); }
+  .topnav-tab.is-active { color: var(--klein); border-bottom-color: var(--klein); }
+
+  /* ---------- Bulleted lists (Routine & Training) ---------- */
+  .blist {
+    list-style: none;
+    margin: 16px 0 0;
+    padding: 0;
+    border-top: 1px solid var(--rule);
+    max-width: 70ch;
+  }
+  .blist li {
+    position: relative;
+    padding: 13px 0 13px 20px;
+    border-bottom: 1px solid var(--rule);
+    font-family: var(--font-body);
+    font-size: 0.96rem;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  .blist li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 20px;
+    width: 6px;
+    height: 6px;
+    background: var(--klein);
+  }
+  .blist.blist-ordered { counter-reset: blist-n; }
+  .blist.blist-ordered li { padding-left: 30px; }
+  .blist.blist-ordered li::before {
+    counter-increment: blist-n;
+    content: counter(blist-n);
+    width: auto;
+    height: auto;
+    top: 12px;
+    background: none;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 0.78rem;
+    color: var(--klein);
+  }
+
+  .script-quote {
+    border-left: 3px solid var(--klein);
+    background: var(--klein-tint);
+    padding: 16px 20px;
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 1.05rem;
+    line-height: 1.55;
+    color: var(--ink);
+    max-width: 68ch;
+    margin: 18px 0 0;
+  }
+
+  /* ---------- Closing statement band ---------- */
+  .closing-band {
+    background: var(--klein);
+    color: var(--white);
+    padding: 72px clamp(22px, 4vw, 32px);
+    margin-top: 64px;
+    text-align: center;
+  }
+  .closing-band p {
+    max-width: 48ch;
+    margin: 0 auto;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.3rem, 1.05rem + 1.1vw, 1.9rem);
+    letter-spacing: -0.01em;
+    line-height: 1.42;
+  }
+
   /* ---------- Copilot spotlight ---------- */
   .spotlight-wrap {
     max-width: var(--container);
@@ -578,6 +683,15 @@
     </div>
   </div>
 </div>
+
+<nav class="topnav" id="topnav">
+  <div class="topnav-inner">
+    <button type="button" class="topnav-tab is-active" data-view="sop" data-i18n="navSop"></button>
+    <button type="button" class="topnav-tab" data-view="training" data-i18n="navTraining"></button>
+  </div>
+</nav>
+
+<div id="view-sop" class="view">
 
 <div class="spotlight-wrap">
   <div class="spotlight">
@@ -894,6 +1008,63 @@
   </div>
 </div>
 
+</div><!-- /view-sop -->
+
+<div id="view-training" class="view" hidden>
+  <div class="process">
+    <div class="eyebrow" data-i18n="trainingEyebrow"></div>
+    <h2 data-i18n="trainingH2"></h2>
+    <p class="statement-light" data-i18n="trainingStatement"></p>
+
+    <div class="sub-eyebrow" data-i18n="rhythmEyebrow"></div>
+    <h3 class="sub-h3" data-i18n="rhythmH3"></h3>
+    <div class="dtable-wrap" style="margin:16px 0 8px;">
+      <table class="dtable">
+        <thead><tr><th id="rhythmHeadTime"></th><th id="rhythmHeadBlock"></th></tr></thead>
+        <tbody id="rhythm-body"></tbody>
+      </table>
+    </div>
+
+    <div class="sub-eyebrow" data-i18n="kpiEyebrow"></div>
+    <h3 class="sub-h3" data-i18n="kpiH3"></h3>
+    <div class="dtable-wrap" style="margin:16px 0 8px;">
+      <table class="dtable">
+        <thead><tr><th id="kpiHeadMetric"></th><th id="kpiHeadTarget"></th></tr></thead>
+        <tbody id="kpi-body"></tbody>
+      </table>
+    </div>
+
+    <div class="sub-eyebrow" data-i18n="qualifyEyebrow"></div>
+    <h3 class="sub-h3" data-i18n="qualifyH3"></h3>
+    <p class="sub-intro" data-i18n="qualifyIntro"></p>
+    <p class="script-quote" data-i18n="qualifyScript"></p>
+    <p class="sub-intro" style="margin-top:20px;" data-i18n="qualifyQuestionsLabel"></p>
+    <ul class="blist blist-ordered" id="qualify-questions"></ul>
+
+    <div class="sub-eyebrow" data-i18n="deliverEyebrow"></div>
+    <h3 class="sub-h3" data-i18n="deliverH3"></h3>
+    <ul class="blist" id="deliver-list"></ul>
+
+    <div class="sub-eyebrow" data-i18n="meetingEyebrow"></div>
+    <h3 class="sub-h3" data-i18n="meetingH3"></h3>
+    <div class="dtable-wrap" style="margin:16px 0 8px;">
+      <table class="dtable">
+        <thead><tr><th id="meetingHeadName"></th><th id="meetingHeadFreq"></th><th id="meetingHeadPurpose"></th></tr></thead>
+        <tbody id="meeting-body"></tbody>
+      </table>
+    </div>
+
+    <div class="sub-eyebrow" data-i18n="trainingSchedEyebrow"></div>
+    <h3 class="sub-h3" data-i18n="trainingSchedH3"></h3>
+    <p class="sub-intro" data-i18n="trainingSchedIntro"></p>
+    <ul class="blist" id="training-sched-list"></ul>
+  </div>
+
+  <div class="closing-band">
+    <p data-i18n="closingStatement"></p>
+  </div>
+</div><!-- /view-training -->
+
 <div class="colophon">
   <span data-i18n="colophon1"></span>
   <span data-i18n="colophon2"></span>
@@ -944,6 +1115,31 @@ en: {
   dmDecisionOrText: 'Young.Sales handles everything solo, through to close',
   colophon1: 'YOUNG.Sales SOP — a living reference for how YOUNG sells, hands off, and retains.',
   colophon2: 'The product catalog lives in a separate reference document.',
+  navSop: 'Sales SOP',
+  navTraining: 'Routine &amp; Training',
+  trainingEyebrow: 'Routine &amp; Training',
+  trainingH2: 'How reps run their day, and how they get better at it.',
+  trainingStatement: 'The SOP tells you what to sell and to whom. This is the rhythm underneath it — what a normal day looks like, what gets measured, and how the team levels up.',
+  rhythmEyebrow: 'Daily Rhythm',
+  rhythmH3: 'A normal day, block by block',
+  rhythmHeadTime: 'Time', rhythmHeadBlock: 'Block',
+  kpiEyebrow: 'What Gets Measured',
+  kpiH3: 'The numbers that matter, by week',
+  kpiHeadMetric: 'KPI', kpiHeadTarget: 'Target',
+  qualifyEyebrow: 'Calling Philosophy',
+  qualifyH3: 'Qualify, don’t pitch',
+  qualifyIntro: 'The first call is not where you sell — it’s where you find out if there is anything to sell. A rep who pitches on the first call is guessing; a rep who asks is qualifying. Every call should end with either a clear next step or a clear reason to stop.',
+  qualifyScript: '“Hi [Name], this is [Rep] from YOUNG — you reached out about [X]. Before I tell you anything about it, can I ask what’s driving that for you right now?”',
+  qualifyQuestionsLabel: 'Ask these, in order:',
+  deliverEyebrow: 'What You Get',
+  deliverH3: 'What YOUNG delivers to every rep',
+  meetingEyebrow: 'Meeting Rhythm',
+  meetingH3: 'How often the team gets in a room',
+  meetingHeadName: 'Meeting', meetingHeadFreq: 'Frequency', meetingHeadPurpose: 'Purpose',
+  trainingSchedEyebrow: 'Sales Training',
+  trainingSchedH3: 'Bi-weekly Fridays, starting September 4',
+  trainingSchedIntro: 'Every session is a working session, not a lecture — bring a live deal.',
+  closingStatement: 'Clarity creates speed. Speed creates progress. Progress creates momentum. And momentum creates results.',
   svg1: {
     feedback: "renewal & churn signal shapes next quarter's channel mix",
     prospect: 'PROSPECT', entry: 'ENTRY CHANNEL', demandgen1: 'DEMAND GEN', demandgen2: '+ LEAD CAPTURE',
@@ -1035,6 +1231,50 @@ en: {
     { t: 'Commercial Lead takes care of Account Management with the business unit and the customer', actor: 'Commercial Lead' },
     { t: 'Commercial Lead sends the invoice to the customer', actor: 'Commercial Lead' },
     { t: 'Commercial Lead pays the business unit', actor: 'Commercial Lead' }
+  ],
+  rhythmRows: [
+    ['09:00 – 09:15', 'Daily stand-up — pipeline, blockers, priorities for the day'],
+    ['09:15 – 11:30', 'Outbound calling block — new prospects, no interruptions'],
+    ['11:30 – 12:30', 'Follow-ups &amp; CRM hygiene — every call logged before lunch'],
+    ['12:30 – 13:30', 'Lunch'],
+    ['13:30 – 16:00', 'Meetings &amp; discovery calls — booked slots only'],
+    ['16:00 – 17:00', 'Second calling block — warm leads, recycled leads from scoring'],
+    ['17:00 – 17:30', 'Wrap-up — CRM updated, tomorrow’s list built before leaving']
+  ],
+  kpiRows: [
+    ['Outbound calls', '40–60 per day'],
+    ['Qualified conversations', '8–12 per week'],
+    ['Meetings booked', '4–6 per week'],
+    ['Proposal-to-close rate', 'Tracked, not targeted — a signal for coaching, not a quota'],
+    ['CRM logged same-day', '100%']
+  ],
+  qualifyQuestions: [
+    'What’s happening right now that makes this relevant?',
+    'Who else needs to be involved in this decision?',
+    'What’s the timeline you’re working against?',
+    'What happens if nothing changes?'
+  ],
+  deliverList: [
+    'A scored, routed lead — never a cold list',
+    'AI-drafted first outreach, reviewed by a human before it sends',
+    'A CRM record that travels with the lead through every handoff',
+    'A named specialist to escalate to, above threshold',
+    'Bi-weekly training, not once-a-year onboarding'
+  ],
+  meetingRows: [
+    ['Daily stand-up', 'Daily', 'Pipeline, blockers, priorities'],
+    ['Pipeline review', 'Weekly', 'Deal-by-deal with the team lead'],
+    ['Vertical sync', 'Bi-weekly', 'Cross-vertical handoffs and referrals'],
+    ['Sales training', 'Bi-weekly (Fridays)', 'Skill-building, live call review'],
+    ['Commercial Lead handoff review', 'Monthly', 'Won-deal quality, account health']
+  ],
+  trainingSchedule: [
+    ['Sept 4', 'Qualifying calls — live review'],
+    ['Sept 18', 'Objection handling'],
+    ['Oct 2', 'Vertical deep dive — Real Estate &amp; Media thresholds'],
+    ['Oct 16', 'CRM discipline &amp; handoff quality'],
+    ['Oct 30', 'Negotiation &amp; proposal structure'],
+    ['…', 'Recurring every two weeks — topics set by what the pipeline needs']
   ]
 },
 nl: {
@@ -1077,6 +1317,31 @@ nl: {
   dmDecisionOrText: 'Young.Sales alles zelfstandig regelt, tot en met de sluiting',
   colophon1: 'YOUNG.Sales SOP — een levend naslagwerk over hoe YOUNG verkoopt, overdraagt en behoudt.',
   colophon2: 'De productcatalogus staat in een apart document.',
+  navSop: 'Verkoop-SOP',
+  navTraining: 'Routine &amp; Training',
+  trainingEyebrow: 'Routine &amp; Training',
+  trainingH2: 'Hoe reps hun dag indelen, en hoe ze daar beter in worden.',
+  trainingStatement: 'De SOP vertelt je wat je verkoopt en aan wie. Dit is het ritme daaronder — hoe een gewone dag eruitziet, wat er gemeten wordt, en hoe het team zich verbetert.',
+  rhythmEyebrow: 'Dagritme',
+  rhythmH3: 'Een gewone dag, blok voor blok',
+  rhythmHeadTime: 'Tijd', rhythmHeadBlock: 'Blok',
+  kpiEyebrow: 'Wat er gemeten wordt',
+  kpiH3: 'De cijfers die per week ertoe doen',
+  kpiHeadMetric: 'KPI', kpiHeadTarget: 'Doel',
+  qualifyEyebrow: 'Belfilosofie',
+  qualifyH3: 'Kwalificeren, niet pitchen',
+  qualifyIntro: 'Het eerste gesprek is niet het moment om te verkopen — het is het moment om te ontdekken of er iets te verkopen is. Een rep die op het eerste gesprek pitcht, gokt; een rep die vraagt, kwalificeert. Elk gesprek eindigt met een duidelijke volgende stap, of een duidelijke reden om te stoppen.',
+  qualifyScript: '“Hoi [Naam], dit is [Rep] van YOUNG — je hebt contact gezocht over [X]. Voordat ik je daar iets over vertel, mag ik vragen wat daar nu voor jou achter zit?”',
+  qualifyQuestionsLabel: 'Stel deze vragen, in deze volgorde:',
+  deliverEyebrow: 'Wat je krijgt',
+  deliverH3: 'Wat YOUNG elke rep levert',
+  meetingEyebrow: 'Overlegritme',
+  meetingH3: 'Hoe vaak het team samenkomt',
+  meetingHeadName: 'Overleg', meetingHeadFreq: 'Frequentie', meetingHeadPurpose: 'Doel',
+  trainingSchedEyebrow: 'Verkooptraining',
+  trainingSchedH3: 'Tweewekelijks op vrijdag, vanaf 4 september',
+  trainingSchedIntro: 'Elke sessie is een werksessie, geen lezing — neem een lopende deal mee.',
+  closingStatement: 'Duidelijkheid creëert snelheid. Snelheid creëert vooruitgang. Vooruitgang creëert momentum. En momentum creëert resultaten.',
   svg1: {
     feedback: 'vernieuwings- en verloopsignaal stuurt de kanaalmix van komend kwartaal',
     prospect: 'PROSPECT', entry: 'INSTROOMKANAAL', demandgen1: 'LEADGENERATIE', demandgen2: '+ LEAD VASTLEGGEN',
@@ -1168,6 +1433,50 @@ nl: {
     { t: 'Commercial Lead verzorgt accountbeheer bij de business unit en de klant', actor: 'Commercial Lead' },
     { t: 'Commercial Lead stuurt de factuur naar de klant', actor: 'Commercial Lead' },
     { t: 'Commercial Lead betaalt de business unit uit', actor: 'Commercial Lead' }
+  ],
+  rhythmRows: [
+    ['09:00 – 09:15', 'Daily stand-up — pipeline, blokkades, prioriteiten voor de dag'],
+    ['09:15 – 11:30', 'Outbound belblok — nieuwe prospects, geen onderbrekingen'],
+    ['11:30 – 12:30', 'Opvolging &amp; CRM-hygiëne — elk gesprek gelogd vóór de lunch'],
+    ['12:30 – 13:30', 'Lunch'],
+    ['13:30 – 16:00', 'Afspraken &amp; discovery-gesprekken — alleen geboekte slots'],
+    ['16:00 – 17:00', 'Tweede belblok — warme leads, gerecyclede leads uit scoring'],
+    ['17:00 – 17:30', 'Afronding — CRM bijgewerkt, lijst voor morgen klaar vóór vertrek']
+  ],
+  kpiRows: [
+    ['Outbound gesprekken', '40–60 per dag'],
+    ['Gekwalificeerde gesprekken', '8–12 per week'],
+    ['Geboekte afspraken', '4–6 per week'],
+    ['Voorstel-naar-sluiting ratio', 'Gevolgd, geen doel — een signaal voor coaching, geen quotum'],
+    ['CRM dezelfde dag bijgewerkt', '100%']
+  ],
+  qualifyQuestions: [
+    'Wat speelt er nu dat dit relevant maakt?',
+    'Wie moet er nog bij deze beslissing betrokken worden?',
+    'Binnen welk tijdsbestek moet dit gebeuren?',
+    'Wat gebeurt er als er niets verandert?'
+  ],
+  deliverList: [
+    'Een gescoorde, gerouteerde lead — nooit een koude lijst',
+    'AI-opgestelde eerste outreach, gecontroleerd door een mens voordat die verstuurd wordt',
+    'Een CRM-record dat met de lead meereist door elke overdracht',
+    'Een aangewezen specialist om naar te escaleren, boven de drempel',
+    'Tweewekelijkse training, geen onboarding die maar één keer per jaar gebeurt'
+  ],
+  meetingRows: [
+    ['Daily stand-up', 'Dagelijks', 'Pipeline, blokkades, prioriteiten'],
+    ['Pipeline review', 'Wekelijks', 'Deal voor deal met de teamleider'],
+    ['Vertical sync', 'Tweewekelijks', 'Overdrachten en verwijzingen tussen onderdelen'],
+    ['Verkooptraining', 'Tweewekelijks (vrijdag)', 'Vaardigheden opbouwen, live gesprekken bekijken'],
+    ['Commercial Lead overdrachtsreview', 'Maandelijks', 'Kwaliteit van gewonnen deals, accountgezondheid']
+  ],
+  trainingSchedule: [
+    ['4 sept', 'Kwalificerende gesprekken — live review'],
+    ['18 sept', 'Omgaan met bezwaren'],
+    ['2 okt', 'Verdieping per onderdeel — drempels Real Estate &amp; Media'],
+    ['16 okt', 'CRM-discipline &amp; kwaliteit van overdracht'],
+    ['30 okt', 'Onderhandeling &amp; opbouw van voorstellen'],
+    ['…', 'Terugkerend elke twee weken — onderwerpen bepaald door wat de pijplijn nodig heeft']
   ]
 },
 es: {
@@ -1210,6 +1519,31 @@ es: {
   dmDecisionOrText: 'Young.Sales gestiona todo en solitario, hasta el cierre',
   colophon1: 'SOP de Ventas de YOUNG — una referencia viva de cómo YOUNG vende, traspasa y retiene.',
   colophon2: 'El catálogo de producto vive en un documento aparte.',
+  navSop: 'SOP de Ventas',
+  navTraining: 'Rutina y Formación',
+  trainingEyebrow: 'Rutina y Formación',
+  trainingH2: 'Cómo organizan los reps su día, y cómo mejoran en ello.',
+  trainingStatement: 'El SOP dice qué vender y a quién. Esto es el ritmo que hay debajo — cómo es un día normal, qué se mide y cómo mejora el equipo.',
+  rhythmEyebrow: 'Ritmo diario',
+  rhythmH3: 'Un día normal, bloque a bloque',
+  rhythmHeadTime: 'Hora', rhythmHeadBlock: 'Bloque',
+  kpiEyebrow: 'Qué se mide',
+  kpiH3: 'Las cifras que importan, semana a semana',
+  kpiHeadMetric: 'KPI', kpiHeadTarget: 'Objetivo',
+  qualifyEyebrow: 'Filosofía de llamada',
+  qualifyH3: 'Calificar, no vender',
+  qualifyIntro: 'La primera llamada no es para vender — es para descubrir si hay algo que vender. Un representante que vende en la primera llamada está adivinando; uno que pregunta está calificando. Toda llamada debe terminar con un siguiente paso claro, o con una razón clara para detenerse.',
+  qualifyScript: '“Hola [Nombre], soy [Rep] de YOUNG — te pusiste en contacto por [X]. Antes de contarte nada al respecto, ¿puedo preguntarte qué hay detrás de eso ahora mismo?”',
+  qualifyQuestionsLabel: 'Haz estas preguntas, en este orden:',
+  deliverEyebrow: 'Qué recibes',
+  deliverH3: 'Qué entrega YOUNG a cada representante',
+  meetingEyebrow: 'Ritmo de reuniones',
+  meetingH3: 'Con qué frecuencia se reúne el equipo',
+  meetingHeadName: 'Reunión', meetingHeadFreq: 'Frecuencia', meetingHeadPurpose: 'Propósito',
+  trainingSchedEyebrow: 'Formación de Ventas',
+  trainingSchedH3: 'Quincenal los viernes, a partir del 4 de septiembre',
+  trainingSchedIntro: 'Cada sesión es una sesión de trabajo, no una clase — trae una operación real.',
+  closingStatement: 'La claridad crea velocidad. La velocidad crea progreso. El progreso crea impulso. Y el impulso crea resultados.',
   svg1: {
     feedback: 'la señal de renovación y abandono da forma a la mezcla de canales del próximo trimestre',
     prospect: 'PROSPECTO', entry: 'CANAL DE ENTRADA', demandgen1: 'GENERAR DEMANDA', demandgen2: '+ CAPTURAR LEAD',
@@ -1301,6 +1635,50 @@ es: {
     { t: 'El Commercial Lead se encarga de la gestión de cuenta con la unidad de negocio y el cliente', actor: 'Commercial Lead' },
     { t: 'El Commercial Lead envía la factura al cliente', actor: 'Commercial Lead' },
     { t: 'El Commercial Lead paga a la unidad de negocio', actor: 'Commercial Lead' }
+  ],
+  rhythmRows: [
+    ['09:00 – 09:15', 'Daily stand-up — pipeline, obstáculos, prioridades del día'],
+    ['09:15 – 11:30', 'Bloque de llamadas outbound — prospectos nuevos, sin interrupciones'],
+    ['11:30 – 12:30', 'Seguimientos e higiene del CRM — cada llamada registrada antes de comer'],
+    ['12:30 – 13:30', 'Comida'],
+    ['13:30 – 16:00', 'Reuniones y llamadas de descubrimiento — solo horarios reservados'],
+    ['16:00 – 17:00', 'Segundo bloque de llamadas — leads cálidos, leads reciclados de la puntuación'],
+    ['17:00 – 17:30', 'Cierre del día — CRM actualizado, lista de mañana lista antes de salir']
+  ],
+  kpiRows: [
+    ['Llamadas outbound', '40–60 por día'],
+    ['Conversaciones calificadas', '8–12 por semana'],
+    ['Reuniones agendadas', '4–6 por semana'],
+    ['Tasa de propuesta a cierre', 'Se sigue, no es un objetivo — una señal para el coaching, no una cuota'],
+    ['CRM actualizado el mismo día', '100%']
+  ],
+  qualifyQuestions: [
+    '¿Qué está pasando ahora mismo que hace esto relevante?',
+    '¿Quién más debe participar en esta decisión?',
+    '¿Con qué plazo estás trabajando?',
+    '¿Qué pasa si nada cambia?'
+  ],
+  deliverList: [
+    'Un lead puntuado y enrutado — nunca una lista fría',
+    'Un primer contacto redactado por IA, revisado por una persona antes de enviarse',
+    'Un registro de CRM que viaja con el lead en cada traspaso',
+    'Un especialista designado al que escalar, por encima del umbral',
+    'Formación quincenal, no una incorporación de una sola vez al año'
+  ],
+  meetingRows: [
+    ['Daily stand-up', 'Diario', 'Pipeline, obstáculos, prioridades'],
+    ['Revisión de pipeline', 'Semanal', 'Operación por operación con el líder del equipo'],
+    ['Sincronización entre verticales', 'Quincenal', 'Traspasos y referidos entre verticales'],
+    ['Formación de ventas', 'Quincenal (viernes)', 'Desarrollo de habilidades, revisión de llamadas reales'],
+    ['Revisión de traspaso al Commercial Lead', 'Mensual', 'Calidad de operaciones ganadas, salud de cuentas']
+  ],
+  trainingSchedule: [
+    ['4 sept', 'Llamadas de calificación — revisión en vivo'],
+    ['18 sept', 'Manejo de objeciones'],
+    ['2 oct', 'Profundización por vertical — umbrales de Real Estate y Media'],
+    ['16 oct', 'Disciplina de CRM y calidad de traspaso'],
+    ['30 oct', 'Negociación y estructura de propuestas'],
+    ['…', 'Se repite cada dos semanas — los temas se fijan según lo que necesite el pipeline']
   ]
 }
   };
@@ -1375,8 +1753,53 @@ es: {
     });
     listEl.innerHTML = html;
 
+    document.getElementById('rhythmHeadTime').textContent = S.rhythmHeadTime;
+    document.getElementById('rhythmHeadBlock').textContent = S.rhythmHeadBlock;
+    document.getElementById('rhythm-body').innerHTML = S.rhythmRows.map(row =>
+      `<tr><td>${decodeEntities(row[0])}</td><td>${decodeEntities(row[1])}</td></tr>`
+    ).join('');
+
+    document.getElementById('kpiHeadMetric').textContent = S.kpiHeadMetric;
+    document.getElementById('kpiHeadTarget').textContent = S.kpiHeadTarget;
+    document.getElementById('kpi-body').innerHTML = S.kpiRows.map(row =>
+      `<tr><td>${decodeEntities(row[0])}</td><td>${decodeEntities(row[1])}</td></tr>`
+    ).join('');
+
+    document.getElementById('qualify-questions').innerHTML = S.qualifyQuestions.map(q =>
+      `<li>${decodeEntities(q)}</li>`
+    ).join('');
+
+    document.getElementById('deliver-list').innerHTML = S.deliverList.map(item =>
+      `<li>${decodeEntities(item)}</li>`
+    ).join('');
+
+    document.getElementById('meetingHeadName').textContent = S.meetingHeadName;
+    document.getElementById('meetingHeadFreq').textContent = S.meetingHeadFreq;
+    document.getElementById('meetingHeadPurpose').textContent = S.meetingHeadPurpose;
+    document.getElementById('meeting-body').innerHTML = S.meetingRows.map(row =>
+      `<tr><td>${decodeEntities(row[0])}</td><td>${decodeEntities(row[1])}</td><td>${decodeEntities(row[2])}</td></tr>`
+    ).join('');
+
+    document.getElementById('training-sched-list').innerHTML = S.trainingSchedule.map(row =>
+      `<li><strong>${decodeEntities(row[0])}</strong> — ${decodeEntities(row[1])}</li>`
+    ).join('');
+
     document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('is-active', b.dataset.lang === lang));
   }
+
+  function switchView(view) {
+    document.getElementById('view-sop').hidden = view !== 'sop';
+    document.getElementById('view-training').hidden = view !== 'training';
+    document.querySelectorAll('.topnav-tab').forEach(b => b.classList.toggle('is-active', b.dataset.view === view));
+    localStorage.setItem('sb-view', view);
+    window.scrollTo(0, 0);
+  }
+
+  document.querySelectorAll('.topnav-tab').forEach(btn => {
+    btn.addEventListener('click', () => switchView(btn.dataset.view));
+  });
+
+  switchView(localStorage.getItem('sb-view') === 'training' ? 'training' : 'sop');
 
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.addEventListener('click', () => applyLang(btn.dataset.lang));
